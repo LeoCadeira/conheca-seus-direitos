@@ -247,16 +247,58 @@
       </div>
     </div>
 
-    <script>
-      const cepInput = document.querySelector('.input');
+<script>
+  const cepInput = document.querySelector('.input');
+  const searchButton = document.querySelector('.button');
 
-      cepInput.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 5) {
-          value = value.slice(0, 5) + '-' + value.slice(5, 8);
-        }
-        e.target.value = value.slice(0, 9);
-      });
-    </script>
+  cepInput.addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '');
+
+    if (value.length > 5) {
+      value = value.slice(0, 5) + '-' + value.slice(5, 8);
+    }
+
+    e.target.value = value.slice(0, 9);
+  });
+
+  searchButton.addEventListener('click', async function () {
+    const cep = cepInput.value.replace(/\D/g, '');
+
+    if (cep.length !== 8) {
+      alert('Digite um CEP válido.');
+      return;
+    }
+
+    searchButton.textContent = 'BUSCANDO...';
+    searchButton.disabled = true;
+
+    try {
+      const response = await fetch(
+        `https://viacep.com.br/ws/${cep}/json/`
+      );
+
+      const data = await response.json();
+
+      if (data.erro) {
+        alert('CEP não encontrado.');
+        return;
+      }
+
+      alert(
+        `Localização encontrada!\n\n` +
+        `${data.logradouro || ''}\n` +
+        `${data.bairro || ''}\n` +
+        `${data.localidade} - ${data.uf}`
+      );
+
+    } catch (error) {
+      alert('Não foi possível consultar o CEP.');
+    } finally {
+      searchButton.textContent = 'ENCONTRAR';
+      searchButton.disabled = false;
+    }
+  });
+</script>
+
   </body>
 </html>
