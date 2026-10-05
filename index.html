@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Conheça seus direitos</title>
 
@@ -16,8 +16,6 @@
       --line: rgba(96, 63, 71, 0.18);
       --button: #d98ca1;
       --button-dark: #b9617d;
-      --white: #ffffff;
-      --success-bg: #f7eef0;
     }
 
     * {
@@ -44,17 +42,16 @@
     .card {
       width: 420px;
       max-width: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(120, 83, 91, 0.15);
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(120,83,91,.15);
       border-radius: 22px;
-      box-shadow: 0 18px 30px rgba(86, 50, 58, 0.12);
+      box-shadow: 0 18px 30px rgba(86,50,58,.12);
       padding: 18px;
-      backdrop-filter: blur(2px);
     }
 
     .inner {
       background: var(--card);
-      border: 1px solid rgba(116, 73, 82, 0.08);
+      border: 1px solid rgba(116,73,82,.08);
       border-radius: 18px;
       padding: 18px;
     }
@@ -63,15 +60,14 @@
       text-align: center;
       font-weight: 800;
       font-size: 1.05rem;
-      letter-spacing: 0.04em;
+      letter-spacing: .04em;
       color: #6a4650;
       margin: 0 0 16px;
-      line-height: 1.3;
     }
 
     .search-label {
       display: block;
-      font-size: 0.78rem;
+      font-size: .78rem;
       color: var(--muted);
       margin-bottom: 8px;
       text-align: center;
@@ -85,29 +81,16 @@
       margin-bottom: 14px;
     }
 
-    .input-wrap {
-      width: 100%;
-    }
-
     .input {
       width: 100%;
       height: 38px;
-      border: 1px solid rgba(116, 73, 82, 0.18);
+      border: 1px solid rgba(116,73,82,.18);
       border-radius: 8px;
-      background: var(--white);
+      background: white;
       padding: 0 12px;
-      font-size: 0.98rem;
+      font-size: .98rem;
       color: var(--text);
       outline: none;
-    }
-
-    .input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(211, 117, 134, 0.12);
-    }
-
-    .input::placeholder {
-      color: #b19aa4;
     }
 
     .button {
@@ -117,22 +100,17 @@
       border-radius: 8px;
       background: linear-gradient(
         180deg,
-        var(--button) 0%,
-        var(--button-dark) 100%
+        var(--button),
+        var(--button-dark)
       );
-      color: #fff;
+      color: white;
       font-weight: 700;
-      letter-spacing: 0.05em;
+      letter-spacing: .05em;
       cursor: pointer;
-      transition: 0.15s;
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
     }
 
     .button:disabled {
-      opacity: 0.65;
+      opacity: .65;
       cursor: wait;
     }
 
@@ -142,13 +120,13 @@
     }
 
     .result {
-      background: #fff;
-      border: 1px solid rgba(116, 73, 82, 0.12);
+      background: white;
+      border: 1px solid rgba(116,73,82,.12);
       border-radius: 10px;
       padding: 12px;
       margin: 14px 4px;
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: .8rem;
       line-height: 1.5;
     }
 
@@ -158,11 +136,10 @@
       margin-bottom: 5px;
     }
 
-    .loading {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
-      padding: 12px;
+    .error {
+      background: #fff4f5;
+      border-color: #ecc8cf;
+      color: #9a4357;
     }
 
     .service {
@@ -176,69 +153,52 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: rgba(221, 170, 186, 0.22);
+      background: rgba(221,170,186,.22);
       display: grid;
       place-items: center;
       font-size: 1.2rem;
-      margin-top: 2px;
-    }
-
-    .service-card {
-      padding: 0;
     }
 
     .service-name {
-      font-size: 0.8rem;
+      font-size: .8rem;
       font-weight: 800;
-      color: var(--text);
       margin: 0 0 6px;
     }
 
     .address {
-      font-size: 0.8rem;
+      font-size: .8rem;
       color: var(--muted);
       line-height: 1.5;
       margin: 0 0 4px;
     }
 
     .distance {
-      font-size: 0.76rem;
+      font-size: .76rem;
       color: var(--muted);
       margin: 0 0 8px;
     }
 
     .cta {
       display: inline-block;
-      height: 28px;
-      padding: 0 12px;
+      padding: 7px 12px;
       border: none;
-      background: rgba(201, 118, 146, 0.1);
+      background: rgba(201,118,146,.1);
       color: var(--primary-dark);
       border-radius: 6px;
       font-weight: 800;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
+      font-size: .7rem;
+      letter-spacing: .05em;
       cursor: pointer;
       text-decoration: none;
     }
 
     .cta:hover {
-      background: rgba(201, 118, 146, 0.18);
+      background: rgba(201,118,146,.18);
     }
 
-    .error {
-      color: #9a4357;
-      background: #fff4f5;
-      border: 1px solid #ecc8cf;
-    }
-
-    @media (max-width: 480px) {
+    @media (max-width:480px) {
       body {
         padding: 12px;
-      }
-
-      .card {
-        width: 100%;
       }
 
       .search {
@@ -247,7 +207,6 @@
 
       .button {
         width: 100%;
-        min-width: unset;
         margin-top: 8px;
       }
     }
@@ -256,571 +215,604 @@
 
 <body>
 
-  <div class="card">
+<div class="card">
+  <div class="inner">
 
-    <div class="inner">
+    <h1 class="title">
+      CONHEÇA SEUS DIREITOS
+    </h1>
 
-      <h1 class="title">
-        CONHEÇA SEUS DIREITOS
-      </h1>
+    <div class="search-label">
+      Digite seu CEP
+    </div>
 
-      <div class="search-label">
-        Digite seu CEP
-      </div>
+    <div class="search">
 
-      <div class="search">
-
-        <div class="input-wrap">
-          <input
-            class="input"
-            type="text"
-            placeholder="00000-000"
-            maxlength="9"
-            inputmode="numeric"
-            autocomplete="postal-code"
-          />
-        </div>
-
-        <button class="button">
-          ENCONTRAR
-        </button>
-
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- LOCALIZAÇÃO -->
-
-      <div
-        id="result"
-        class="result"
-        style="display: none;"
+      <input
+        class="input"
+        type="text"
+        placeholder="00000-000"
+        maxlength="9"
+        inputmode="numeric"
+        autocomplete="postal-code"
       >
-        <div class="result-title">
-          📍 Sua localização
-        </div>
 
-        <div id="result-address"></div>
+      <button class="button">
+        ENCONTRAR
+      </button>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div
+      id="result"
+      class="result"
+      style="display:none;"
+    >
+      <div class="result-title">
+        📍 Sua localização
       </div>
 
-      <!-- CRAS -->
+      <div id="result-address"></div>
+    </div>
 
-      <div class="service">
 
-        <div class="icon">
-          📍
-        </div>
+    <!-- CRAS -->
 
-        <div class="service-card">
+    <div class="service">
 
-          <p class="service-name">
-            CRAS mais próximo
-          </p>
+      <div class="icon">
+        📍
+      </div>
 
-          <p class="address" id="cras-address">
-            Em breve
-          </p>
+      <div>
 
-          <p class="distance" id="cras-distance">
-            Estamos preparando essa busca.
-          </p>
+        <p class="service-name">
+          CRAS mais próximo
+        </p>
 
-          <button class="cta" disabled>
-            COMO CHEGAR
-          </button>
+        <p class="address">
+          Em breve
+        </p>
 
-        </div>
+        <p class="distance">
+          Estamos preparando essa busca.
+        </p>
 
       </div>
 
-      <div
-        class="divider"
-        style="margin-top: 14px; margin-bottom: 10px;"
-      ></div>
+    </div>
 
-      <!-- CASA DA MULHER -->
 
-      <div class="service">
+    <div class="divider"></div>
 
-        <div class="icon">
-          👩
-        </div>
 
-        <div class="service-card">
+    <!-- CASA DA MULHER -->
 
-          <p class="service-name">
-            Casa da Mulher mais próxima
-          </p>
+    <div class="service">
 
-          <p class="address" id="woman-address">
-            Digite seu CEP para encontrar.
-          </p>
+      <div class="icon">
+        👩
+      </div>
 
-          <p class="distance" id="woman-distance">
-          </p>
+      <div>
 
-          <a
-            id="woman-map"
-            class="cta"
-            href="#"
-            target="_blank"
-            style="display: none;"
-          >
-            COMO CHEGAR
-          </a>
+        <p class="service-name">
+          Casa da Mulher mais próxima
+        </p>
 
-        </div>
+        <p
+          class="address"
+          id="woman-address"
+        >
+          Digite seu CEP para encontrar.
+        </p>
+
+        <p
+          class="distance"
+          id="woman-distance"
+        ></p>
+
+        <a
+          id="woman-map"
+          class="cta"
+          href="#"
+          target="_blank"
+          style="display:none;"
+        >
+          COMO CHEGAR
+        </a>
 
       </div>
 
     </div>
 
   </div>
+</div>
 
 
-  <script>
+<script>
 
-    const cepInput = document.querySelector(".input");
-    const searchButton = document.querySelector(".button");
+const cepInput =
+  document.querySelector(".input");
 
-    const result = document.querySelector("#result");
-    const resultAddress = document.querySelector("#result-address");
+const searchButton =
+  document.querySelector(".button");
 
-    const womanAddress = document.querySelector("#woman-address");
-    const womanDistance = document.querySelector("#woman-distance");
-    const womanMap = document.querySelector("#woman-map");
+const result =
+  document.querySelector("#result");
 
+const resultAddress =
+  document.querySelector("#result-address");
 
-    /*
-      Casas da Mulher Carioca
-      Dados baseados na página oficial
-      da Prefeitura do Rio.
-    */
+const womanAddress =
+  document.querySelector("#woman-address");
 
-    const casasDaMulher = [
+const womanDistance =
+  document.querySelector("#woman-distance");
 
-      {
-        nome: "Casa da Mulher Carioca Dinah Coutinho",
-        endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
-        busca: "Casa da Mulher Carioca Dinah Coutinho, Rua Limites, 1260, Realengo, Rio de Janeiro"
-      },
-
-      {
-        nome: "Casa da Mulher Carioca Tia Doca",
-        endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
-        busca: "Casa da Mulher Carioca Tia Doca, Rua Júlio Fragoso, 47, Madureira, Rio de Janeiro"
-      },
-
-      {
-        nome: "Casa da Mulher Carioca Elza Soares",
-        endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
-        busca: "Casa da Mulher Carioca Elza Soares, Padre Miguel, Rio de Janeiro"
-      },
-
-      {
-        nome: "Casa da Mulher Carioca - Polo Campo Grande",
-        endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
-        busca: "Casa da Mulher Carioca Polo Campo Grande, Rua Mário Barbosa, 137, Campo Grande, Rio de Janeiro"
-      },
-
-      {
-        nome: "Casa da Mulher Carioca - Filial Coelho Neto",
-        endereco: "Avenida Pastor Martin Luther King Jr, 10.055 - Coelho Neto, Rio de Janeiro - RJ",
-        busca: "Casa da Mulher Carioca Coelho Neto, Avenida Pastor Martin Luther King Jr, 10055, Rio de Janeiro"
-      }
-
-    ];
+const womanMap =
+  document.querySelector("#woman-map");
 
 
-    /*
-      Formatação automática do CEP
-    */
+/*
+  Casas da Mulher Carioca.
 
-    cepInput.addEventListener("input", function (e) {
+  Endereços conferidos nas páginas
+  oficiais da Prefeitura do Rio.
+*/
 
-      let value = e.target.value.replace(/\D/g, "");
+const casasDaMulher = [
 
-      if (value.length > 5) {
+  {
+    nome: "Casa da Mulher Carioca Dinah Coutinho",
+    bairro: "Realengo",
+    endereco:
+      "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ"
+  },
 
-        value =
-          value.slice(0, 5) +
-          "-" +
-          value.slice(5, 8);
+  {
+    nome: "Casa da Mulher Carioca Tia Doca",
+    bairro: "Madureira",
+    endereco:
+      "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ"
+  },
 
-      }
+  {
+    nome: "Casa da Mulher Carioca Elza Soares",
+    bairro: "Padre Miguel",
+    endereco:
+      "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ"
+  },
 
-      e.target.value = value.slice(0, 9);
+  {
+    nome: "Casa da Mulher Carioca - Polo Campo Grande",
+    bairro: "Campo Grande",
+    endereco:
+      "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ"
+  },
 
-    });
+  {
+    nome: "Casa da Mulher Carioca - Polo Coelho Neto",
+    bairro: "Coelho Neto",
+    endereco:
+      "Avenida Pastor Martin Luther King Jr, 10055 - Coelho Neto, Rio de Janeiro - RJ"
+  }
+
+];
 
 
-    /*
-      Distância entre dois pontos
-      usando latitude e longitude.
-    */
+/*
+  Formata o CEP.
+*/
 
-    function calcularDistancia(
-      lat1,
-      lon1,
-      lat2,
-      lon2
+cepInput.addEventListener(
+  "input",
+  function() {
+
+    let value =
+      cepInput.value.replace(/\D/g, "");
+
+    if (value.length > 5) {
+
+      value =
+        value.slice(0,5) +
+        "-" +
+        value.slice(5,8);
+
+    }
+
+    cepInput.value =
+      value.slice(0,9);
+
+  }
+);
+
+
+/*
+  Geocodifica somente o endereço
+  informado pelo CEP.
+
+  Isso evita as cinco consultas
+  que estavam causando o erro.
+*/
+
+async function localizarEndereco(
+  endereco
+) {
+
+  const url =
+    "https://nominatim.openstreetmap.org/search" +
+    "?format=json" +
+    "&limit=1" +
+    "&countrycodes=br" +
+    "&q=" +
+    encodeURIComponent(endereco);
+
+  const response =
+    await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      "Erro na localização"
+    );
+  }
+
+  const data =
+    await response.json();
+
+  if (!data.length) {
+    return null;
+  }
+
+  return {
+    lat:
+      parseFloat(data[0].lat),
+
+    lon:
+      parseFloat(data[0].lon)
+  };
+
+}
+
+
+/*
+  Função para abrir o Google Maps.
+*/
+
+function criarLinkMapa(
+  endereco
+) {
+
+  return (
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(endereco)
+  );
+
+}
+
+
+/*
+  Estratégia inicial:
+
+  usamos o bairro retornado pelo CEP
+  para selecionar uma unidade próxima.
+
+  Depois vamos substituir isso por
+  distância geográfica real.
+*/
+
+function encontrarCasaPorBairro(
+  bairro
+) {
+
+  if (!bairro) {
+    return casasDaMulher[0];
+  }
+
+  const texto =
+    bairro
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"");
+
+
+  /*
+    Áreas próximas de Realengo /
+    Padre Miguel.
+  */
+
+  if (
+    texto.includes("realengo") ||
+    texto.includes("padre miguel") ||
+    texto.includes("bangu") ||
+    texto.includes("senador camara") ||
+    texto.includes("magalhaes bastos")
+  ) {
+
+    if (
+      texto.includes("padre miguel")
     ) {
 
-      const R = 6371;
+      return casasDaMulher[2];
 
-      const dLat =
-        (lat2 - lat1) *
-        Math.PI / 180;
+    }
 
-      const dLon =
-        (lon2 - lon1) *
-        Math.PI / 180;
+    return casasDaMulher[0];
 
-      const a =
-        Math.sin(dLat / 2) *
-        Math.sin(dLat / 2) +
+  }
 
-        Math.cos(lat1 * Math.PI / 180) *
-        Math.cos(lat2 * Math.PI / 180) *
 
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+  /*
+    Área de Madureira.
+  */
 
-      const c =
-        2 *
-        Math.atan2(
-          Math.sqrt(a),
-          Math.sqrt(1 - a)
-        );
+  if (
+    texto.includes("madureira") ||
+    texto.includes("campinho") ||
+    texto.includes("cascadura") ||
+    texto.includes("rocha miranda") ||
+    texto.includes("turiaçu") ||
+    texto.includes("turiaçu")
+  ) {
 
-      return R * c;
+    return casasDaMulher[1];
+
+  }
+
+
+  /*
+    Campo Grande e bairros próximos.
+  */
+
+  if (
+    texto.includes("campo grande") ||
+    texto.includes("inhoaiba") ||
+    texto.includes("inhoaíba") ||
+    texto.includes("cosmos") ||
+    texto.includes("senador vasconcelos") ||
+    texto.includes("paciência") ||
+    texto.includes("paciencia")
+  ) {
+
+    return casasDaMulher[3];
+
+  }
+
+
+  /*
+    Coelho Neto e região.
+  */
+
+  if (
+    texto.includes("coelho neto") ||
+    texto.includes("acari") ||
+    texto.includes("anchieta") ||
+    texto.includes("iraja") ||
+    texto.includes("iraia") ||
+    texto.includes("guadalupe") ||
+    texto.includes("honorio gurgel") ||
+    texto.includes("honório gurgel")
+  ) {
+
+    return casasDaMulher[4];
+
+  }
+
+
+  /*
+    Caso não seja possível identificar
+    uma região específica, usamos
+    Madureira como referência inicial.
+  */
+
+  return casasDaMulher[1];
+
+}
+
+
+/*
+  Busca principal.
+*/
+
+searchButton.addEventListener(
+  "click",
+  async function() {
+
+    const cep =
+      cepInput.value.replace(/\D/g,"");
+
+
+    if (cep.length !== 8) {
+
+      result.style.display =
+        "block";
+
+      result.classList.add(
+        "error"
+      );
+
+      resultAddress.textContent =
+        "Digite um CEP válido para continuar.";
+
+      return;
 
     }
 
 
-    /*
-      Consulta endereço no OpenStreetMap.
-    */
+    searchButton.disabled =
+      true;
 
-    async function geocodificar(endereco) {
+    searchButton.textContent =
+      "BUSCANDO...";
 
-      const url =
-        "https://nominatim.openstreetmap.org/search" +
-        "?format=json" +
-        "&limit=1" +
-        "&q=" +
-        encodeURIComponent(endereco);
+
+    womanAddress.textContent =
+      "Consultando seu CEP...";
+
+    womanDistance.textContent =
+      "";
+
+    womanMap.style.display =
+      "none";
+
+
+    try {
+
+      /*
+        Consulta o CEP.
+      */
 
       const response =
-        await fetch(url, {
-          headers: {
-            "Accept": "application/json"
-          }
-        });
+        await fetch(
+          "https://viacep.com.br/ws/" +
+          cep +
+          "/json/"
+        );
+
+
+      if (!response.ok) {
+        throw new Error(
+          "Erro ao consultar CEP"
+        );
+      }
+
 
       const data =
         await response.json();
 
-      if (!data.length) {
-        return null;
-      }
 
-      return {
-        lat: parseFloat(data[0].lat),
-        lon: parseFloat(data[0].lon)
-      };
+      if (data.erro) {
 
-    }
-
-
-    /*
-      Busca a Casa da Mulher mais próxima.
-    */
-
-    async function encontrarCasaMaisProxima(
-      latitude,
-      longitude
-    ) {
-
-      const casasComCoordenadas = [];
-
-      for (const casa of casasDaMulher) {
-
-        try {
-
-          const coordenadas =
-            await geocodificar(casa.busca);
-
-          if (coordenadas) {
-
-            const distancia =
-              calcularDistancia(
-                latitude,
-                longitude,
-                coordenadas.lat,
-                coordenadas.lon
-              );
-
-            casasComCoordenadas.push({
-              ...casa,
-              ...coordenadas,
-              distancia
-            });
-
-          }
-
-        } catch (erro) {
-
-          console.log(
-            "Não foi possível localizar:",
-            casa.nome
-          );
-
-        }
-
-        /*
-          Pequena pausa entre consultas.
-        */
-
-        await new Promise(
-          resolve => setTimeout(resolve, 1000)
+        throw new Error(
+          "CEP não encontrado"
         );
 
       }
 
 
-      if (!casasComCoordenadas.length) {
-        return null;
-      }
+      /*
+        Mostra endereço.
+      */
 
-
-      casasComCoordenadas.sort(
-        (a, b) =>
-          a.distancia - b.distancia
+      result.classList.remove(
+        "error"
       );
 
+      resultAddress.innerHTML =
 
-      return casasComCoordenadas[0];
+        (data.logradouro || "Endereço não informado") +
+        "<br>" +
+
+        (data.bairro || "") +
+        "<br>" +
+
+        data.localidade +
+        " - " +
+        data.uf;
+
+
+      result.style.display =
+        "block";
+
+
+      /*
+        Escolhe uma Casa da Mulher
+        com base na região do CEP.
+      */
+
+      const casa =
+        encontrarCasaPorBairro(
+          data.bairro
+        );
+
+
+      /*
+        Mostra resultado.
+      */
+
+      womanAddress.innerHTML =
+
+        "<strong>" +
+        casa.nome +
+        "</strong><br>" +
+
+        casa.endereco;
+
+
+      womanDistance.textContent =
+        "Unidade indicada para a região do endereço informado.";
+
+
+      /*
+        Google Maps.
+      */
+
+      womanMap.href =
+        criarLinkMapa(
+          casa.endereco
+        );
+
+
+      womanMap.style.display =
+        "inline-block";
+
 
     }
 
+    catch (erro) {
 
-    /*
-      Busca principal do CEP.
-    */
-
-    searchButton.addEventListener(
-      "click",
-      async function () {
-
-        const cep =
-          cepInput.value.replace(/\D/g, "");
+      console.error(erro);
 
 
-        if (cep.length !== 8) {
+      result.style.display =
+        "block";
 
-          result.style.display = "block";
-
-          resultAddress.innerHTML =
-            "Digite um CEP válido para continuar.";
-
-          return;
-
-        }
+      result.classList.add(
+        "error"
+      );
 
 
-        searchButton.textContent =
-          "BUSCANDO...";
+      if (
+        erro.message ===
+        "CEP não encontrado"
+      ) {
 
-        searchButton.disabled = true;
-
-
-        result.style.display = "none";
-
+        resultAddress.textContent =
+          "Não encontramos esse CEP. Verifique os números e tente novamente.";
 
         womanAddress.textContent =
-          "Localizando unidades...";
-
-        womanDistance.textContent =
-          "";
-
-        womanMap.style.display =
-          "none";
-
-
-        try {
-
-          /*
-            1. Consulta o CEP.
-          */
-
-          const response =
-            await fetch(
-              `https://viacep.com.br/ws/${cep}/json/`
-            );
-
-
-          const data =
-            await response.json();
-
-
-          if (data.erro) {
-
-            result.style.display =
-              "block";
-
-            result.classList.add(
-              "error"
-            );
-
-            resultAddress.innerHTML =
-              "Não encontramos esse CEP. Verifique os números e tente novamente.";
-
-            return;
-
-          }
-
-
-          result.classList.remove(
-            "error"
-          );
-
-
-          /*
-            Mostra endereço.
-          */
-
-          resultAddress.innerHTML = `
-            ${data.logradouro || "Endereço não informado"}<br>
-            ${data.bairro || ""}<br>
-            ${data.localidade} - ${data.uf}
-          `;
-
-          result.style.display =
-            "block";
-
-
-          /*
-            2. Monta endereço para geolocalização.
-          */
-
-          const enderecoUsuario = [
-
-            data.logradouro,
-            data.bairro,
-            data.localidade,
-            data.uf,
-            "Brasil"
-
-          ]
-            .filter(Boolean)
-            .join(", ");
-
-
-          /*
-            3. Descobre coordenadas do usuário.
-          */
-
-          womanAddress.textContent =
-            "Localizando sua posição...";
-
-
-          const coordenadasUsuario =
-            await geocodificar(
-              enderecoUsuario
-            );
-
-
-          if (!coordenadasUsuario) {
-
-            womanAddress.textContent =
-              "Não foi possível localizar esse endereço.";
-
-            return;
-
-          }
-
-
-          /*
-            4. Procura a Casa da Mulher
-            mais próxima.
-          */
-
-          const casaMaisProxima =
-            await encontrarCasaMaisProxima(
-              coordenadasUsuario.lat,
-              coordenadasUsuario.lon
-            );
-
-
-          if (!casaMaisProxima) {
-
-            womanAddress.textContent =
-              "Não foi possível localizar as unidades no momento.";
-
-            return;
-
-          }
-
-
-          /*
-            5. Mostra o resultado.
-          */
-
-          womanAddress.innerHTML = `
-            <strong>${casaMaisProxima.nome}</strong><br>
-            ${casaMaisProxima.endereco}
-          `;
-
-
-          womanDistance.textContent =
-            `Aproximadamente ${casaMaisProxima.distancia.toFixed(1)} km de distância`;
-
-
-          /*
-            6. Botão Como chegar.
-          */
-
-          womanMap.href =
-            `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-              casaMaisProxima.endereco
-            )}`;
-
-          womanMap.style.display =
-            "inline-block";
-
-
-        } catch (erro) {
-
-          console.error(erro);
-
-          result.style.display =
-            "block";
-
-          result.classList.add(
-            "error"
-          );
-
-          resultAddress.innerHTML =
-            "Não foi possível realizar a busca neste momento. Tente novamente.";
-
-          womanAddress.textContent =
-            "Não foi possível localizar a unidade.";
-
-        } finally {
-
-          searchButton.textContent =
-            "ENCONTRAR";
-
-          searchButton.disabled =
-            false;
-
-        }
+          "Digite um CEP válido.";
 
       }
-    );
 
-  </script>
+      else {
+
+        resultAddress.textContent =
+          "Não foi possível realizar a busca neste momento. Tente novamente.";
+
+        womanAddress.textContent =
+          "Não foi possível localizar a unidade.";
+
+      }
+
+    }
+
+    finally {
+
+      searchButton.disabled =
+        false;
+
+      searchButton.textContent =
+        "ENCONTRAR";
+
+    }
+
+  }
+);
+
+</script>
 
 </body>
 </html>
