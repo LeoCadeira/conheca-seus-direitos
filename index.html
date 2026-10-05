@@ -1,2285 +1,409 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+PROJETO: CONHEÇA SEUS DIREITOS
+OBJETIVO
 
-<head>
+Criar um site gratuito para ajudar mulheres a encontrar serviços públicos de apoio e proteção próximos de sua localização, utilizando o CEP informado.
 
-  <meta charset="UTF-8">
+SITE PUBLICADO
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+https://leocadeira.github.io/conheca-seus-direitos/
 
-  <title>Conheça seus direitos</title>
+O site está publicado através do GitHub Pages e pode ser acessado por celular ou computador.
 
+O QUE JÁ FOI FEITO
 
-  <style>
+CRIAÇÃO DO SITE
 
-    :root {
+O projeto começou como uma página criada no Webnode.
 
-      --card: #f8f2ee;
+O Webnode não permitia facilmente implementar a funcionalidade necessária.
 
-      --primary: #d37586;
+Decidimos migrar a solução para HTML/CSS/JavaScript.
 
-      --primary-dark: #b5526e;
+O código foi criado e colocado em um repositório do GitHub.
 
-      --text: #402d35;
+REPOSITÓRIO
 
-      --muted: #7b5d65;
+Foi criado um repositório chamado:
+conheca-seus-direitos
 
-      --line: rgba(96, 63, 71, 0.18);
+O arquivo principal contém o código HTML, CSS e JavaScript do site.
 
-      --button: #d98ca1;
+PUBLICAÇÃO
 
-      --button-dark: #b9617d;
+O GitHub Pages foi configurado.
 
-      --white: #ffffff;
+Branch utilizada: main
 
-      --success-bg: #f7eef0;
+Pasta: root
 
-    }
+O site está publicado e funcionando.
 
+CAMPO DE CEP
 
-    * {
-      box-sizing: border-box;
-    }
+O usuário pode digitar o CEP.
 
+O CEP é formatado automaticamente no padrão 00000-000.
 
-    body {
+O sistema verifica se o CEP possui 8 números.
 
-      margin: 0;
+CONSULTA DO CEP
 
-      min-height: 100vh;
+O projeto utiliza a API ViaCEP para consultar o endereço relacionado ao CEP.
 
-      display: grid;
+O sistema mostra:
 
-      place-items: center;
+logradouro;
 
-      background:
-        radial-gradient(
-          circle at top,
-          #f9f0eb 0%,
-          #f1e4df 35%,
-          #e8d8d2 100%
-        );
+bairro;
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+cidade;
 
-      color: var(--text);
+estado.
 
-      padding: 20px;
+LOCALIZAÇÃO
 
-    }
+O endereço obtido pelo CEP é convertido em coordenadas geográficas.
 
+Para isso foi utilizada a ferramenta OpenStreetMap/Nominatim.
 
-    .card {
+CASA DA MULHER
 
-      width: 420px;
+Foi criada uma base com unidades da Casa da Mulher Carioca.
 
-      max-width: 100%;
+O sistema calcula aproximadamente a distância entre o endereço informado e as unidades cadastradas.
 
-      background:
-        rgba(255, 255, 255, 0.2);
+A unidade mais próxima é apresentada.
 
-      border:
-        1px solid
-        rgba(120, 83, 91, 0.15);
+O resultado mostra:
 
-      border-radius: 22px;
+nome da unidade;
 
-      box-shadow:
-        0 18px 30px
-        rgba(86, 50, 58, 0.12);
+endereço;
 
-      padding: 18px;
+distância aproximada;
 
-      backdrop-filter: blur(2px);
+telefone;
 
-    }
+horário de funcionamento;
 
+botão "Ligar";
 
-    .inner {
+botão "Como chegar".
 
-      background: var(--card);
+CRAS
 
-      border:
-        1px solid
-        rgba(116, 73, 82, 0.08);
+Também foi implementada a busca do CRAS mais próximo.
 
-      border-radius: 18px;
+Foram feitos testes com diferentes CEPs.
 
-      padding: 18px;
+Um problema foi identificado com alguns bairros, como Rocha Miranda.
 
-    }
+A base foi corrigida e o funcionamento foi testado novamente.
 
+TESTES
 
-    .title {
+O site já foi testado com diferentes CEPs.
 
-      text-align: center;
+Foi confirmado que o sistema consegue encontrar Casa da Mulher e CRAS em determinados endereços.
 
-      font-weight: 800;
+O site foi enviado para outras pessoas testarem.
 
-      font-size: 1.05rem;
+Até o momento, o funcionamento geral está satisfatório.
 
-      letter-spacing: 0.04em;
+TECNOLOGIAS UTILIZADAS
 
-      color: #6a4650;
+HTML
 
-      margin:
-        0 0 16px;
+CSS
 
-      line-height: 1.3;
+JavaScript
 
-    }
+GitHub
 
+GitHub Pages
 
-    .search-label {
+ViaCEP
 
-      display: block;
+OpenStreetMap/Nominatim
 
-      font-size: 0.78rem;
+Google Maps para rotas
 
-      color: var(--muted);
+ESTRUTURA ATUAL
 
-      margin-bottom: 8px;
+O site possui:
 
-      text-align: center;
+título "CONHEÇA SEUS DIREITOS";
 
-      font-weight: 700;
+campo para digitar CEP;
 
-    }
+botão "ENCONTRAR";
 
+resultado da localização;
 
-    .search {
+seção "CRAS mais próximo";
 
-      display: flex;
+seção "Casa da Mulher mais próxima";
 
-      align-items: center;
+endereço;
 
-      gap: 8px;
+distância aproximada;
 
-      margin-bottom: 14px;
+telefone;
 
-    }
+horário de funcionamento;
 
+botão para ligar;
 
-    .input-wrap {
+botão "COMO CHEGAR".
 
-      width: 100%;
+PRÓXIMOS PASSOS
+FASE 1 — TESTES
 
-    }
+Continuar testando o site com CEPs de diferentes regiões do Rio de Janeiro.
 
+Testar principalmente:
 
-    .input {
+Centro;
 
-      width: 100%;
+Zona Norte;
 
-      height: 38px;
+Zona Sul;
 
-      border:
-        1px solid
-        rgba(116, 73, 82, 0.18);
+Zona Oeste;
 
-      border-radius: 8px;
+Zona da Leopoldina;
 
-      background: var(--white);
+regiões mais afastadas.
 
-      padding:
-        0 12px;
+Verificar:
 
-      font-size: 0.98rem;
+se o CEP é encontrado;
 
-      color: var(--text);
+se o endereço está correto;
 
-      outline: none;
+se o CRAS indicado atende aquela região;
 
-    }
+se a Casa da Mulher indicada é realmente a mais próxima;
 
+telefone;
 
-    .input:focus {
+horário;
 
-      border-color:
-        var(--primary);
+botão "Ligar";
 
-      box-shadow:
-        0 0 0 2px
-        rgba(211, 117, 134, 0.12);
+botão "Como chegar".
 
-    }
+FASE 2 — AMPLIAR A BASE DE SERVIÇOS
 
+Criar uma base mais completa e organizada com:
 
-    .input::placeholder {
+CRAS:
 
-      color: #b19aa4;
+nome;
 
-    }
+endereço;
 
+bairro;
 
-    .button {
+telefone;
 
-      height: 38px;
+horário;
 
-      min-width: 104px;
+coordenadas;
 
-      border: none;
+região de atendimento.
 
-      border-radius: 8px;
+CASAS DA MULHER:
 
-      background:
-        linear-gradient(
-          180deg,
-          var(--button) 0%,
-          var(--button-dark) 100%
-        );
+nome;
 
-      color: #fff;
+endereço;
 
-      font-weight: 700;
+telefone;
 
-      letter-spacing: 0.05em;
+horário;
 
-      cursor: pointer;
+coordenadas.
 
-      transition: 0.15s;
+FASE 3 — OUTROS SERVIÇOS
 
-    }
+Adicionar futuramente outros serviços importantes, como:
 
+Delegacias Especializadas de Atendimento à Mulher (DEAM);
 
-    .button:hover {
+Defensoria Pública;
 
-      transform:
-        translateY(-1px);
+Ministério Público;
 
-    }
+serviços municipais de atendimento à mulher;
 
+outros equipamentos da rede de proteção;
 
-    .button:disabled {
+serviços de assistência social.
 
-      opacity: 0.65;
+FASE 4 — EMERGÊNCIA
 
-      cursor: wait;
+Criar uma área de destaque para situações urgentes.
 
-    }
+Exemplo:
 
+PRECISA DE AJUDA AGORA?
 
-    .divider {
+190 — Polícia Militar
+180 — Central de Atendimento à Mulher
 
-      border-top:
-        1px solid
-        var(--line);
+Os números e informações devem ser conferidos em fontes oficiais antes da publicação.
 
-      margin:
-        18px 0 12px;
+FASE 5 — MELHORAR O VISUAL
 
-    }
+Manter a identidade visual atual, mas melhorar:
 
+organização das informações;
 
-    .result {
+tamanho dos textos;
 
-      background: #fff;
+visual dos resultados;
 
-      border:
-        1px solid
-        rgba(116, 73, 82, 0.12);
+botões;
 
-      border-radius: 10px;
+versão para celular;
 
-      padding: 12px;
+destaque das informações importantes.
 
-      margin:
-        14px 4px;
+Também podemos adicionar uma frase explicativa:
 
-      color: var(--muted);
+"Encontre serviços públicos de apoio e proteção perto de você."
 
-      font-size: 0.8rem;
+FASE 6 — PÁGINA SOBRE O PROJETO
 
-      line-height: 1.5;
+Criar uma seção ou página explicando:
 
-    }
+objetivo do projeto;
 
+para quem ele foi criado;
 
-    .result-title {
+que o serviço é gratuito;
 
-      color: var(--text);
+quais fontes são utilizadas;
 
-      font-weight: 800;
+como as informações são atualizadas;
 
-      margin-bottom: 5px;
+aviso de que os dados devem ser conferidos nas fontes oficiais.
 
-    }
+FASE 7 — CORREÇÃO DE INFORMAÇÕES
 
+Criar um botão:
 
-    .service {
+"Encontrou uma informação incorreta?"
 
-      display: grid;
+Esse botão poderá abrir um formulário para que usuários informem:
 
-      grid-template-columns:
-        36px 1fr;
+unidade com informação incorreta;
 
-      gap: 10px;
+telefone desatualizado;
 
-      padding:
-        8px 4px 6px;
+horário incorreto;
 
-    }
+unidade que mudou de endereço;
 
+outros problemas.
 
-    .icon {
+FASE 8 — MELHORAR A ESTRUTURA DO BANCO DE DADOS
 
-      width: 30px;
+Atualmente parte das informações está diretamente no código.
 
-      height: 30px;
+No futuro, seria melhor separar os dados do código do site.
 
-      border-radius: 50%;
+Assim poderemos atualizar uma unidade sem precisar alterar toda a programação.
 
-      background:
-        rgba(221, 170, 186, 0.22);
+Exemplo de cadastro:
 
-      display: grid;
-
-      place-items: center;
-
-      font-size: 1.2rem;
-
-      margin-top: 2px;
-
-    }
-
-
-    .service-card {
-
-      padding: 0;
-
-    }
-
-
-    .service-name {
-
-      font-size: 0.82rem;
-
-      font-weight: 800;
-
-      color: var(--text);
-
-      margin:
-        0 0 6px;
-
-    }
-
-
-    .address {
-
-      font-size: 0.8rem;
-
-      color: var(--muted);
-
-      line-height: 1.5;
-
-      margin:
-        0 0 6px;
-
-    }
-
-
-    .distance {
-
-      font-size: 0.76rem;
-
-      color: var(--muted);
-
-      margin:
-        0 0 8px;
-
-    }
-
-
-    .info {
-
-      font-size: 0.76rem;
-
-      color: var(--muted);
-
-      line-height: 1.5;
-
-      margin:
-        4px 0;
-
-    }
-
-
-    .cta {
-
-      display: inline-block;
-
-      height: 30px;
-
-      padding:
-        0 12px;
-
-      border: none;
-
-      background:
-        rgba(201, 118, 146, 0.1);
-
-      color: var(--primary-dark);
-
-      border-radius: 6px;
-
-      font-weight: 800;
-
-      font-size: 0.7rem;
-
-      letter-spacing: 0.05em;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      margin-top: 5px;
-
-      margin-right: 4px;
-
-    }
-
-
-    .cta:hover {
-
-      background:
-        rgba(201, 118, 146, 0.18);
-
-    }
-
-
-    .phone {
-
-      background:
-        rgba(201, 118, 146, 0.16);
-
-    }
-
-
-    .loading {
-
-      text-align: center;
-
-      color: var(--muted);
-
-      font-size: 0.8rem;
-
-      padding: 10px;
-
-    }
-
-
-    .error {
-
-      color: #9a4357;
-
-      background: #fff4f5;
-
-      border:
-        1px solid
-        #ecc8cf;
-
-    }
-
-
-    .success {
-
-      background:
-        var(--success-bg);
-
-    }
-
-
-    strong {
-
-      color: var(--text);
-
-    }
-
-
-    @media (max-width: 480px) {
-
-      body {
-
-        padding: 12px;
-
-      }
-
-
-      .card {
-
-        width: 100%;
-
-      }
-
-
-      .search {
-
-        flex-wrap: wrap;
-
-      }
-
-
-      .button {
-
-        width: 100%;
-
-        min-width: unset;
-
-        margin-top: 8px;
-
-      }
-
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-
-  <div class="card">
-
-    <div class="inner">
-
-
-      <h1 class="title">
-
-        CONHEÇA SEUS DIREITOS
-
-      </h1>
-
-
-      <div class="search-label">
-
-        Digite seu CEP
-
-      </div>
-
-
-      <div class="search">
-
-        <div class="input-wrap">
-
-          <input
-            class="input"
-            type="text"
-            placeholder="00000-000"
-            maxlength="9"
-            inputmode="numeric"
-            autocomplete="postal-code"
-          >
-
-        </div>
-
-
-        <button class="button">
-
-          ENCONTRAR
-
-        </button>
-
-      </div>
-
-
-      <div class="divider"></div>
-
-
-      <!-- RESULTADO DO CEP -->
-
-      <div
-        id="result"
-        class="result"
-        style="display:none;"
-      >
-
-        <div class="result-title">
-
-          📍 Sua localização
-
-        </div>
-
-        <div id="result-address"></div>
-
-      </div>
-
-
-      <!-- CRAS -->
-
-      <div class="service">
-
-        <div class="icon">
-
-          📍
-
-        </div>
-
-
-        <div class="service-card">
-
-          <p class="service-name">
-
-            CRAS indicado para sua região
-
-          </p>
-
-
-          <p
-            class="address"
-            id="cras-address"
-          >
-
-            Digite seu CEP para encontrar.
-
-          </p>
-
-
-          <p
-            class="distance"
-            id="cras-distance"
-          ></p>
-
-
-          <p
-            class="info"
-            id="cras-phone"
-          ></p>
-
-
-          <p
-            class="info"
-            id="cras-hours"
-          ></p>
-
-
-          <a
-            id="cras-map"
-            class="cta"
-            href="#"
-            target="_blank"
-            style="display:none;"
-          >
-
-            COMO CHEGAR
-
-          </a>
-
-          <a
-            id="cras-call"
-            class="cta phone"
-            href="#"
-            style="display:none;"
-          >
-
-            LIGAR
-
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="divider"
-        style="
-          margin-top:14px;
-          margin-bottom:10px;
-        "
-      ></div>
-
-
-      <!-- CASA DA MULHER -->
-
-      <div class="service">
-
-        <div class="icon">
-
-          👩
-
-        </div>
-
-
-        <div class="service-card">
-
-          <p class="service-name">
-
-            Casa da Mulher mais próxima
-
-          </p>
-
-
-          <p
-            class="address"
-            id="woman-address"
-          >
-
-            Digite seu CEP para encontrar.
-
-          </p>
-
-
-          <p
-            class="distance"
-            id="woman-distance"
-          ></p>
-
-
-          <p
-            class="info"
-            id="woman-phone"
-          ></p>
-
-
-          <p
-            class="info"
-            id="woman-hours"
-          ></p>
-
-
-          <a
-            id="woman-map"
-            class="cta"
-            href="#"
-            target="_blank"
-            style="display:none;"
-          >
-
-            COMO CHEGAR
-
-          </a>
-
-
-          <a
-            id="woman-call"
-            class="cta phone"
-            href="#"
-            style="display:none;"
-          >
-
-            LIGAR
-
-          </a>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-
-
-<script>
-
-
-/* =========================================================
-   ELEMENTOS DA PÁGINA
-========================================================= */
-
-
-const cepInput =
-  document.querySelector(".input");
-
-const searchButton =
-  document.querySelector(".button");
-
-const result =
-  document.querySelector("#result");
-
-const resultAddress =
-  document.querySelector("#result-address");
-
-
-const crasAddress =
-  document.querySelector("#cras-address");
-
-const crasDistance =
-  document.querySelector("#cras-distance");
-
-const crasPhone =
-  document.querySelector("#cras-phone");
-
-const crasHours =
-  document.querySelector("#cras-hours");
-
-const crasMap =
-  document.querySelector("#cras-map");
-
-const crasCall =
-  document.querySelector("#cras-call");
-
-
-const womanAddress =
-  document.querySelector("#woman-address");
-
-const womanDistance =
-  document.querySelector("#woman-distance");
-
-const womanPhone =
-  document.querySelector("#woman-phone");
-
-const womanHours =
-  document.querySelector("#woman-hours");
-
-const womanMap =
-  document.querySelector("#woman-map");
-
-const womanCall =
-  document.querySelector("#woman-call");
-
-
-
-/* =========================================================
-   DADOS DOS CRAS
-   Baseados na página oficial da Prefeitura
-========================================================= */
-
-
-const crasList = [
-
-
-  {
-    nome:
-      "CRAS José Carlos Campos",
-
-    endereco:
-      "Rua Guarama, s/nº - Rocha Miranda, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 2475-5103 / (21) 3342-9442",
-
-    bairros: [
-      "bento ribeiro",
-      "coelho neto",
-      "honorio gurgel",
-      "oswaldo cruz",
-      "rocha miranda",
-      "turiaçu"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Yara Amaral",
-
-    endereco:
-      "Estrada do Camboatá, 23000 - Loja 115 - Guadalupe, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "guadalupe",
-      "marechal hermes",
-      "parque anchieta",
-      "ricardo de albuquerque"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Zózimo Barroso do Amaral",
-
-    endereco:
-      "Av. Ministro Edgard Romero, 400 - Madureira, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3018-3724",
-
-    bairros: [
-      "campinho",
-      "cascadura",
-      "cavalcanti",
-      "engenheiro leal",
-      "madureira",
-      "quintino bocaiuva",
-      "vaz lobo"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Rubens Corrêa",
-
-    endereco:
-      "Rua Capitão Aliatar Martins, 211 - Irajá, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3013-4632 / (21) 2051-5403",
-
-    bairros: [
-      "colegio",
-      "iraja",
-      "vicente de carvalho",
-      "vila da penha",
-      "vila kosmos",
-      "vista alegre"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Francisco Sales de Mesquita",
-
-    endereco:
-      "Rua Mercúrio, 430 - Pavuna, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 2407-2292",
-
-    bairros: [
-      "anchieta",
-      "costa barros",
-      "pavuna"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Acari",
-
-    endereco:
-      "Rua Guaiúba, 150 - Acari, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3375-8011",
-
-    bairros: [
-      "acari",
-      "barros filho",
-      "parque columbia"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Maria da Luz dos Santos",
-
-    endereco:
-      "Rua Ana Quintão, 380 - Piedade, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "abolicao",
-      "engenho da rainha",
-      "engenho de dentro",
-      "inhauma",
-      "piedade",
-      "pilares",
-      "tomas coelho"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Sobral Pinto",
-
-    endereco:
-      "Rua Pernambuco, 484 - Engenho de Dentro, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "agua santa",
-      "cachambi",
-      "del castilho",
-      "encantado",
-      "engenho de dentro",
-      "maria da graca",
-      "meier",
-      "piedade",
-      "pilares",
-      "todos os santos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Caio Fernando Abreu",
-
-    endereco:
-      "Rua Lino Teixeira, 112 - Rocha, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "cachambi",
-      "del castilho",
-      "higienopolis",
-      "jacare",
-      "jacarezinho",
-      "maria da graca"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Mary Richmond",
-
-    endereco:
-      "Rua Conselheiro Ferraz, 54 - Lins de Vasconcelos, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "engenho novo",
-      "lins de vasconcelos",
-      "riachuelo",
-      "rocha",
-      "sao francisco xavier",
-      "sampaio"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Nelson Mandela",
-
-    endereco:
-      "Rua da Regeneração, 654 - Bonsucesso, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bonsucesso",
-      "manguinhos",
-      "mare",
-      "ramos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Nelza Felipe Pereira",
-
-    endereco:
-      "Rua Rodolfo Chamberlland, s/nº - Jardim América, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "jardim america",
-      "parada de lucas",
-      "vigario geral"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Professor Darcy Ribeiro",
-
-    endereco:
-      "Estrada Governador Chagas Freitas, 1900 - Parque Royal, Ilha do Governador, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bancarios",
-      "cacuia",
-      "cidade universitaria",
-      "cocota",
-      "freguesia",
-      "galeao",
-      "jardim carioca",
-      "jardim guanabara",
-      "monero",
-      "portuguesa",
-      "pitangueiras",
-      "praia da bandeira",
-      "ribeira",
-      "ta uá",
-      "taua",
-      "zumbi"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Carlos Drummond de Andrade",
-
-    endereco:
-      "Rua Taperoá, 308 - Penha, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "olaria",
-      "penha",
-      "ramos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS João Fassarela",
-
-    endereco:
-      "Rua Flora Lobo, s/nº - Parque Ary Barroso, Penha, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bras de pina",
-      "cordovil",
-      "penha circular"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Ramos",
-
-    endereco:
-      "Estrada do Itararé, 222 - Ramos, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "complexo do alemao",
-      "bonsucesso",
-      "manguinhos",
-      "ramos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Deputada Heloneida Studart",
-
-    endereco:
-      "Rua Rangel Pestana, 510 - Bangu, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bangu",
-      "senador camara",
-      "santissimo"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Maria Thereza Freire Moura",
-
-    endereco:
-      "Rua Silva Cardoso, 967 - Bangu, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bangu",
-      "padre miguel",
-      "realengo"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Vila Moretti",
-
-    endereco:
-      "Av. Ministro Ary Franco, 278 - Bangu, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "bangu",
-      "padre miguel",
-      "senador camara"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Oswaldo Antonio Ferreira",
-
-    endereco:
-      "Rua Dona Olímpia, 220 - Realengo, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "deodoro",
-      "magalhaes bastos",
-      "realengo",
-      "sulacap",
-      "vila militar"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Aluno Marcelo Cardoso Tomé",
-
-    endereco:
-      "Rua Breno Pessoa, 15 - Campo Grande, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "campo grande",
-      "santissimo",
-      "senador vasconcelos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Luisa Mahim",
-
-    endereco:
-      "Rua Campo Grande, 3058 - Inhoaíba, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "cosmos",
-      "inhoaiba"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Cecilia Meireles",
-
-    endereco:
-      "Rua Viúva Dantas, 695 - Campo Grande, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "campo grande",
-      "santissimo",
-      "senador vasconcelos"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Maria Vieira Bazani",
-
-    endereco:
-      "Estrada do Mato Alto, 5620 - Guaratiba, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "barra de guaratiba",
-      "guaratiba",
-      "ilha de guaratiba",
-      "jardim maravilha",
-      "pedra de guaratiba"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Jorge Gonçalves",
-
-    endereco:
-      "Rua Primeira, 61 - Santa Cruz, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "santa cruz"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Betty Friedman",
-
-    endereco:
-      "Rua Prainha, 57 - Sepetiba, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "sepetiba"
-    ]
-  },
-
-
-  {
-    nome:
-      "CRAS Professora Helenice Nunes Jacintho",
-
-    endereco:
-      "Travessa JK, 5 - Paciência, Rio de Janeiro - RJ",
-
-    telefone:
-      "1746",
-
-    bairros: [
-      "paciencia"
-    ]
-  }
-
-];
-
-
-
-/* =========================================================
-   CASAS DA MULHER CARIOCA
-========================================================= */
-
-
-const casasDaMulher = [
-
-
-  {
-    nome:
-      "Casa da Mulher Carioca Tia Doca",
-
-    endereco:
-      "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3085-3823",
-
-    telefone2:
-      "(21) 97711-0295",
-
-    horario:
-      "Segunda a sexta, das 8h às 17h"
-  },
-
-
-  {
-    nome:
-      "Casa da Mulher Carioca Dinah Coutinho",
-
-    endereco:
-      "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3464-1870",
-
-    telefone2:
-      "(21) 97093-1514",
-
-    horario:
-      "Segunda a sexta, das 8h às 17h"
-  },
-
-
-  {
-    nome:
-      "Casa da Mulher Carioca Elza Soares",
-
-    endereco:
-      "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 3900-3749",
-
-    telefone2:
-      "(21) 96897-4364",
-
-    horario:
-      "Segunda a sexta, das 8h às 17h"
-  },
-
-
-  {
-    nome:
-      "Casa da Mulher Carioca - Polo Campo Grande",
-
-    endereco:
-      "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 96814-8886",
-
-    telefone2:
-      "(21) 99022-6944",
-
-    horario:
-      "Segunda a sexta, das 8h às 17h"
-  },
-
-
-  {
-    nome:
-      "Casa da Mulher Carioca - Filial Coelho Neto",
-
-    endereco:
-      "Avenida Pastor Martin Luther King Jr, 10.055 - Coelho Neto, Rio de Janeiro - RJ",
-
-    telefone:
-      "(21) 96815-1042",
-
-    telefone2:
-      "",
-
-    horario:
-      "Segunda a sexta, das 8h às 17h"
-  }
-
-];
-
-
-
-/* =========================================================
-   NORMALIZAÇÃO DE TEXTO
-========================================================= */
-
-
-function normalizar(texto) {
-
-  return (texto || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .trim();
-
+{
+nome: "Nome da unidade",
+endereco: "Endereço",
+bairro: "Bairro",
+telefone: "Telefone",
+horario: "Horário",
+latitude: "...",
+longitude: "..."
 }
 
+FONTES E CONFIABILIDADE
 
+Sempre que possível, utilizar informações de fontes oficiais.
 
-/* =========================================================
-   FORMATAÇÃO DO CEP
-========================================================= */
+Prioridade:
 
+Prefeitura do Rio de Janeiro;
 
-cepInput.addEventListener(
-  "input",
-  function (e) {
+Governo do Estado do Rio de Janeiro;
 
-    let value =
-      e.target.value
-        .replace(/\D/g, "");
+Governo Federal;
 
-    if (value.length > 5) {
+órgãos oficiais responsáveis pelo serviço.
 
-      value =
-        value.slice(0, 5) +
-        "-" +
-        value.slice(5, 8);
+Evitar utilizar informações de sites não oficiais como fonte principal.
 
-    }
+IMPORTANTE SOBRE O GITHUB
 
-    e.target.value =
-      value.slice(0, 9);
+O código do projeto está salvo no GitHub.
 
-  }
-);
+Sempre que uma alteração for feita:
 
+abrir o arquivo HTML no GitHub;
 
+alterar o código;
 
-/* =========================================================
-   LIMPA RESULTADOS
-========================================================= */
+clicar em "Commit changes";
 
+aguardar o GitHub Pages atualizar;
 
-function limparResultados() {
+abrir o site e testar.
 
-  crasAddress.textContent =
-    "Localizando o CRAS indicado para sua região...";
+O endereço público atual é:
 
-  crasDistance.textContent = "";
+https://leocadeira.github.io/conheca-seus-direitos/
 
-  crasPhone.textContent = "";
+SITUAÇÃO ATUAL
 
-  crasHours.textContent = "";
+O projeto já possui:
 
-  crasMap.style.display =
-    "none";
+[OK] Site publicado
+[OK] Campo de CEP
+[OK] Formatação automática do CEP
+[OK] Consulta do CEP
+[OK] Identificação do endereço
+[OK] Localização geográfica
+[OK] Busca de Casa da Mulher
+[OK] Busca de CRAS
+[OK] Cálculo aproximado de distância
+[OK] Telefone
+[OK] Horário de funcionamento
+[OK] Botão Ligar
+[OK] Botão Como chegar
+[OK] Funcionamento testado
+[OK] Link público disponível
 
-  crasCall.style.display =
-    "none";
+PRÓXIMA PRIORIDADE:
 
+Receber os testes das pessoas que receberam o link.
 
-  womanAddress.textContent =
-    "Localizando a Casa da Mulher mais próxima...";
+Corrigir eventuais erros encontrados.
 
-  womanDistance.textContent = "";
+Ampliar e conferir a base de CRAS.
 
-  womanPhone.textContent = "";
+Ampliar os serviços disponíveis.
 
-  womanHours.textContent = "";
+Criar a área de emergência.
 
-  womanMap.style.display =
-    "none";
+Melhorar o visual.
 
-  womanCall.style.display =
-    "none";
+Criar uma estrutura mais fácil de atualizar.
 
-}
+OBSERVAÇÃO
 
+O projeto já passou da fase de simples protótipo visual.
 
+Atualmente existe um site funcional publicado na internet, capaz de receber um CEP e apresentar serviços públicos relacionados à localização informada.
 
-/* =========================================================
-   MOSTRA CRAS
-========================================================= */
-
-
-function mostrarCras(cras) {
-
-
-  if (!cras) {
-
-    crasAddress.innerHTML =
-      "Não encontramos uma unidade específica para este bairro na base do projeto.";
-
-    crasDistance.textContent =
-      "Para orientação, você também pode ligar para a Central 1746 da Prefeitura.";
-
-    crasPhone.innerHTML =
-      "<strong>Central 1746:</strong> 1746";
-
-    crasHours.textContent =
-      "Atendimento e orientações pela Prefeitura.";
-
-    crasCall.href =
-      "tel:1746";
-
-    crasCall.style.display =
-      "inline-block";
-
-    return;
-
-  }
-
-
-  crasAddress.innerHTML =
-
-    "<strong>" +
-    cras.nome +
-    "</strong><br>" +
-
-    cras.endereco;
-
-
-  crasDistance.textContent =
-    "CRAS responsável pela área de abrangência do bairro informado.";
-
-
-  crasPhone.innerHTML =
-    "<strong>Telefone:</strong> " +
-    cras.telefone;
-
-
-  crasHours.innerHTML =
-    "<strong>Atendimento:</strong> " +
-    "segunda a sexta, das 8h às 17h";
-
-
-  crasMap.href =
-    "https://www.google.com/maps/dir/?api=1&destination=" +
-    encodeURIComponent(
-      cras.endereco
-    );
-
-
-  crasMap.style.display =
-    "inline-block";
-
-
-  const telefone =
-    cras.telefone
-      .split("/")
-      [0]
-      .replace(/\D/g, "");
-
-
-  if (telefone) {
-
-    crasCall.href =
-      "tel:" + telefone;
-
-    crasCall.style.display =
-      "inline-block";
-
-  }
-
-}
-
-
-
-/* =========================================================
-   DISTÂNCIA
-   Usada somente para a Casa da Mulher.
-========================================================= */
-
-
-function calcularDistancia(
-  lat1,
-  lon1,
-  lat2,
-  lon2
-) {
-
-  const R = 6371;
-
-
-  const dLat =
-    (lat2 - lat1) *
-    Math.PI / 180;
-
-
-  const dLon =
-    (lon2 - lon1) *
-    Math.PI / 180;
-
-
-  const a =
-
-    Math.sin(dLat / 2) *
-    Math.sin(dLat / 2)
-
-    +
-
-    Math.cos(
-      lat1 *
-      Math.PI /
-      180
-    )
-
-    *
-
-    Math.cos(
-      lat2 *
-      Math.PI /
-      180
-    )
-
-    *
-
-    Math.sin(dLon / 2) *
-    Math.sin(dLon / 2);
-
-
-  const c =
-    2 *
-    Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1 - a)
-    );
-
-
-  return R * c;
-
-}
-
-
-
-/* =========================================================
-   GEOCODIFICAÇÃO
-========================================================= */
-
-
-async function geocodificar(
-  endereco
-) {
-
-  const url =
-
-    "https://nominatim.openstreetmap.org/search" +
-
-    "?format=json" +
-
-    "&limit=1" +
-
-    "&countrycodes=br" +
-
-    "&q=" +
-
-    encodeURIComponent(
-      endereco
-    );
-
-
-  const response =
-    await fetch(
-      url,
-      {
-        headers: {
-          "Accept":
-            "application/json"
-        }
-      }
-    );
-
-
-  if (!response.ok) {
-
-    throw new Error(
-      "Falha na geolocalização"
-    );
-
-  }
-
-
-  const data =
-    await response.json();
-
-
-  if (!data.length) {
-
-    return null;
-
-  }
-
-
-  return {
-
-    lat:
-      parseFloat(
-        data[0].lat
-      ),
-
-    lon:
-      parseFloat(
-        data[0].lon
-      )
-
-  };
-
-}
-
-
-
-/* =========================================================
-   CASA DA MULHER MAIS PRÓXIMA
-========================================================= */
-
-
-async function encontrarCasaMaisProxima(
-  latitude,
-  longitude
-) {
-
-
-  const casas =
-    [];
-
-
-  for (
-    const casa
-    of casasDaMulher
-  ) {
-
-    try {
-
-      const coordenadas =
-        await geocodificar(
-          casa.endereco
-        );
-
-
-      if (coordenadas) {
-
-        const distancia =
-          calcularDistancia(
-
-            latitude,
-            longitude,
-
-            coordenadas.lat,
-            coordenadas.lon
-
-          );
-
-
-        casas.push({
-
-          ...casa,
-
-          ...coordenadas,
-
-          distancia
-
-        });
-
-      }
-
-
-    } catch (erro) {
-
-      console.log(
-        "Não foi possível localizar:",
-        casa.nome
-      );
-
-    }
-
-
-    await new Promise(
-      resolve =>
-        setTimeout(
-          resolve,
-          800
-        )
-    );
-
-  }
-
-
-  if (!casas.length) {
-
-    return null;
-
-  }
-
-
-  casas.sort(
-    (a, b) =>
-      a.distancia -
-      b.distancia
-  );
-
-
-  return casas[0];
-
-}
-
-
-
-/* =========================================================
-   MOSTRA CASA DA MULHER
-========================================================= */
-
-
-function mostrarCasa(
-  casa
-) {
-
-
-  if (!casa) {
-
-    womanAddress.textContent =
-      "Não foi possível localizar uma Casa da Mulher no momento.";
-
-    return;
-
-  }
-
-
-  womanAddress.innerHTML =
-
-    "<strong>" +
-    casa.nome +
-    "</strong><br>" +
-
-    casa.endereco;
-
-
-  womanDistance.textContent =
-
-    "Aproximadamente " +
-
-    casa.distancia.toFixed(1) +
-
-    " km de distância.";
-
-
-  womanPhone.innerHTML =
-
-    "<strong>Telefone:</strong> " +
-
-    casa.telefone +
-
-    (
-      casa.telefone2
-        ? " / " + casa.telefone2
-        : ""
-    );
-
-
-  womanHours.innerHTML =
-
-    "<strong>Funcionamento:</strong> " +
-
-    casa.horario;
-
-
-  womanMap.href =
-
-    "https://www.google.com/maps/dir/?api=1&destination=" +
-
-    encodeURIComponent(
-      casa.endereco
-    );
-
-
-  womanMap.style.display =
-    "inline-block";
-
-
-  const telefone =
-    casa.telefone
-      .replace(/\D/g, "");
-
-
-  womanCall.href =
-    "tel:" + telefone;
-
-
-  womanCall.style.display =
-    "inline-block";
-
-}
-
-
-
-/* =========================================================
-   BUSCA PRINCIPAL
-========================================================= */
-
-
-searchButton.addEventListener(
-  "click",
-  async function () {
-
-
-    const cep =
-      cepInput.value
-        .replace(/\D/g, "");
-
-
-    if (
-      cep.length !== 8
-    ) {
-
-      result.style.display =
-        "block";
-
-      result.classList.add(
-        "error"
-      );
-
-      resultAddress.innerHTML =
-        "Digite um CEP válido para continuar.";
-
-      return;
-
-    }
-
-
-    searchButton.textContent =
-      "BUSCANDO...";
-
-    searchButton.disabled =
-      true;
-
-
-    result.style.display =
-      "none";
-
-    result.classList.remove(
-      "error"
-    );
-
-
-    limparResultados();
-
-
-    try {
-
-
-      /* ===============================================
-         1. CONSULTA O CEP
-      =============================================== */
-
-
-      const response =
-        await fetch(
-
-          "https://viacep.com.br/ws/" +
-
-          cep +
-
-          "/json/"
-
-        );
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          "Erro na consulta do CEP"
-        );
-
-      }
-
-
-      const data =
-        await response.json();
-
-
-      if (data.erro) {
-
-        result.style.display =
-          "block";
-
-        result.classList.add(
-          "error"
-        );
-
-        resultAddress.innerHTML =
-          "Não encontramos esse CEP. Verifique os números e tente novamente.";
-
-        return;
-
-      }
-
-
-      /* ===============================================
-         2. MOSTRA ENDEREÇO
-      =============================================== */
-
-
-      resultAddress.innerHTML =
-
-        (
-          data.logradouro ||
-          "Endereço não informado"
-        )
-
-        +
-
-        "<br>" +
-
-        (
-          data.bairro ||
-          ""
-        )
-
-        +
-
-        "<br>" +
-
-        data.localidade +
-
-        " - " +
-
-        data.uf;
-
-
-      result.style.display =
-        "block";
-
-
-      /* ===============================================
-         3. DESCOBRE O BAIRRO
-      =============================================== */
-
-
-      const bairro =
-        normalizar(
-          data.bairro
-        );
-
-
-      /* ===============================================
-         4. PROCURA CRAS POR ABRANGÊNCIA
-      =============================================== */
-
-
-      let crasEncontrado =
-        null;
-
-
-      for (
-        const cras
-        of crasList
-      ) {
-
-        const encontrou =
-          cras.bairros.some(
-            item =>
-              normalizar(item)
-              === bairro
-          );
-
-
-        if (encontrou) {
-
-          crasEncontrado =
-            cras;
-
-          break;
-
-        }
-
-      }
-
-
-      mostrarCras(
-        crasEncontrado
-      );
-
-
-      /* ===============================================
-         5. LOCALIZAÇÃO DO USUÁRIO
-         PARA CASA DA MULHER
-      =============================================== */
-
-
-      const enderecoUsuario = [
-
-        data.logradouro,
-
-        data.bairro,
-
-        data.localidade,
-
-        data.uf,
-
-        "Brasil"
-
-      ]
-        .filter(Boolean)
-        .join(", ");
-
-
-      const coordenadasUsuario =
-        await geocodificar(
-          enderecoUsuario
-        );
-
-
-      if (!coordenadasUsuario) {
-
-        womanAddress.textContent =
-          "Encontramos o endereço, mas não foi possível calcular a Casa da Mulher mais próxima.";
-
-        return;
-
-      }
-
-
-      /* ===============================================
-         6. CASA DA MULHER
-      =============================================== */
-
-
-      const casaMaisProxima =
-        await encontrarCasaMaisProxima(
-
-          coordenadasUsuario.lat,
-
-          coordenadasUsuario.lon
-
-        );
-
-
-      mostrarCasa(
-        casaMaisProxima
-      );
-
-
-    }
-
-    catch (erro) {
-
-      console.error(
-        erro
-      );
-
-
-      result.style.display =
-        "block";
-
-      result.classList.add(
-        "error"
-      );
-
-
-      resultAddress.innerHTML =
-
-        "Não foi possível realizar a busca neste momento. " +
-
-        "Verifique sua conexão e tente novamente.";
-
-
-      crasAddress.textContent =
-        "Não foi possível consultar o CRAS.";
-
-      womanAddress.textContent =
-        "Não foi possível consultar a Casa da Mulher.";
-
-    }
-
-
-    finally {
-
-      searchButton.textContent =
-        "ENCONTRAR";
-
-      searchButton.disabled =
-        false;
-
-    }
-
-  });
-
-
-</script>
-
-
-</body>
-
-</html>
+O objetivo das próximas etapas é transformar esse protótipo em uma ferramenta confiável, abrangente e fácil de manter.
