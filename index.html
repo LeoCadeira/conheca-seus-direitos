@@ -134,7 +134,6 @@
     .button:disabled {
       opacity: 0.65;
       cursor: wait;
-      transform: none;
     }
 
     .divider {
@@ -157,12 +156,6 @@
       color: var(--text);
       font-weight: 800;
       margin-bottom: 5px;
-    }
-
-    .error {
-      color: #9a4357;
-      background: #fff4f5;
-      border-color: #ecc8cf;
     }
 
     .service {
@@ -207,63 +200,49 @@
       margin: 0 0 8px;
     }
 
-    .hours {
-      font-size: 0.76rem;
-      color: var(--muted);
-      line-height: 1.5;
-      margin: 5px 0;
-    }
-
     .phone {
       font-size: 0.76rem;
       color: var(--muted);
-      margin: 5px 0 9px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
+      margin: 0 0 8px;
     }
 
     .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 30px;
+      display: inline-block;
+      height: 28px;
       padding: 0 12px;
       border: none;
       background: rgba(201, 118, 146, 0.1);
       color: var(--primary-dark);
       border-radius: 6px;
       font-weight: 800;
-      font-size: 0.68rem;
-      letter-spacing: 0.04em;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
       cursor: pointer;
       text-decoration: none;
+      margin-right: 5px;
+      margin-bottom: 5px;
     }
 
     .cta:hover {
       background: rgba(201, 118, 146, 0.18);
     }
 
-    .cta.disabled {
-      opacity: 0.5;
-      pointer-events: none;
+    .call {
+      background: rgba(112, 170, 130, 0.12);
+      color: #39704a;
     }
 
-    .source-note {
-      font-size: 0.68rem;
-      color: #9b8189;
-      margin: 10px 4px 0;
-      line-height: 1.4;
+    .error {
+      color: #9a4357;
+      background: #fff4f5;
+      border: 1px solid #ecc8cf;
     }
 
     .loading {
-      text-align: center;
       color: var(--muted);
+      text-align: center;
       font-size: 0.8rem;
-      padding: 12px;
+      padding: 8px;
     }
 
     @media (max-width: 480px) {
@@ -290,485 +269,446 @@
 
 <body>
 
-  <div class="card">
-    <div class="inner">
+<div class="card">
 
-      <h1 class="title">
-        CONHEÇA SEUS DIREITOS
-      </h1>
+  <div class="inner">
 
-      <div class="search-label">
-        Digite seu CEP
+    <h1 class="title">
+      CONHEÇA SEUS DIREITOS
+    </h1>
+
+    <div class="search-label">
+      Digite seu CEP
+    </div>
+
+    <div class="search">
+
+      <div class="input-wrap">
+        <input
+          class="input"
+          type="text"
+          placeholder="00000-000"
+          maxlength="9"
+          inputmode="numeric"
+          autocomplete="postal-code"
+        />
       </div>
 
-      <div class="search">
-
-        <div class="input-wrap">
-          <input
-            class="input"
-            type="text"
-            placeholder="00000-000"
-            maxlength="9"
-            inputmode="numeric"
-            autocomplete="postal-code"
-          />
-        </div>
-
-        <button class="button">
-          ENCONTRAR
-        </button>
-
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- LOCALIZAÇÃO -->
-
-      <div
-        id="result"
-        class="result"
-        style="display: none;"
-      >
-        <div class="result-title">
-          📍 Sua localização
-        </div>
-
-        <div id="result-address"></div>
-      </div>
-
-
-      <!-- CRAS -->
-
-      <div class="service">
-
-        <div class="icon">
-          📍
-        </div>
-
-        <div class="service-card">
-
-          <p class="service-name">
-            CRAS mais próximo
-          </p>
-
-          <p class="address" id="cras-address">
-            Digite seu CEP para encontrar.
-          </p>
-
-          <p class="distance" id="cras-distance"></p>
-
-          <div class="actions">
-
-            <a
-              id="cras-map"
-              class="cta"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display: none;"
-            >
-              COMO CHEGAR
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="divider"
-        style="margin-top: 14px; margin-bottom: 10px;"
-      ></div>
-
-
-      <!-- CASA DA MULHER -->
-
-      <div class="service">
-
-        <div class="icon">
-          👩
-        </div>
-
-        <div class="service-card">
-
-          <p class="service-name">
-            Casa da Mulher mais próxima
-          </p>
-
-          <p class="address" id="woman-address">
-            Digite seu CEP para encontrar.
-          </p>
-
-          <p class="distance" id="woman-distance"></p>
-
-          <p class="hours" id="woman-hours"></p>
-
-          <p class="phone" id="woman-phone"></p>
-
-          <div class="actions">
-
-            <a
-              id="woman-call"
-              class="cta"
-              href="#"
-              style="display: none;"
-            >
-              📞 LIGAR
-            </a>
-
-            <a
-              id="woman-map"
-              class="cta"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display: none;"
-            >
-              📍 COMO CHEGAR
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <p class="source-note">
-        Informações das unidades da Casa da Mulher Carioca:
-        Prefeitura do Rio / Secretaria Especial de Políticas e Promoção da Mulher.
-      </p>
+      <button class="button">
+        ENCONTRAR
+      </button>
 
     </div>
+
+    <div class="divider"></div>
+
+    <div
+      id="result"
+      class="result"
+      style="display:none;"
+    >
+      <div class="result-title">
+        📍 Sua localização
+      </div>
+
+      <div id="result-address"></div>
+    </div>
+
+
+    <!-- CRAS -->
+
+    <div class="service">
+
+      <div class="icon">
+        📍
+      </div>
+
+      <div class="service-card">
+
+        <p class="service-name">
+          CRAS mais próximo
+        </p>
+
+        <p
+          class="address"
+          id="cras-address"
+        >
+          Digite seu CEP para encontrar.
+        </p>
+
+        <p
+          class="distance"
+          id="cras-distance"
+        ></p>
+
+        <p
+          class="phone"
+          id="cras-phone"
+        ></p>
+
+        <a
+          id="cras-map"
+          class="cta"
+          href="#"
+          target="_blank"
+          style="display:none;"
+        >
+          COMO CHEGAR
+        </a>
+
+        <a
+          id="cras-call"
+          class="cta call"
+          href="#"
+          style="display:none;"
+        >
+          LIGAR
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="divider"
+      style="margin-top:14px;margin-bottom:10px;"
+    ></div>
+
+
+    <!-- CASA DA MULHER -->
+
+    <div class="service">
+
+      <div class="icon">
+        👩
+      </div>
+
+      <div class="service-card">
+
+        <p class="service-name">
+          Casa da Mulher mais próxima
+        </p>
+
+        <p
+          class="address"
+          id="woman-address"
+        >
+          Digite seu CEP para encontrar.
+        </p>
+
+        <p
+          class="distance"
+          id="woman-distance"
+        ></p>
+
+        <p
+          class="phone"
+          id="woman-phone"
+        ></p>
+
+        <a
+          id="woman-map"
+          class="cta"
+          href="#"
+          target="_blank"
+          style="display:none;"
+        >
+          COMO CHEGAR
+        </a>
+
+        <a
+          id="woman-call"
+          class="cta call"
+          href="#"
+          style="display:none;"
+        >
+          LIGAR
+        </a>
+
+      </div>
+
+    </div>
+
   </div>
 
+</div>
 
-  <script>
 
-    const cepInput =
-      document.querySelector(".input");
+<script>
 
-    const searchButton =
-      document.querySelector(".button");
+  const cepInput =
+    document.querySelector(".input");
 
-    const result =
-      document.querySelector("#result");
+  const searchButton =
+    document.querySelector(".button");
 
-    const resultAddress =
-      document.querySelector("#result-address");
+  const result =
+    document.querySelector("#result");
 
+  const resultAddress =
+    document.querySelector("#result-address");
 
-    const crasAddress =
-      document.querySelector("#cras-address");
+  const crasAddress =
+    document.querySelector("#cras-address");
 
-    const crasDistance =
-      document.querySelector("#cras-distance");
+  const crasDistance =
+    document.querySelector("#cras-distance");
 
-    const crasMap =
-      document.querySelector("#cras-map");
+  const crasPhone =
+    document.querySelector("#cras-phone");
 
+  const crasMap =
+    document.querySelector("#cras-map");
 
-    const womanAddress =
-      document.querySelector("#woman-address");
+  const crasCall =
+    document.querySelector("#cras-call");
 
-    const womanDistance =
-      document.querySelector("#woman-distance");
+  const womanAddress =
+    document.querySelector("#woman-address");
 
-    const womanHours =
-      document.querySelector("#woman-hours");
+  const womanDistance =
+    document.querySelector("#woman-distance");
 
-    const womanPhone =
-      document.querySelector("#woman-phone");
+  const womanPhone =
+    document.querySelector("#woman-phone");
 
-    const womanCall =
-      document.querySelector("#woman-call");
+  const womanMap =
+    document.querySelector("#woman-map");
 
-    const womanMap =
-      document.querySelector("#woman-map");
+  const womanCall =
+    document.querySelector("#woman-call");
 
 
-    /*
-      CASAS DA MULHER CARIOCA
+  /*
+    =====================================================
+    CRAS
+    =====================================================
 
-      As coordenadas das unidades ficam
-      cadastradas diretamente no projeto.
+    Unidades da região da Zona Oeste.
 
-      Isso evita depender de uma nova
-      consulta ao OpenStreetMap para cada
-      unidade durante cada pesquisa.
-    */
+    As coordenadas são mantidas no próprio projeto.
+    Assim o sistema não precisa consultar o Nominatim
+    para cada unidade a cada busca.
+  */
 
-    const casasDaMulher = [
+  const cras = [
 
-      {
-        nome:
-          "Casa da Mulher Carioca Dinah Coutinho",
+    {
+      nome: "CRAS Vila Moretti",
+      endereco: "Avenida Ministro Ary Franco, 278 - Bangu, Rio de Janeiro - RJ",
+      telefone: "(21) 3463-1724",
+      lat: -22.8757,
+      lon: -43.4578
+    },
 
-        endereco:
-          "Rua Limites, 1349 - Realengo, Rio de Janeiro - RJ",
+    {
+      nome: "CRAS Maria Thereza Freire Moura",
+      endereco: "Rua Silva Cardoso, 967 - Bangu, Rio de Janeiro - RJ",
+      telefone: "(21) 3463-7936",
+      lat: -22.8750,
+      lon: -43.4688
+    },
 
-        latitude:
-          -22.8824,
+    {
+      nome: "CRAS Deputada Heloneida Studart",
+      endereco: "Rua Rangel Pestana, 510 - Bangu, Rio de Janeiro - RJ",
+      telefone: "(21) 3463-7211",
+      lat: -22.8810,
+      lon: -43.4665
+    },
 
-        longitude:
-          -43.4328,
+    {
+      nome: "CRAS Olímpia Esteves",
+      endereco: "Rua Santa Cecília, 984 - Bangu, Rio de Janeiro - RJ",
+      telefone: "(21) 3463-8333",
+      lat: -22.8748,
+      lon: -43.4660
+    },
 
-        telefone:
-          "(21) 3464-1870",
-
-        telefoneLink:
-          "2134641870",
-
-        horario:
-          "Segunda a sexta, das 8h às 20h. Sábado, das 8h às 12h."
-      },
-
-
-      {
-        nome:
-          "Casa da Mulher Carioca Tia Doca",
-
-        endereco:
-          "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
-
-        latitude:
-          -22.8708,
-
-        longitude:
-          -43.3427,
-
-        telefone:
-          "(21) 3796-0228 / (21) 2452-2217",
-
-        telefoneLink:
-          "2137960228",
-
-        horario:
-          "Segunda a sexta, das 8h às 20h. Sábado, das 8h às 12h."
-      },
-
-
-      {
-        nome:
-          "Casa da Mulher Carioca Elza Soares",
-
-        endereco:
-          "Rua Marechal Falcão da Frota, 1782 - Padre Miguel, Rio de Janeiro - RJ",
-
-        latitude:
-          -22.8707,
-
-        longitude:
-          -43.4488,
-
-        telefone:
-          "(21) 3900-3749 / (21) 96897-4364",
-
-        telefoneLink:
-          "2139003749",
-
-        horario:
-          "Segunda a sexta, das 8h às 20h. Sábado, das 8h às 12h."
-      },
-
-
-      {
-        nome:
-          "Casa da Mulher Carioca - Polo Campo Grande",
-
-        endereco:
-          "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
-
-        latitude:
-          -22.9059,
-
-        longitude:
-          -43.5617,
-
-        telefone:
-          "(21) 96814-8886",
-
-        telefoneLink:
-          "21968148886",
-
-        horario:
-          "Terça a sexta, das 9h às 18h. Sábado, das 9h às 12h."
-      },
-
-
-      {
-        nome:
-          "Casa da Mulher Carioca - Filial Coelho Neto",
-
-        endereco:
-          "Avenida Pastor Martin Luther King Jr, 10055 - Coelho Neto, Rio de Janeiro - RJ",
-
-        latitude:
-          -22.8255,
-
-        longitude:
-          -43.3670,
-
-        telefone:
-          "(21) 96815-1042",
-
-        telefoneLink:
-          "21968151042",
-
-        horario:
-          "Consulte a unidade para confirmar o horário de atendimento."
-      }
-
-    ];
-
-
-    /*
-      CRAS
-
-      A estrutura permite cadastrar unidades
-      com coordenadas e fazer a mesma busca
-      por distância.
-
-      Por enquanto mantemos a busca do CRAS
-      através do serviço disponível no projeto.
-    */
-
-    const crasPorRegiao = [
-
-      {
-        nome:
-          "CRAS Machado de Assis",
-
-        endereco:
-          "Região Central - Rio de Janeiro - RJ",
-
-        latitude:
-          -22.9068,
-
-        longitude:
-          -43.1810
-      }
-
-    ];
-
-
-    /*
-      FORMATAÇÃO DO CEP
-    */
-
-    cepInput.addEventListener(
-      "input",
-      function (e) {
-
-        let value =
-          e.target.value.replace(/\D/g, "");
-
-        if (value.length > 5) {
-
-          value =
-            value.slice(0, 5) +
-            "-" +
-            value.slice(5, 8);
-
-        }
-
-        e.target.value =
-          value.slice(0, 9);
-
-      }
-    );
-
-
-    /*
-      CÁLCULO DE DISTÂNCIA
-    */
-
-    function calcularDistancia(
-      lat1,
-      lon1,
-      lat2,
-      lon2
-    ) {
-
-      const R = 6371;
-
-      const dLat =
-        (lat2 - lat1) *
-        Math.PI / 180;
-
-      const dLon =
-        (lon2 - lon1) *
-        Math.PI / 180;
-
-      const a =
-        Math.sin(dLat / 2) *
-        Math.sin(dLat / 2) +
-
-        Math.cos(
-          lat1 * Math.PI / 180
-        ) *
-
-        Math.cos(
-          lat2 * Math.PI / 180
-        ) *
-
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-
-      const c =
-        2 *
-        Math.atan2(
-          Math.sqrt(a),
-          Math.sqrt(1 - a)
-        );
-
-      return R * c;
-
+    {
+      nome: "CRAS Oswaldo Antonio Ferreira",
+      endereco: "Rua Dona Olímpia, 220 - Realengo, Rio de Janeiro - RJ",
+      telefone: "(21) 3335-0541",
+      lat: -22.883199,
+      lon: -43.427694
     }
 
-
-    /*
-      GEOCODIFICA APENAS O ENDEREÇO
-      INFORMADO PELO USUÁRIO.
-
-      Isso reduz muito o número de
-      consultas ao OpenStreetMap.
-    */
-
-    async function geocodificar(
-      endereco
-    ) {
-
-      const url =
-        "https://nominatim.openstreetmap.org/search" +
-        "?format=json" +
-        "&limit=1" +
-        "&countrycodes=br" +
-        "&q=" +
-        encodeURIComponent(endereco);
+  ];
 
 
-      const response =
-        await fetch(url);
+  /*
+    =====================================================
+    CASAS DA MULHER CARIOCA
+    =====================================================
+  */
+
+  const casasDaMulher = [
+
+    {
+      nome: "Casa da Mulher Carioca Dinah Coutinho",
+      endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
+      telefone: "(21) 3464-1870",
+      lat: -22.8815,
+      lon: -43.4305
+    },
+
+    {
+      nome: "Casa da Mulher Carioca Tia Doca",
+      endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
+      telefone: "(21) 3085-3823",
+      lat: -22.8695,
+      lon: -43.3375
+    },
+
+    {
+      nome: "Casa da Mulher Carioca Elza Soares",
+      endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
+      telefone: "(21) 3900-3749",
+      lat: -22.8755,
+      lon: -43.4485
+    },
+
+    {
+      nome: "Casa da Mulher Carioca - Polo Campo Grande",
+      endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
+      telefone: "(21) 96814-8886",
+      lat: -22.9025,
+      lon: -43.5610
+    },
+
+    {
+      nome: "Casa da Mulher Carioca - Polo Coelho Neto",
+      endereco: "Avenida Pastor Martin Luther King Jr, 10055 - Coelho Neto, Rio de Janeiro - RJ",
+      telefone: "(21) 96815-1042",
+      lat: -22.8255,
+      lon: -43.3660
+    }
+
+  ];
 
 
-      if (!response.ok) {
-        throw new Error(
-          "Falha na localização."
-        );
+  /*
+    =====================================================
+    FORMATAÇÃO DO CEP
+    =====================================================
+  */
+
+  cepInput.addEventListener(
+    "input",
+    function(e) {
+
+      let value =
+        e.target.value.replace(/\D/g, "");
+
+      if (value.length > 5) {
+
+        value =
+          value.slice(0,5) +
+          "-" +
+          value.slice(5,8);
+
       }
 
+      e.target.value =
+        value.slice(0,9);
+
+    }
+  );
+
+
+  /*
+    =====================================================
+    DISTÂNCIA
+    =====================================================
+  */
+
+  function calcularDistancia(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+  ) {
+
+    const R = 6371;
+
+    const dLat =
+      (lat2 - lat1) *
+      Math.PI / 180;
+
+    const dLon =
+      (lon2 - lon1) *
+      Math.PI / 180;
+
+    const a =
+      Math.sin(dLat / 2) *
+      Math.sin(dLat / 2) +
+
+      Math.cos(
+        lat1 * Math.PI / 180
+      ) *
+
+      Math.cos(
+        lat2 * Math.PI / 180
+      ) *
+
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+    const c =
+      2 *
+      Math.atan2(
+        Math.sqrt(a),
+        Math.sqrt(1 - a)
+      );
+
+    return R * c;
+
+  }
+
+
+  /*
+    =====================================================
+    GEOCODIFICAÇÃO DO ENDEREÇO DO USUÁRIO
+    =====================================================
+
+    Agora somente o endereço do usuário é consultado.
+
+    Não fazemos uma consulta para cada unidade.
+  */
+
+  async function localizarUsuario(endereco) {
+
+    const url =
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=jsonv2" +
+      "&limit=1" +
+      "&countrycodes=br" +
+      "&q=" +
+      encodeURIComponent(endereco);
+
+    try {
+
+      const response =
+        await fetch(url, {
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+      if (!response.ok) {
+        return null;
+      }
 
       const data =
         await response.json();
 
-
-      if (!data.length) {
+      if (
+        !data ||
+        !data.length
+      ) {
         return null;
       }
-
 
       return {
 
@@ -780,156 +720,295 @@
 
       };
 
+    } catch (erro) {
+
+      console.error(
+        "Erro ao localizar endereço:",
+        erro
+      );
+
+      return null;
+
     }
 
+  }
 
-    /*
-      ENCONTRA A CASA DA MULHER
-      MAIS PRÓXIMA.
 
-      Não existe mais uma consulta
-      externa para cada unidade.
-    */
+  /*
+    =====================================================
+    ENCONTRA UNIDADE MAIS PRÓXIMA
+    =====================================================
+  */
 
-    function encontrarCasaMaisProxima(
-      latitude,
-      longitude
+  function encontrarMaisProxima(
+    latitude,
+    longitude,
+    unidades
+  ) {
+
+    if (
+      !latitude ||
+      !longitude
     ) {
+      return null;
+    }
 
-      let maisProxima = null;
+    const calculadas =
+      unidades.map(
+        unidade => {
 
-      let menorDistancia =
-        Infinity;
+          const distancia =
+            calcularDistancia(
+              latitude,
+              longitude,
+              unidade.lat,
+              unidade.lon
+            );
 
-
-      for (
-        const casa of casasDaMulher
-      ) {
-
-        const distancia =
-          calcularDistancia(
-            latitude,
-            longitude,
-            casa.latitude,
-            casa.longitude
-          );
-
-
-        if (
-          distancia <
-          menorDistancia
-        ) {
-
-          menorDistancia =
-            distancia;
-
-          maisProxima = {
-
-            ...casa,
-
-            distancia:
-              distancia
-
+          return {
+            ...unidade,
+            distancia
           };
 
         }
+      );
 
-      }
+    calculadas.sort(
+      (a,b) =>
+        a.distancia -
+        b.distancia
+    );
+
+    return calculadas[0];
+
+  }
 
 
-      return maisProxima;
+  /*
+    =====================================================
+    LIMPA RESULTADOS
+    =====================================================
+  */
+
+  function limparResultados() {
+
+    crasAddress.textContent =
+      "Localizando...";
+
+    crasDistance.textContent =
+      "";
+
+    crasPhone.textContent =
+      "";
+
+    crasMap.style.display =
+      "none";
+
+    crasCall.style.display =
+      "none";
+
+    womanAddress.textContent =
+      "Localizando...";
+
+    womanDistance.textContent =
+      "";
+
+    womanPhone.textContent =
+      "";
+
+    womanMap.style.display =
+      "none";
+
+    womanCall.style.display =
+      "none";
+
+  }
+
+
+  /*
+    =====================================================
+    MOSTRA CRAS
+    =====================================================
+  */
+
+  function mostrarCras(
+    unidade
+  ) {
+
+    if (!unidade) {
+
+      crasAddress.textContent =
+        "Não foi possível calcular o CRAS mais próximo.";
+
+      crasDistance.textContent =
+        "Ligue 1746 da Prefeitura para orientação.";
+
+      return;
 
     }
 
+    crasAddress.innerHTML =
+      `<strong>${unidade.nome}</strong><br>${unidade.endereco}`;
 
-    /*
-      ENCONTRA CRAS MAIS PRÓXIMO
-      QUANDO HOUVER UNIDADES
-      CADASTRADAS.
-    */
+    crasDistance.textContent =
+      `Aproximadamente ${unidade.distancia.toFixed(1)} km de distância`;
 
-    function encontrarCrasMaisProximo(
-      latitude,
-      longitude
-    ) {
+    crasPhone.textContent =
+      `Telefone: ${unidade.telefone}`;
 
-      if (
-        !crasPorRegiao.length
-      ) {
+    crasMap.href =
+      "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(
+        unidade.endereco
+      );
 
-        return null;
+    crasMap.style.display =
+      "inline-block";
 
-      }
+    crasCall.href =
+      "tel:" +
+      unidade.telefone
+        .replace(/\D/g, "");
 
+    crasCall.style.display =
+      "inline-block";
 
-      let maisProximo = null;
-
-      let menorDistancia =
-        Infinity;
-
-
-      for (
-        const cras of crasPorRegiao
-      ) {
-
-        const distancia =
-          calcularDistancia(
-            latitude,
-            longitude,
-            cras.latitude,
-            cras.longitude
-          );
+  }
 
 
-        if (
-          distancia <
-          menorDistancia
-        ) {
+  /*
+    =====================================================
+    MOSTRA CASA DA MULHER
+    =====================================================
+  */
 
-          menorDistancia =
-            distancia;
+  function mostrarCasa(
+    unidade
+  ) {
 
-          maisProximo = {
+    if (!unidade) {
 
-            ...cras,
+      womanAddress.textContent =
+        "Não foi possível calcular a Casa da Mulher mais próxima.";
 
-            distancia:
-              distancia
+      womanDistance.textContent =
+        "Ligue 1746 da Prefeitura para orientação.";
 
-          };
-
-        }
-
-      }
-
-
-      return maisProximo;
+      return;
 
     }
 
+    womanAddress.innerHTML =
+      `<strong>${unidade.nome}</strong><br>${unidade.endereco}`;
 
-    /*
-      BUSCA PRINCIPAL
-    */
+    womanDistance.textContent =
+      `Aproximadamente ${unidade.distancia.toFixed(1)} km de distância`;
 
-    searchButton.addEventListener(
-      "click",
-      async function () {
+    womanPhone.textContent =
+      `Telefone: ${unidade.telefone}`;
 
-        const cep =
-          cepInput.value.replace(
-            /\D/g,
-            ""
-          );
+    womanMap.href =
+      "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(
+        unidade.endereco
+      );
 
+    womanMap.style.display =
+      "inline-block";
+
+    womanCall.href =
+      "tel:" +
+      unidade.telefone
+        .replace(/\D/g, "");
+
+    womanCall.style.display =
+      "inline-block";
+
+  }
+
+
+  /*
+    =====================================================
+    BUSCA PRINCIPAL
+    =====================================================
+  */
+
+  searchButton.addEventListener(
+    "click",
+    async function() {
+
+      const cep =
+        cepInput.value
+          .replace(/\D/g, "");
+
+
+      /*
+        Verificação do CEP.
+      */
+
+      if (cep.length !== 8) {
+
+        result.style.display =
+          "block";
+
+        result.classList.add(
+          "error"
+        );
+
+        resultAddress.textContent =
+          "Digite um CEP válido para continuar.";
+
+        return;
+
+      }
+
+
+      /*
+        Estado de carregamento.
+      */
+
+      searchButton.textContent =
+        "BUSCANDO...";
+
+      searchButton.disabled =
+        true;
+
+      result.style.display =
+        "none";
+
+      result.classList.remove(
+        "error"
+      );
+
+      limparResultados();
+
+
+      try {
 
         /*
-          CEP inválido
+          ===============================================
+          1. VIA CEP
+          ===============================================
         */
 
-        if (
-          cep.length !== 8
-        ) {
+        const response =
+          await fetch(
+            `https://viacep.com.br/ws/${cep}/json/`
+          );
+
+
+        if (!response.ok) {
+          throw new Error(
+            "Falha no ViaCEP"
+          );
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (data.erro) {
 
           result.style.display =
             "block";
@@ -938,8 +1017,8 @@
             "error"
           );
 
-          resultAddress.innerHTML =
-            "Digite um CEP válido para continuar.";
+          resultAddress.textContent =
+            "Não encontramos esse CEP. Verifique os números e tente novamente.";
 
           return;
 
@@ -947,311 +1026,165 @@
 
 
         /*
-          Estado inicial
+          ===============================================
+          2. MOSTRA ENDEREÇO
+          ===============================================
         */
 
-        searchButton.textContent =
-          "BUSCANDO...";
+        resultAddress.innerHTML = `
 
-        searchButton.disabled =
-          true;
+          ${data.logradouro || "Endereço não informado"}<br>
 
+          ${data.bairro || ""}<br>
+
+          ${data.localidade} - ${data.uf}
+
+        `;
 
         result.style.display =
-          "none";
+          "block";
 
-        result.classList.remove(
-          "error"
-        );
 
+        /*
+          ===============================================
+          3. MONTA ENDEREÇO
+          ===============================================
+        */
 
-        womanAddress.textContent =
-          "Localizando sua posição...";
+        const enderecoUsuario = [
 
-        womanDistance.textContent =
-          "";
+          data.logradouro,
 
-        womanHours.textContent =
-          "";
+          data.bairro,
 
-        womanPhone.textContent =
-          "";
+          data.localidade,
 
-        womanCall.style.display =
-          "none";
+          data.uf,
 
-        womanMap.style.display =
-          "none";
+          "Brasil"
 
+        ]
+          .filter(Boolean)
+          .join(", ");
 
-        crasAddress.textContent =
-          "Localizando sua posição...";
 
-        crasDistance.textContent =
-          "";
+        /*
+          ===============================================
+          4. LOCALIZA USUÁRIO
+          ===============================================
+        */
 
-        crasMap.style.display =
-          "none";
-
-
-        try {
-
-          /*
-            1. CONSULTA O CEP
-          */
-
-          const response =
-            await fetch(
-              `https://viacep.com.br/ws/${cep}/json/`
-            );
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              "Falha ao consultar o CEP."
-            );
-
-          }
-
-
-          const data =
-            await response.json();
-
-
-          if (data.erro) {
-
-            throw new Error(
-              "CEP não encontrado."
-            );
-
-          }
-
-
-          /*
-            2. MOSTRA O ENDEREÇO
-          */
-
-          resultAddress.innerHTML = `
-
-            ${data.logradouro || "Endereço não informado"}<br>
-
-            ${data.bairro || ""}<br>
-
-            ${data.localidade || ""} -
-            ${data.uf || ""}
-
-          `;
-
-
-          result.style.display =
-            "block";
-
-
-          /*
-            3. MONTA ENDEREÇO
-          */
-
-          const enderecoUsuario = [
-
-            data.logradouro,
-
-            data.bairro,
-
-            data.localidade,
-
-            data.uf,
-
-            "Brasil"
-
-          ]
-            .filter(Boolean)
-            .join(", ");
-
-
-          /*
-            4. LOCALIZA O ENDEREÇO
-          */
-
-          const coordenadasUsuario =
-            await geocodificar(
-              enderecoUsuario
-            );
-
-
-          if (
-            !coordenadasUsuario
-          ) {
-
-            womanAddress.textContent =
-              "Encontramos o endereço, mas não foi possível localizar sua posição para calcular a distância.";
-
-            crasAddress.textContent =
-              "Encontramos o endereço, mas não foi possível calcular o CRAS mais próximo.";
-
-            return;
-
-          }
-
-
-          /*
-            5. CASA DA MULHER
-          */
-
-          const casaMaisProxima =
-            encontrarCasaMaisProxima(
-
-              coordenadasUsuario.lat,
-
-              coordenadasUsuario.lon
-
-            );
-
-
-          if (
-            casaMaisProxima
-          ) {
-
-            womanAddress.innerHTML = `
-
-              <strong>
-                ${casaMaisProxima.nome}
-              </strong>
-              <br>
-
-              ${casaMaisProxima.endereco}
-
-            `;
-
-
-            womanDistance.textContent =
-              `Aproximadamente ${casaMaisProxima.distancia.toFixed(1)} km de distância`;
-
-
-            womanHours.innerHTML =
-              `<strong>Funcionamento:</strong> ${casaMaisProxima.horario}`;
-
-
-            womanPhone.innerHTML =
-              `<strong>Telefone:</strong> ${casaMaisProxima.telefone}`;
-
-
-            womanCall.href =
-              `tel:${casaMaisProxima.telefoneLink}`;
-
-
-            womanCall.style.display =
-              "inline-flex";
-
-
-            womanMap.href =
-              `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                casaMaisProxima.endereco
-              )}`;
-
-
-            womanMap.style.display =
-              "inline-flex";
-
-          }
-
-
-          /*
-            6. CRAS
-          */
-
-          const crasMaisProximo =
-            encontrarCrasMaisProximo(
-
-              coordenadasUsuario.lat,
-
-              coordenadasUsuario.lon
-
-            );
-
-
-          if (
-            crasMaisProximo
-          ) {
-
-            crasAddress.innerHTML = `
-
-              <strong>
-                ${crasMaisProximo.nome}
-              </strong>
-              <br>
-
-              ${crasMaisProximo.endereco}
-
-            `;
-
-
-            crasDistance.textContent =
-              `Aproximadamente ${crasMaisProximo.distancia.toFixed(1)} km de distância`;
-
-
-            crasMap.href =
-              `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                crasMaisProximo.endereco
-              )}`;
-
-
-            crasMap.style.display =
-              "inline-flex";
-
-          } else {
-
-            crasAddress.textContent =
-              "Não encontramos uma unidade específica para este bairro na base do projeto.";
-
-            crasDistance.textContent =
-              "Central 1746 da Prefeitura: ligue 1746 para orientação.";
-
-          }
-
-
-        } catch (erro) {
-
-          console.error(
-            "Erro:",
-            erro
+        const coordenadas =
+          await localizarUsuario(
+            enderecoUsuario
           );
 
 
-          result.style.display =
-            "block";
+        /*
+          ===============================================
+          5. SE NÃO CONSEGUIR LOCALIZAR
+          ===============================================
+        */
 
-          result.classList.add(
-            "error"
-          );
-
-
-          resultAddress.innerHTML =
-            "Não foi possível realizar a busca neste momento. Verifique o CEP e tente novamente.";
-
-
-          womanAddress.textContent =
-            "Não foi possível localizar a Casa da Mulher mais próxima.";
-
+        if (!coordenadas) {
 
           crasAddress.textContent =
-            "Não foi possível localizar o CRAS mais próximo.";
+            "Encontramos o endereço, mas não foi possível calcular o CRAS mais próximo.";
 
+          crasDistance.textContent =
+            "Ligue 1746 da Prefeitura para orientação.";
 
-        } finally {
+          womanAddress.textContent =
+            "Encontramos o endereço, mas não foi possível calcular a Casa da Mulher mais próxima.";
 
-          searchButton.textContent =
-            "ENCONTRAR";
+          womanDistance.textContent =
+            "Ligue 1746 da Prefeitura para orientação.";
 
-          searchButton.disabled =
-            false;
+          return;
 
         }
 
-      }
-    );
 
-  </script>
+        /*
+          ===============================================
+          6. CALCULA CRAS
+          ===============================================
+        */
+
+        const crasMaisProximo =
+          encontrarMaisProxima(
+            coordenadas.lat,
+            coordenadas.lon,
+            cras
+          );
+
+
+        /*
+          ===============================================
+          7. CALCULA CASA DA MULHER
+          ===============================================
+        */
+
+        const casaMaisProxima =
+          encontrarMaisProxima(
+            coordenadas.lat,
+            coordenadas.lon,
+            casasDaMulher
+          );
+
+
+        /*
+          ===============================================
+          8. MOSTRA RESULTADOS
+          ===============================================
+        */
+
+        mostrarCras(
+          crasMaisProximo
+        );
+
+        mostrarCasa(
+          casaMaisProxima
+        );
+
+
+      } catch (erro) {
+
+        console.error(
+          "Erro na busca:",
+          erro
+        );
+
+        result.style.display =
+          "block";
+
+        result.classList.add(
+          "error"
+        );
+
+        resultAddress.textContent =
+          "Não foi possível realizar a busca neste momento. Tente novamente.";
+
+        crasAddress.textContent =
+          "Não foi possível localizar o CRAS.";
+
+        womanAddress.textContent =
+          "Não foi possível localizar a Casa da Mulher.";
+
+      } finally {
+
+        searchButton.textContent =
+          "ENCONTRAR";
+
+        searchButton.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+</script>
 
 </body>
 </html>
