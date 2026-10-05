@@ -1,404 +1,621 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Conheça seus direitos</title>
+  <title>Conheça seus direitos</title>
 
-    <style>
-      :root {
-        --bg: #f4e4dc;
-        --card: #f8f2ee;
-        --primary: #d37586;
-        --primary-dark: #b5526e;
-        --text: #402d35;
-        --muted: #7b5d65;
-        --line: rgba(96, 63, 71, 0.18);
-        --button: #d98ca1;
-        --button-dark: #b9617d;
-      }
+  <style>
+    :root {
+      --card: #f8f2ee;
+      --primary: #d37586;
+      --primary-dark: #b5526e;
+      --text: #402d35;
+      --muted: #7b5d65;
+      --line: rgba(96, 63, 71, 0.18);
+      --button: #d98ca1;
+      --button-dark: #b9617d;
+      --white: #ffffff;
+      --success-bg: #f7eef0;
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(
+          circle at top,
+          #f9f0eb 0%,
+          #f1e4df 35%,
+          #e8d8d2 100%
+        );
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      padding: 20px;
+    }
+
+    .card {
+      width: 420px;
+      max-width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(120, 83, 91, 0.15);
+      border-radius: 22px;
+      box-shadow: 0 18px 30px rgba(86, 50, 58, 0.12);
+      padding: 18px;
+      backdrop-filter: blur(2px);
+    }
+
+    .inner {
+      background: var(--card);
+      border: 1px solid rgba(116, 73, 82, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .title {
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: #6a4650;
+      margin: 0 0 16px;
+      line-height: 1.3;
+    }
+
+    .search-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .input-wrap {
+      width: 100%;
+    }
+
+    .input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid rgba(116, 73, 82, 0.18);
+      border-radius: 8px;
+      background: var(--white);
+      padding: 0 12px;
+      font-size: 0.98rem;
+      color: var(--text);
+      outline: none;
+    }
+
+    .input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(211, 117, 134, 0.12);
+    }
+
+    .input::placeholder {
+      color: #b19aa4;
+    }
+
+    .button {
+      height: 38px;
+      min-width: 104px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(
+        180deg,
+        var(--button) 0%,
+        var(--button-dark) 100%
+      );
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .divider {
+      border-top: 1px solid var(--line);
+      margin: 18px 0 12px;
+    }
+
+    .result {
+      background: #fff;
+      border: 1px solid rgba(116, 73, 82, 0.12);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 14px 4px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .result-title {
+      color: var(--text);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 12px;
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      padding: 8px 4px 6px;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(221, 170, 186, 0.22);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+
+    .service-card {
+      padding: 0;
+    }
+
+    .service-name {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 6px;
+    }
+
+    .address {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0 0 4px;
+    }
+
+    .distance {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    .cta {
+      display: inline-block;
+      height: 28px;
+      padding: 0 12px;
+      border: none;
+      background: rgba(201, 118, 146, 0.1);
+      color: var(--primary-dark);
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .cta:hover {
+      background: rgba(201, 118, 146, 0.18);
+    }
+
+    .error {
+      color: #9a4357;
+      background: #fff4f5;
+      border: 1px solid #ecc8cf;
+    }
+
+    @media (max-width: 480px) {
       body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background:
-          radial-gradient(
-            circle at top,
-            #f9f0eb 0%,
-            #f1e4df 35%,
-            #e8d8d2 100%
-          );
-        font-family: Arial, Helvetica, sans-serif;
-        color: var(--text);
-        padding: 20px;
+        padding: 12px;
       }
 
       .card {
-        width: 420px;
-        max-width: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(120, 83, 91, 0.15);
-        border-radius: 22px;
-        box-shadow: 0 18px 30px rgba(86, 50, 58, 0.12);
-        padding: 18px 18px 22px;
-        backdrop-filter: blur(2px);
-      }
-
-      .inner {
-        background: var(--card);
-        border: 1px solid rgba(116, 73, 82, 0.08);
-        border-radius: 18px;
-        padding: 18px 18px 14px;
-      }
-
-      .title {
-        text-align: center;
-        font-weight: 800;
-        font-size: 1.05rem;
-        letter-spacing: 0.04em;
-        color: #6a4650;
-        margin: 0 0 16px;
-        line-height: 1.3;
-      }
-
-      .search-label {
-        display: block;
-        font-size: 0.78rem;
-        color: var(--muted);
-        margin-bottom: 8px;
-        text-align: center;
-        font-weight: 700;
+        width: 100%;
       }
 
       .search {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 14px;
-      }
-
-      .input-wrap {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .input {
-        width: 100%;
-        max-width: 220px;
-        height: 38px;
-        border: 1px solid rgba(116, 73, 82, 0.18);
-        border-radius: 8px;
-        background: #fff;
-        padding: 0 12px;
-        font-size: 0.98rem;
-        color: var(--text);
-        outline: none;
-      }
-
-      .input:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 2px rgba(211, 117, 134, 0.12);
-      }
-
-      .input::placeholder {
-        color: #b19aa4;
+        flex-wrap: wrap;
       }
 
       .button {
-        height: 38px;
-        min-width: 104px;
-        border: none;
-        border-radius: 8px;
-        background: linear-gradient(
-          180deg,
-          var(--button) 0%,
-          var(--button-dark) 100%
-        );
-        color: #fff;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
-        transition: transform 0.15s ease, opacity 0.15s ease;
+        width: 100%;
+        min-width: unset;
+        margin-top: 8px;
       }
+    }
+  </style>
+</head>
 
-      .button:hover {
-        transform: translateY(-1px);
-      }
+<body>
 
-      .button:disabled {
-        opacity: 0.65;
-        cursor: wait;
-        transform: none;
-      }
+  <div class="card">
 
-      .divider {
-        border-top: 1px solid var(--line);
-        margin: 18px 0 12px;
-      }
+    <div class="inner">
 
-      .result {
-        background: #fff;
-        border: 1px solid rgba(116, 73, 82, 0.12);
-        border-radius: 10px;
-        padding: 12px;
-        margin: 14px 4px;
-        color: var(--muted);
-        font-size: 0.8rem;
-        line-height: 1.5;
-      }
+      <h1 class="title">
+        CONHEÇA SEUS DIREITOS
+      </h1>
 
-      .result-title {
-        color: var(--text);
-        font-weight: 800;
-        margin-bottom: 5px;
-      }
+      <div class="search-label">
+        Digite seu CEP
+      </div>
 
-      .service {
-        display: grid;
-        grid-template-columns: 36px 1fr;
-        gap: 10px;
-        padding: 8px 4px 6px;
-      }
+      <div class="search">
 
-      .icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: rgba(221, 170, 186, 0.22);
-        display: grid;
-        place-items: center;
-        font-size: 1.2rem;
-        margin-top: 2px;
-      }
-
-      .service-card {
-        border: 1px solid transparent;
-        padding: 0;
-      }
-
-      .service-name {
-        font-size: 0.8rem;
-        font-weight: 800;
-        color: var(--text);
-        margin: 0 0 6px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .address {
-        font-size: 0.8rem;
-        color: var(--muted);
-        line-height: 1.5;
-        margin: 0 0 4px;
-      }
-
-      .distance {
-        font-size: 0.76rem;
-        color: var(--muted);
-        margin: 0 0 8px;
-      }
-
-      .cta {
-        display: inline-block;
-        height: 28px;
-        padding: 0 12px;
-        border: none;
-        background: rgba(201, 118, 146, 0.1);
-        color: var(--primary-dark);
-        border-radius: 6px;
-        font-weight: 800;
-        font-size: 0.7rem;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-      }
-
-      @media (max-width: 480px) {
-        body {
-          padding: 12px;
-        }
-
-        .card {
-          width: 100%;
-        }
-
-        .search {
-          flex-wrap: wrap;
-        }
-
-        .button {
-          width: 100%;
-          min-width: unset;
-          margin-top: 8px;
-        }
-
-        .input-wrap {
-          width: 100%;
-        }
-
-        .input {
-          max-width: none;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="card">
-      <div class="inner">
-
-        <h1 class="title">
-          CONHEÇA SEUS DIREITOS
-        </h1>
-
-        <div class="search-label">
-          Digite seu CEP
+        <div class="input-wrap">
+          <input
+            class="input"
+            type="text"
+            placeholder="00000-000"
+            maxlength="9"
+            inputmode="numeric"
+            autocomplete="postal-code"
+          />
         </div>
 
-        <div class="search">
+        <button class="button">
+          ENCONTRAR
+        </button>
 
-          <div class="input-wrap">
-            <input
-              class="input"
-              type="text"
-              placeholder="00000-000"
-              maxlength="9"
-              inputmode="numeric"
-              autocomplete="postal-code"
-            />
-          </div>
+      </div>
 
-          <button class="button">
-            ENCONTRAR
+      <div class="divider"></div>
+
+      <!-- LOCALIZAÇÃO -->
+
+      <div
+        id="result"
+        class="result"
+        style="display: none;"
+      >
+        <div class="result-title">
+          📍 Sua localização
+        </div>
+
+        <div id="result-address"></div>
+      </div>
+
+      <!-- CRAS -->
+
+      <div class="service">
+
+        <div class="icon">
+          📍
+        </div>
+
+        <div class="service-card">
+
+          <p class="service-name">
+            CRAS mais próximo
+          </p>
+
+          <p class="address" id="cras-address">
+            Em breve
+          </p>
+
+          <p class="distance" id="cras-distance">
+            Estamos preparando essa busca.
+          </p>
+
+          <button class="cta" disabled>
+            COMO CHEGAR
           </button>
 
         </div>
 
-        <div class="divider"></div>
+      </div>
 
-        <!-- Resultado do CEP -->
+      <div
+        class="divider"
+        style="margin-top: 14px; margin-bottom: 10px;"
+      ></div>
 
-        <div
-          id="result"
-          class="result"
-          style="display: none;"
-        >
-          <div class="result-title">
-            📍 Sua localização
-          </div>
+      <!-- CASA DA MULHER -->
 
-          <div id="result-address"></div>
+      <div class="service">
+
+        <div class="icon">
+          👩
         </div>
 
-        <!-- CRAS -->
+        <div class="service-card">
 
-        <div class="service">
+          <p class="service-name">
+            Casa da Mulher mais próxima
+          </p>
 
-          <div class="icon">
-            📍
-          </div>
+          <p class="address" id="woman-address">
+            Digite seu CEP para encontrar.
+          </p>
 
-          <div class="service-card">
+          <p class="distance" id="woman-distance">
+          </p>
 
-            <p class="service-name">
-              CRAS mais próximo
-            </p>
-
-            <p class="address">
-              endereço
-            </p>
-
-            <p class="distance">
-              distância
-            </p>
-
-            <button class="cta">
-              COMO CHEGAR
-            </button>
-
-          </div>
-
-        </div>
-
-        <div
-          class="divider"
-          style="margin-top: 14px; margin-bottom: 10px;"
-        ></div>
-
-        <!-- Casa da Mulher -->
-
-        <div class="service">
-
-          <div class="icon">
-            👩
-          </div>
-
-          <div class="service-card">
-
-            <p class="service-name">
-              Casa da Mulher mais próxima
-            </p>
-
-            <p class="address">
-              endereço
-            </p>
-
-            <p class="distance">
-              distância
-            </p>
-
-            <button class="cta">
-              COMO CHEGAR
-            </button>
-
-          </div>
+          <a
+            id="woman-map"
+            class="cta"
+            href="#"
+            target="_blank"
+            style="display: none;"
+          >
+            COMO CHEGAR
+          </a>
 
         </div>
 
       </div>
+
     </div>
 
-    <script>
-      const cepInput = document.querySelector(".input");
-      const searchButton = document.querySelector(".button");
+  </div>
 
-      const result = document.querySelector("#result");
-      const resultAddress = document.querySelector("#result-address");
 
-      // Formatação automática do CEP
+  <script>
 
-      cepInput.addEventListener("input", function (e) {
+    const cepInput = document.querySelector(".input");
+    const searchButton = document.querySelector(".button");
 
-        let value = e.target.value.replace(/\D/g, "");
+    const result = document.querySelector("#result");
+    const resultAddress = document.querySelector("#result-address");
 
-        if (value.length > 5) {
-          value =
-            value.slice(0, 5) +
-            "-" +
-            value.slice(5, 8);
+    const womanAddress = document.querySelector("#woman-address");
+    const womanDistance = document.querySelector("#woman-distance");
+    const womanMap = document.querySelector("#woman-map");
+
+
+    /*
+      Casas da Mulher Carioca
+      Dados baseados na página oficial
+      da Prefeitura do Rio.
+    */
+
+    const casasDaMulher = [
+
+      {
+        nome: "Casa da Mulher Carioca Dinah Coutinho",
+        endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
+        busca: "Casa da Mulher Carioca Dinah Coutinho, Rua Limites, 1260, Realengo, Rio de Janeiro"
+      },
+
+      {
+        nome: "Casa da Mulher Carioca Tia Doca",
+        endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
+        busca: "Casa da Mulher Carioca Tia Doca, Rua Júlio Fragoso, 47, Madureira, Rio de Janeiro"
+      },
+
+      {
+        nome: "Casa da Mulher Carioca Elza Soares",
+        endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
+        busca: "Casa da Mulher Carioca Elza Soares, Padre Miguel, Rio de Janeiro"
+      },
+
+      {
+        nome: "Casa da Mulher Carioca - Polo Campo Grande",
+        endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
+        busca: "Casa da Mulher Carioca Polo Campo Grande, Rua Mário Barbosa, 137, Campo Grande, Rio de Janeiro"
+      },
+
+      {
+        nome: "Casa da Mulher Carioca - Filial Coelho Neto",
+        endereco: "Avenida Pastor Martin Luther King Jr, 10.055 - Coelho Neto, Rio de Janeiro - RJ",
+        busca: "Casa da Mulher Carioca Coelho Neto, Avenida Pastor Martin Luther King Jr, 10055, Rio de Janeiro"
+      }
+
+    ];
+
+
+    /*
+      Formatação automática do CEP
+    */
+
+    cepInput.addEventListener("input", function (e) {
+
+      let value = e.target.value.replace(/\D/g, "");
+
+      if (value.length > 5) {
+
+        value =
+          value.slice(0, 5) +
+          "-" +
+          value.slice(5, 8);
+
+      }
+
+      e.target.value = value.slice(0, 9);
+
+    });
+
+
+    /*
+      Distância entre dois pontos
+      usando latitude e longitude.
+    */
+
+    function calcularDistancia(
+      lat1,
+      lon1,
+      lat2,
+      lon2
+    ) {
+
+      const R = 6371;
+
+      const dLat =
+        (lat2 - lat1) *
+        Math.PI / 180;
+
+      const dLon =
+        (lon2 - lon1) *
+        Math.PI / 180;
+
+      const a =
+        Math.sin(dLat / 2) *
+        Math.sin(dLat / 2) +
+
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+      const c =
+        2 *
+        Math.atan2(
+          Math.sqrt(a),
+          Math.sqrt(1 - a)
+        );
+
+      return R * c;
+
+    }
+
+
+    /*
+      Consulta endereço no OpenStreetMap.
+    */
+
+    async function geocodificar(endereco) {
+
+      const url =
+        "https://nominatim.openstreetmap.org/search" +
+        "?format=json" +
+        "&limit=1" +
+        "&q=" +
+        encodeURIComponent(endereco);
+
+      const response =
+        await fetch(url, {
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+      const data =
+        await response.json();
+
+      if (!data.length) {
+        return null;
+      }
+
+      return {
+        lat: parseFloat(data[0].lat),
+        lon: parseFloat(data[0].lon)
+      };
+
+    }
+
+
+    /*
+      Busca a Casa da Mulher mais próxima.
+    */
+
+    async function encontrarCasaMaisProxima(
+      latitude,
+      longitude
+    ) {
+
+      const casasComCoordenadas = [];
+
+      for (const casa of casasDaMulher) {
+
+        try {
+
+          const coordenadas =
+            await geocodificar(casa.busca);
+
+          if (coordenadas) {
+
+            const distancia =
+              calcularDistancia(
+                latitude,
+                longitude,
+                coordenadas.lat,
+                coordenadas.lon
+              );
+
+            casasComCoordenadas.push({
+              ...casa,
+              ...coordenadas,
+              distancia
+            });
+
+          }
+
+        } catch (erro) {
+
+          console.log(
+            "Não foi possível localizar:",
+            casa.nome
+          );
+
         }
 
-        e.target.value = value.slice(0, 9);
+        /*
+          Pequena pausa entre consultas.
+        */
 
-      });
+        await new Promise(
+          resolve => setTimeout(resolve, 1000)
+        );
+
+      }
 
 
-      // Busca do CEP
+      if (!casasComCoordenadas.length) {
+        return null;
+      }
 
-      searchButton.addEventListener("click", async function () {
 
-        const cep = cepInput.value.replace(/\D/g, "");
+      casasComCoordenadas.sort(
+        (a, b) =>
+          a.distancia - b.distancia
+      );
+
+
+      return casasComCoordenadas[0];
+
+    }
+
+
+    /*
+      Busca principal do CEP.
+    */
+
+    searchButton.addEventListener(
+      "click",
+      async function () {
+
+        const cep =
+          cepInput.value.replace(/\D/g, "");
+
 
         if (cep.length !== 8) {
 
@@ -408,33 +625,70 @@
             "Digite um CEP válido para continuar.";
 
           return;
+
         }
 
-        searchButton.textContent = "BUSCANDO...";
+
+        searchButton.textContent =
+          "BUSCANDO...";
+
         searchButton.disabled = true;
+
 
         result.style.display = "none";
 
+
+        womanAddress.textContent =
+          "Localizando unidades...";
+
+        womanDistance.textContent =
+          "";
+
+        womanMap.style.display =
+          "none";
+
+
         try {
 
-          const response = await fetch(
-            `https://viacep.com.br/ws/${cep}/json/`
-          );
+          /*
+            1. Consulta o CEP.
+          */
 
-          const data = await response.json();
+          const response =
+            await fetch(
+              `https://viacep.com.br/ws/${cep}/json/`
+            );
+
+
+          const data =
+            await response.json();
+
 
           if (data.erro) {
 
-            result.style.display = "block";
+            result.style.display =
+              "block";
+
+            result.classList.add(
+              "error"
+            );
 
             resultAddress.innerHTML =
               "Não encontramos esse CEP. Verifique os números e tente novamente.";
 
             return;
+
           }
 
 
-          // Mostra o endereço encontrado
+          result.classList.remove(
+            "error"
+          );
+
+
+          /*
+            Mostra endereço.
+          */
 
           resultAddress.innerHTML = `
             ${data.logradouro || "Endereço não informado"}<br>
@@ -442,25 +696,131 @@
             ${data.localidade} - ${data.uf}
           `;
 
-          result.style.display = "block";
+          result.style.display =
+            "block";
 
 
-        } catch (error) {
+          /*
+            2. Monta endereço para geolocalização.
+          */
 
-          result.style.display = "block";
+          const enderecoUsuario = [
+
+            data.logradouro,
+            data.bairro,
+            data.localidade,
+            data.uf,
+            "Brasil"
+
+          ]
+            .filter(Boolean)
+            .join(", ");
+
+
+          /*
+            3. Descobre coordenadas do usuário.
+          */
+
+          womanAddress.textContent =
+            "Localizando sua posição...";
+
+
+          const coordenadasUsuario =
+            await geocodificar(
+              enderecoUsuario
+            );
+
+
+          if (!coordenadasUsuario) {
+
+            womanAddress.textContent =
+              "Não foi possível localizar esse endereço.";
+
+            return;
+
+          }
+
+
+          /*
+            4. Procura a Casa da Mulher
+            mais próxima.
+          */
+
+          const casaMaisProxima =
+            await encontrarCasaMaisProxima(
+              coordenadasUsuario.lat,
+              coordenadasUsuario.lon
+            );
+
+
+          if (!casaMaisProxima) {
+
+            womanAddress.textContent =
+              "Não foi possível localizar as unidades no momento.";
+
+            return;
+
+          }
+
+
+          /*
+            5. Mostra o resultado.
+          */
+
+          womanAddress.innerHTML = `
+            <strong>${casaMaisProxima.nome}</strong><br>
+            ${casaMaisProxima.endereco}
+          `;
+
+
+          womanDistance.textContent =
+            `Aproximadamente ${casaMaisProxima.distancia.toFixed(1)} km de distância`;
+
+
+          /*
+            6. Botão Como chegar.
+          */
+
+          womanMap.href =
+            `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+              casaMaisProxima.endereco
+            )}`;
+
+          womanMap.style.display =
+            "inline-block";
+
+
+        } catch (erro) {
+
+          console.error(erro);
+
+          result.style.display =
+            "block";
+
+          result.classList.add(
+            "error"
+          );
 
           resultAddress.innerHTML =
-            "Não foi possível consultar o CEP. Tente novamente.";
+            "Não foi possível realizar a busca neste momento. Tente novamente.";
+
+          womanAddress.textContent =
+            "Não foi possível localizar a unidade.";
 
         } finally {
 
-          searchButton.textContent = "ENCONTRAR";
-          searchButton.disabled = false;
+          searchButton.textContent =
+            "ENCONTRAR";
+
+          searchButton.disabled =
+            false;
 
         }
 
-      });
-    </script>
+      }
+    );
 
-  </body>
+  </script>
+
+</body>
 </html>
