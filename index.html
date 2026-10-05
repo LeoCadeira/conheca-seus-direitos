@@ -93,6 +93,11 @@
       outline: none;
     }
 
+    .input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(211,117,134,.12);
+    }
+
     .button {
       height: 38px;
       min-width: 104px;
@@ -162,20 +167,30 @@
     .service-name {
       font-size: .8rem;
       font-weight: 800;
-      margin: 0 0 6px;
+      margin: 0 0 7px;
     }
 
-    .address {
-      font-size: .8rem;
+    .info {
+      font-size: .78rem;
       color: var(--muted);
-      line-height: 1.5;
-      margin: 0 0 4px;
+      line-height: 1.6;
+      margin: 3px 0;
+    }
+
+    .phone {
+      color: var(--primary-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .phone:hover {
+      text-decoration: underline;
     }
 
     .distance {
       font-size: .76rem;
       color: var(--muted);
-      margin: 0 0 8px;
+      margin: 6px 0 9px;
     }
 
     .cta {
@@ -190,13 +205,26 @@
       letter-spacing: .05em;
       cursor: pointer;
       text-decoration: none;
+      margin-right: 5px;
+      margin-top: 3px;
     }
 
     .cta:hover {
       background: rgba(201,118,146,.18);
     }
 
+    .source-note {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: .67rem;
+      line-height: 1.5;
+      color: #8d737a;
+      text-align: center;
+    }
+
     @media (max-width:480px) {
+
       body {
         padding: 12px;
       }
@@ -209,6 +237,10 @@
         width: 100%;
         margin-top: 8px;
       }
+
+      .cta {
+        margin-top: 5px;
+      }
     }
   </style>
 </head>
@@ -216,6 +248,7 @@
 <body>
 
 <div class="card">
+
   <div class="inner">
 
     <h1 class="title">
@@ -245,16 +278,20 @@
 
     <div class="divider"></div>
 
+    <!-- LOCALIZAÇÃO -->
+
     <div
       id="result"
       class="result"
       style="display:none;"
     >
+
       <div class="result-title">
         📍 Sua localização
       </div>
 
       <div id="result-address"></div>
+
     </div>
 
 
@@ -272,7 +309,7 @@
           CRAS mais próximo
         </p>
 
-        <p class="address">
+        <p class="info">
           Em breve
         </p>
 
@@ -302,33 +339,74 @@
           Casa da Mulher mais próxima
         </p>
 
+        <div
+          id="woman-info"
+          style="display:none;"
+        >
+
+          <p
+            class="info"
+            id="woman-address"
+          ></p>
+
+          <p
+            class="info"
+            id="woman-phone"
+          ></p>
+
+          <p
+            class="info"
+            id="woman-hours"
+          ></p>
+
+          <p
+            class="distance"
+            id="woman-distance"
+          ></p>
+
+          <a
+            id="woman-call"
+            class="cta"
+            href="#"
+          >
+            📞 LIGAR
+          </a>
+
+          <a
+            id="woman-map"
+            class="cta"
+            href="#"
+            target="_blank"
+          >
+            📍 COMO CHEGAR
+          </a>
+
+        </div>
+
         <p
-          class="address"
-          id="woman-address"
+          id="woman-message"
+          class="info"
         >
           Digite seu CEP para encontrar.
         </p>
-
-        <p
-          class="distance"
-          id="woman-distance"
-        ></p>
-
-        <a
-          id="woman-map"
-          class="cta"
-          href="#"
-          target="_blank"
-          style="display:none;"
-        >
-          COMO CHEGAR
-        </a>
 
       </div>
 
     </div>
 
+
+    <div class="source-note">
+
+      Informações de endereço e contato baseadas
+      em dados publicados pela Prefeitura da Cidade
+      do Rio de Janeiro. Confirme os dados antes de
+      se deslocar, pois horários e serviços podem
+      sofrer alterações.
+
+    </div>
+
   </div>
+
 </div>
 
 
@@ -346,65 +424,153 @@ const result =
 const resultAddress =
   document.querySelector("#result-address");
 
+const womanInfo =
+  document.querySelector("#woman-info");
+
+const womanMessage =
+  document.querySelector("#woman-message");
+
 const womanAddress =
   document.querySelector("#woman-address");
 
+const womanPhone =
+  document.querySelector("#woman-phone");
+
+const womanHours =
+  document.querySelector("#woman-hours");
+
 const womanDistance =
   document.querySelector("#woman-distance");
+
+const womanCall =
+  document.querySelector("#woman-call");
 
 const womanMap =
   document.querySelector("#woman-map");
 
 
 /*
-  Casas da Mulher Carioca.
+  Dados das Casas da Mulher Carioca.
 
-  Endereços conferidos nas páginas
-  oficiais da Prefeitura do Rio.
+  Telefones:
+  página atual da Prefeitura.
+
+  Horários:
+  documentos oficiais da Prefeitura
+  quando disponíveis.
 */
 
 const casasDaMulher = [
 
   {
-    nome: "Casa da Mulher Carioca Dinah Coutinho",
-    bairro: "Realengo",
+    nome:
+      "Casa da Mulher Carioca Dinah Coutinho",
+
+    bairro:
+      "Realengo",
+
     endereco:
-      "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ"
+      "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
+
+    telefone:
+      "2134641870",
+
+    telefoneExibicao:
+      "(21) 3464-1870 / (21) 97093-1514",
+
+    horario:
+      "Segunda a sexta: 8h às 20h<br>Sábado: 8h às 12h"
   },
 
-  {
-    nome: "Casa da Mulher Carioca Tia Doca",
-    bairro: "Madureira",
-    endereco:
-      "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ"
-  },
 
   {
-    nome: "Casa da Mulher Carioca Elza Soares",
-    bairro: "Padre Miguel",
+    nome:
+      "Casa da Mulher Carioca Tia Doca",
+
+    bairro:
+      "Madureira",
+
     endereco:
-      "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ"
+      "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
+
+    telefone:
+      "2130853823",
+
+    telefoneExibicao:
+      "(21) 3085-3823 / (21) 97711-0295",
+
+    horario:
+      "Segunda a sexta: 8h às 20h<br>Sábado: 8h às 12h"
   },
 
-  {
-    nome: "Casa da Mulher Carioca - Polo Campo Grande",
-    bairro: "Campo Grande",
-    endereco:
-      "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ"
-  },
 
   {
-    nome: "Casa da Mulher Carioca - Polo Coelho Neto",
-    bairro: "Coelho Neto",
+    nome:
+      "Casa da Mulher Carioca Elza Soares",
+
+    bairro:
+      "Padre Miguel",
+
     endereco:
-      "Avenida Pastor Martin Luther King Jr, 10055 - Coelho Neto, Rio de Janeiro - RJ"
+      "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
+
+    telefone:
+      "2139003749",
+
+    telefoneExibicao:
+      "(21) 3900-3749 / (21) 96897-4364",
+
+    horario:
+      "Segunda a sexta: 8h às 20h<br>Sábado: 8h às 12h"
+  },
+
+
+  {
+    nome:
+      "Casa da Mulher Carioca - Polo Campo Grande",
+
+    bairro:
+      "Campo Grande",
+
+    endereco:
+      "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
+
+    telefone:
+      "21968148886",
+
+    telefoneExibicao:
+      "(21) 96814-8886 / (21) 99022-6944",
+
+    horario:
+      "Terça a sexta: 9h às 18h<br>Sábado: 9h às 12h"
+  },
+
+
+  {
+    nome:
+      "Casa da Mulher Carioca - Filial Coelho Neto",
+
+    bairro:
+      "Coelho Neto",
+
+    endereco:
+      "Avenida Pastor Martin Luther King Jr, 10.055 - Coelho Neto, Rio de Janeiro - RJ",
+
+    telefone:
+      "21968151042",
+
+    telefoneExibicao:
+      "(21) 96815-1042",
+
+    horario:
+      "Horário não informado na página atual da Prefeitura."
   }
 
 ];
 
 
 /*
-  Formata o CEP.
+  Formatação do CEP.
 */
 
 cepInput.addEventListener(
@@ -431,76 +597,8 @@ cepInput.addEventListener(
 
 
 /*
-  Geocodifica somente o endereço
-  informado pelo CEP.
-
-  Isso evita as cinco consultas
-  que estavam causando o erro.
-*/
-
-async function localizarEndereco(
-  endereco
-) {
-
-  const url =
-    "https://nominatim.openstreetmap.org/search" +
-    "?format=json" +
-    "&limit=1" +
-    "&countrycodes=br" +
-    "&q=" +
-    encodeURIComponent(endereco);
-
-  const response =
-    await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(
-      "Erro na localização"
-    );
-  }
-
-  const data =
-    await response.json();
-
-  if (!data.length) {
-    return null;
-  }
-
-  return {
-    lat:
-      parseFloat(data[0].lat),
-
-    lon:
-      parseFloat(data[0].lon)
-  };
-
-}
-
-
-/*
-  Função para abrir o Google Maps.
-*/
-
-function criarLinkMapa(
-  endereco
-) {
-
-  return (
-    "https://www.google.com/maps/search/?api=1&query=" +
-    encodeURIComponent(endereco)
-  );
-
-}
-
-
-/*
-  Estratégia inicial:
-
-  usamos o bairro retornado pelo CEP
-  para selecionar uma unidade próxima.
-
-  Depois vamos substituir isso por
-  distância geográfica real.
+  Escolhe a unidade pela região
+  do bairro retornado pelo CEP.
 */
 
 function encontrarCasaPorBairro(
@@ -508,7 +606,7 @@ function encontrarCasaPorBairro(
 ) {
 
   if (!bairro) {
-    return casasDaMulher[0];
+    return casasDaMulher[1];
   }
 
   const texto =
@@ -519,41 +617,40 @@ function encontrarCasaPorBairro(
 
 
   /*
-    Áreas próximas de Realengo /
-    Padre Miguel.
+    Realengo / Padre Miguel / Bangu
   */
 
   if (
     texto.includes("realengo") ||
-    texto.includes("padre miguel") ||
     texto.includes("bangu") ||
     texto.includes("senador camara") ||
     texto.includes("magalhaes bastos")
   ) {
-
-    if (
-      texto.includes("padre miguel")
-    ) {
-
-      return casasDaMulher[2];
-
-    }
 
     return casasDaMulher[0];
 
   }
 
 
+  if (
+    texto.includes("padre miguel")
+  ) {
+
+    return casasDaMulher[2];
+
+  }
+
+
   /*
-    Área de Madureira.
+    Madureira e região.
   */
 
   if (
     texto.includes("madureira") ||
-    texto.includes("campinho") ||
+    texto.includes("osvaldo cruz") ||
     texto.includes("cascadura") ||
+    texto.includes("campinho") ||
     texto.includes("rocha miranda") ||
-    texto.includes("turiaçu") ||
     texto.includes("turiaçu")
   ) {
 
@@ -563,17 +660,16 @@ function encontrarCasaPorBairro(
 
 
   /*
-    Campo Grande e bairros próximos.
+    Campo Grande e região.
   */
 
   if (
     texto.includes("campo grande") ||
-    texto.includes("inhoaiba") ||
-    texto.includes("inhoaíba") ||
     texto.includes("cosmos") ||
-    texto.includes("senador vasconcelos") ||
+    texto.includes("inhoaiba") ||
     texto.includes("paciência") ||
-    texto.includes("paciencia")
+    texto.includes("paciencia") ||
+    texto.includes("senador vasconcelos")
   ) {
 
     return casasDaMulher[3];
@@ -588,12 +684,10 @@ function encontrarCasaPorBairro(
   if (
     texto.includes("coelho neto") ||
     texto.includes("acari") ||
-    texto.includes("anchieta") ||
-    texto.includes("iraja") ||
-    texto.includes("iraia") ||
     texto.includes("guadalupe") ||
     texto.includes("honorio gurgel") ||
-    texto.includes("honório gurgel")
+    texto.includes("ira") ||
+    texto.includes("anchieta")
   ) {
 
     return casasDaMulher[4];
@@ -602,9 +696,9 @@ function encontrarCasaPorBairro(
 
 
   /*
-    Caso não seja possível identificar
-    uma região específica, usamos
-    Madureira como referência inicial.
+    Região não identificada.
+    Mantemos Madureira como referência
+    provisória.
   */
 
   return casasDaMulher[1];
@@ -648,20 +742,17 @@ searchButton.addEventListener(
       "BUSCANDO...";
 
 
-    womanAddress.textContent =
-      "Consultando seu CEP...";
-
-    womanDistance.textContent =
-      "";
-
-    womanMap.style.display =
+    womanInfo.style.display =
       "none";
+
+    womanMessage.textContent =
+      "Consultando seu CEP...";
 
 
     try {
 
       /*
-        Consulta o CEP.
+        Consulta o ViaCEP.
       */
 
       const response =
@@ -684,11 +775,9 @@ searchButton.addEventListener(
 
 
       if (data.erro) {
-
         throw new Error(
           "CEP não encontrado"
         );
-
       }
 
 
@@ -702,10 +791,13 @@ searchButton.addEventListener(
 
       resultAddress.innerHTML =
 
-        (data.logradouro || "Endereço não informado") +
+        (data.logradouro ||
+          "Endereço não informado") +
+
         "<br>" +
 
         (data.bairro || "") +
+
         "<br>" +
 
         data.localidade +
@@ -718,8 +810,7 @@ searchButton.addEventListener(
 
 
       /*
-        Escolhe uma Casa da Mulher
-        com base na região do CEP.
+        Escolhe a unidade.
       */
 
       const casa =
@@ -729,37 +820,73 @@ searchButton.addEventListener(
 
 
       /*
-        Mostra resultado.
+        Mostra nome e endereço.
       */
 
       womanAddress.innerHTML =
-
         "<strong>" +
         casa.nome +
         "</strong><br>" +
-
         casa.endereco;
 
+
+      /*
+        Telefone.
+      */
+
+      womanPhone.innerHTML =
+        "📞 <a class='phone' href='tel:" +
+        casa.telefone +
+        "'>" +
+        casa.telefoneExibicao +
+        "</a>";
+
+
+      /*
+        Horário.
+      */
+
+      womanHours.innerHTML =
+        "🕐 <strong>Horário:</strong><br>" +
+        casa.horario;
+
+
+      /*
+        Aviso.
+      */
 
       womanDistance.textContent =
         "Unidade indicada para a região do endereço informado.";
 
 
       /*
-        Google Maps.
+        Botão ligar.
+      */
+
+      womanCall.href =
+        "tel:" +
+        casa.telefone;
+
+
+      /*
+        Botão Google Maps.
       */
 
       womanMap.href =
-        criarLinkMapa(
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(
           casa.endereco
         );
 
 
-      womanMap.style.display =
-        "inline-block";
+      womanMessage.style.display =
+        "none";
 
+      womanInfo.style.display =
+        "block";
 
     }
+
 
     catch (erro) {
 
@@ -782,7 +909,7 @@ searchButton.addEventListener(
         resultAddress.textContent =
           "Não encontramos esse CEP. Verifique os números e tente novamente.";
 
-        womanAddress.textContent =
+        womanMessage.textContent =
           "Digite um CEP válido.";
 
       }
@@ -792,12 +919,13 @@ searchButton.addEventListener(
         resultAddress.textContent =
           "Não foi possível realizar a busca neste momento. Tente novamente.";
 
-        womanAddress.textContent =
+        womanMessage.textContent =
           "Não foi possível localizar a unidade.";
 
       }
 
     }
+
 
     finally {
 
