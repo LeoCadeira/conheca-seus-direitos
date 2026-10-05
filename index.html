@@ -13,7 +13,7 @@
       --primary-dark: #b5526e;
       --text: #402d35;
       --muted: #7b5d65;
-      --line: rgba(96, 63, 71, 0.18);
+      --line: rgba(96,63,71,.18);
       --button: #d98ca1;
       --button-dark: #b9617d;
     }
@@ -28,13 +28,8 @@
       display: grid;
       place-items: center;
       background:
-        radial-gradient(
-          circle at top,
-          #f9f0eb 0%,
-          #f1e4df 35%,
-          #e8d8d2 100%
-        );
-      font-family: Arial, Helvetica, sans-serif;
+        radial-gradient(circle at top,#f9f0eb 0%,#f1e4df 35%,#e8d8d2 100%);
+      font-family: Arial,Helvetica,sans-serif;
       color: var(--text);
       padding: 20px;
     }
@@ -183,10 +178,6 @@
       text-decoration: none;
     }
 
-    .phone:hover {
-      text-decoration: underline;
-    }
-
     .distance {
       font-size: .76rem;
       color: var(--muted);
@@ -306,15 +297,55 @@
       <div>
 
         <p class="service-name">
-          CRAS mais próximo
+          CRAS indicado para sua região
         </p>
 
-        <p class="info">
-          Em breve
-        </p>
+        <div id="cras-info" style="display:none;">
 
-        <p class="distance">
-          Estamos preparando essa busca.
+          <p
+            class="info"
+            id="cras-name"
+          ></p>
+
+          <p
+            class="info"
+            id="cras-address"
+          ></p>
+
+          <p
+            class="info"
+            id="cras-hours"
+          ></p>
+
+          <p
+            class="distance"
+            id="cras-region"
+          ></p>
+
+          <a
+            id="cras-call"
+            class="cta"
+            href="#"
+          >
+            📞 LIGAR
+          </a>
+
+          <a
+            id="cras-map"
+            class="cta"
+            href="#"
+            target="_blank"
+          >
+            📍 COMO CHEGAR
+          </a>
+
+        </div>
+
+        <p
+          id="cras-message"
+          class="info"
+        >
+          Digite seu CEP para encontrar o CRAS indicado para sua região.
         </p>
 
       </div>
@@ -397,11 +428,20 @@
 
     <div class="source-note">
 
-      Informações de endereço e contato baseadas
+      Informações de endereço e funcionamento baseadas
       em dados publicados pela Prefeitura da Cidade
-      do Rio de Janeiro. Confirme os dados antes de
-      se deslocar, pois horários e serviços podem
-      sofrer alterações.
+      do Rio de Janeiro.
+
+      <br><br>
+
+      Os CRAS possuem horário regular informado pela
+      Secretaria Municipal de Assistência Social:
+      segunda a sexta, das 8h às 17h.
+
+      <br><br>
+
+      Confirme as informações antes de se deslocar,
+      pois horários e serviços podem sofrer alterações.
 
     </div>
 
@@ -411,6 +451,10 @@
 
 
 <script>
+
+/* ================================
+   ELEMENTOS
+================================ */
 
 const cepInput =
   document.querySelector(".input");
@@ -423,6 +467,36 @@ const result =
 
 const resultAddress =
   document.querySelector("#result-address");
+
+
+/* CRAS */
+
+const crasInfo =
+  document.querySelector("#cras-info");
+
+const crasMessage =
+  document.querySelector("#cras-message");
+
+const crasName =
+  document.querySelector("#cras-name");
+
+const crasAddress =
+  document.querySelector("#cras-address");
+
+const crasHours =
+  document.querySelector("#cras-hours");
+
+const crasRegion =
+  document.querySelector("#cras-region");
+
+const crasCall =
+  document.querySelector("#cras-call");
+
+const crasMap =
+  document.querySelector("#cras-map");
+
+
+/* CASA DA MULHER */
 
 const womanInfo =
   document.querySelector("#woman-info");
@@ -449,25 +523,166 @@ const womanMap =
   document.querySelector("#woman-map");
 
 
-/*
-  Dados das Casas da Mulher Carioca.
+/* ================================
+   DADOS DOS CRAS
+================================ */
 
-  Telefones:
-  página atual da Prefeitura.
+const crasList = [
 
-  Horários:
-  documentos oficiais da Prefeitura
-  quando disponíveis.
-*/
+  {
+    nome:
+      "CRAS Professora Ismênia de Lima Martins",
+
+    endereco:
+      "Rua da Alfândega, 114 - Centro, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "centro",
+      "lapa",
+      "santa teresa"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Germinal Domingues",
+
+    endereco:
+      "Rua Itapiru, 1.443 - 3º andar - Rio Comprido, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "catumbi",
+      "cidade nova",
+      "estacio",
+      "rio comprido"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Adalberto Ismael de Souza",
+
+    endereco:
+      "Rua Ana Neri, 636 - Benfica, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "benfica",
+      "leopoldina",
+      "mangueira",
+      "sao cristovao"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS XV de Maio",
+
+    endereco:
+      "Rua General Sampaio, 74 - Caju, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "caju"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Dodô da Portela",
+
+    endereco:
+      "Rua Rivadávia Corrêa, 188 - 2º andar - Gamboa, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "gamboa",
+      "santo cristo",
+      "saude",
+      "paqueta"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Deputado Luís Eduardo Magalhães",
+
+    endereco:
+      "Rua Paraíso do Tuiuti, s/n - São Cristóvão, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "vasco da gama"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Maria Vieira Bazani",
+
+    endereco:
+      "Estrada do Mato Alto, 5620 - Guaratiba, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "guaratiba",
+      "barra de guaratiba",
+      "ilha de guaratiba",
+      "jardim maravilha",
+      "pedra de guaratiba"
+    ]
+  },
+
+
+  {
+    nome:
+      "CRAS Jorge Gonçalves",
+
+    endereco:
+      "Rua Primeira, 61 - Santa Cruz, Rio de Janeiro - RJ",
+
+    telefone:
+      "1746",
+
+    bairros: [
+      "santa cruz"
+    ]
+  }
+
+];
+
+
+/* ================================
+   DADOS DAS CASAS DA MULHER
+================================ */
 
 const casasDaMulher = [
 
   {
     nome:
       "Casa da Mulher Carioca Dinah Coutinho",
-
-    bairro:
-      "Realengo",
 
     endereco:
       "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
@@ -487,9 +702,6 @@ const casasDaMulher = [
     nome:
       "Casa da Mulher Carioca Tia Doca",
 
-    bairro:
-      "Madureira",
-
     endereco:
       "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
 
@@ -507,9 +719,6 @@ const casasDaMulher = [
   {
     nome:
       "Casa da Mulher Carioca Elza Soares",
-
-    bairro:
-      "Padre Miguel",
 
     endereco:
       "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
@@ -529,9 +738,6 @@ const casasDaMulher = [
     nome:
       "Casa da Mulher Carioca - Polo Campo Grande",
 
-    bairro:
-      "Campo Grande",
-
     endereco:
       "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
 
@@ -550,9 +756,6 @@ const casasDaMulher = [
     nome:
       "Casa da Mulher Carioca - Filial Coelho Neto",
 
-    bairro:
-      "Coelho Neto",
-
     endereco:
       "Avenida Pastor Martin Luther King Jr, 10.055 - Coelho Neto, Rio de Janeiro - RJ",
 
@@ -569,16 +772,16 @@ const casasDaMulher = [
 ];
 
 
-/*
-  Formatação do CEP.
-*/
+/* ================================
+   FORMATAÇÃO DO CEP
+================================ */
 
 cepInput.addEventListener(
   "input",
   function() {
 
     let value =
-      cepInput.value.replace(/\D/g, "");
+      cepInput.value.replace(/\D/g,"");
 
     if (value.length > 5) {
 
@@ -596,29 +799,69 @@ cepInput.addEventListener(
 );
 
 
-/*
-  Escolhe a unidade pela região
-  do bairro retornado pelo CEP.
-*/
+/* ================================
+   NORMALIZAR TEXTO
+================================ */
+
+function normalizar(texto) {
+
+  return (texto || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"");
+
+}
+
+
+/* ================================
+   ENCONTRAR CRAS
+================================ */
+
+function encontrarCRAS(bairro) {
+
+  const bairroNormalizado =
+    normalizar(bairro);
+
+
+  for (
+    const cras of crasList
+  ) {
+
+    for (
+      const bairroCRAS of cras.bairros
+    ) {
+
+      if (
+        bairroNormalizado.includes(
+          normalizar(bairroCRAS)
+        )
+      ) {
+
+        return cras;
+
+      }
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* ================================
+   ENCONTRAR CASA DA MULHER
+================================ */
 
 function encontrarCasaPorBairro(
   bairro
 ) {
 
-  if (!bairro) {
-    return casasDaMulher[1];
-  }
-
   const texto =
-    bairro
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g,"");
+    normalizar(bairro);
 
-
-  /*
-    Realengo / Padre Miguel / Bangu
-  */
 
   if (
     texto.includes("realengo") ||
@@ -641,10 +884,6 @@ function encontrarCasaPorBairro(
   }
 
 
-  /*
-    Madureira e região.
-  */
-
   if (
     texto.includes("madureira") ||
     texto.includes("osvaldo cruz") ||
@@ -659,16 +898,11 @@ function encontrarCasaPorBairro(
   }
 
 
-  /*
-    Campo Grande e região.
-  */
-
   if (
     texto.includes("campo grande") ||
     texto.includes("cosmos") ||
     texto.includes("inhoaiba") ||
     texto.includes("paciência") ||
-    texto.includes("paciencia") ||
     texto.includes("senador vasconcelos")
   ) {
 
@@ -677,16 +911,11 @@ function encontrarCasaPorBairro(
   }
 
 
-  /*
-    Coelho Neto e região.
-  */
-
   if (
     texto.includes("coelho neto") ||
     texto.includes("acari") ||
     texto.includes("guadalupe") ||
     texto.includes("honorio gurgel") ||
-    texto.includes("ira") ||
     texto.includes("anchieta")
   ) {
 
@@ -695,20 +924,14 @@ function encontrarCasaPorBairro(
   }
 
 
-  /*
-    Região não identificada.
-    Mantemos Madureira como referência
-    provisória.
-  */
-
   return casasDaMulher[1];
 
 }
 
 
-/*
-  Busca principal.
-*/
+/* ================================
+   BUSCA
+================================ */
 
 searchButton.addEventListener(
   "click",
@@ -742,6 +965,13 @@ searchButton.addEventListener(
       "BUSCANDO...";
 
 
+    crasInfo.style.display =
+      "none";
+
+    crasMessage.textContent =
+      "Consultando seu CEP...";
+
+
     womanInfo.style.display =
       "none";
 
@@ -751,9 +981,9 @@ searchButton.addEventListener(
 
     try {
 
-      /*
-        Consulta o ViaCEP.
-      */
+      /* ============================
+         VIACEP
+      ============================ */
 
       const response =
         await fetch(
@@ -764,9 +994,11 @@ searchButton.addEventListener(
 
 
       if (!response.ok) {
+
         throw new Error(
           "Erro ao consultar CEP"
         );
+
       }
 
 
@@ -775,19 +1007,22 @@ searchButton.addEventListener(
 
 
       if (data.erro) {
+
         throw new Error(
           "CEP não encontrado"
         );
+
       }
 
 
-      /*
-        Mostra endereço.
-      */
+      /* ============================
+         ENDEREÇO
+      ============================ */
 
       result.classList.remove(
         "error"
       );
+
 
       resultAddress.innerHTML =
 
@@ -809,9 +1044,76 @@ searchButton.addEventListener(
         "block";
 
 
-      /*
-        Escolhe a unidade.
-      */
+      /* ============================
+         CRAS
+      ============================ */
+
+      const cras =
+        encontrarCRAS(
+          data.bairro
+        );
+
+
+      if (cras) {
+
+        crasName.innerHTML =
+          "<strong>" +
+          cras.nome +
+          "</strong>";
+
+
+        crasAddress.innerHTML =
+          "📍 " +
+          cras.endereco;
+
+
+        crasHours.innerHTML =
+          "🕐 <strong>Horário:</strong><br>" +
+          "Segunda a sexta: 8h às 17h";
+
+
+        crasRegion.textContent =
+          "Unidade indicada de acordo com a região do endereço informado.";
+
+
+        crasCall.href =
+          "tel:1746";
+
+
+        crasMap.href =
+          "https://www.google.com/maps/search/?api=1&query=" +
+          encodeURIComponent(
+            cras.endereco
+          );
+
+
+        crasMessage.style.display =
+          "none";
+
+        crasInfo.style.display =
+          "block";
+
+      }
+
+      else {
+
+        crasInfo.style.display =
+          "none";
+
+        crasMessage.innerHTML =
+          "Não encontramos uma unidade específica para este bairro na base do projeto.<br><br>" +
+          "<strong>Central 1746 da Prefeitura:</strong> " +
+          "ligue 1746 para orientação.";
+
+        crasMessage.style.display =
+          "block";
+
+      }
+
+
+      /* ============================
+         CASA DA MULHER
+      ============================ */
 
       const casa =
         encontrarCasaPorBairro(
@@ -819,20 +1121,12 @@ searchButton.addEventListener(
         );
 
 
-      /*
-        Mostra nome e endereço.
-      */
-
       womanAddress.innerHTML =
         "<strong>" +
         casa.nome +
         "</strong><br>" +
         casa.endereco;
 
-
-      /*
-        Telefone.
-      */
 
       womanPhone.innerHTML =
         "📞 <a class='phone' href='tel:" +
@@ -842,35 +1136,19 @@ searchButton.addEventListener(
         "</a>";
 
 
-      /*
-        Horário.
-      */
-
       womanHours.innerHTML =
         "🕐 <strong>Horário:</strong><br>" +
         casa.horario;
 
 
-      /*
-        Aviso.
-      */
-
       womanDistance.textContent =
         "Unidade indicada para a região do endereço informado.";
 
-
-      /*
-        Botão ligar.
-      */
 
       womanCall.href =
         "tel:" +
         casa.telefone;
 
-
-      /*
-        Botão Google Maps.
-      */
 
       womanMap.href =
         "https://www.google.com/maps/search/?api=1&query=" +
@@ -909,6 +1187,9 @@ searchButton.addEventListener(
         resultAddress.textContent =
           "Não encontramos esse CEP. Verifique os números e tente novamente.";
 
+        crasMessage.textContent =
+          "Digite um CEP válido.";
+
         womanMessage.textContent =
           "Digite um CEP válido.";
 
@@ -918,6 +1199,9 @@ searchButton.addEventListener(
 
         resultAddress.textContent =
           "Não foi possível realizar a busca neste momento. Tente novamente.";
+
+        crasMessage.textContent =
+          "Não foi possível localizar o CRAS.";
 
         womanMessage.textContent =
           "Não foi possível localizar a unidade.";
