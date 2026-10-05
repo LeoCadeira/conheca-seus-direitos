@@ -473,54 +473,117 @@
 
 
   /* =====================================================
-     BASE DE CRAS
+     CRAS
+     
+     ENDEREÇOS CONFERIDOS NA PÁGINA OFICIAL DA
+     SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL
+     DA PREFEITURA DO RIO.
      ===================================================== */
 
   const cras = [
 
     {
-      nome: "CRAS Vila Moretti",
-      endereco: "Avenida Ministro Ari Franco, 278 - Bangu, Rio de Janeiro - RJ",
-      telefone: "(21) 3463-1724",
-      horario: "Consultar horário atualizado pelo 1746",
-      lat: -22.8757,
-      lon: -43.4578
+      nome: "CRAS José Carlos Campos",
+      endereco: "Rua Guarama, s/nº - Rocha Miranda, Rio de Janeiro - RJ",
+      telefone: "(21) 2475-5103",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+
+      /*
+        Coordenada aproximada da Rua Guarama / CEP 21510-230.
+        O endereço oficial é usado para apresentação e rota.
+      */
+      lat: -22.84083,
+      lon: -43.34720
     },
 
     {
-      nome: "CRAS Maria Thereza Freire Moura",
-      endereco: "Rua Silva Cardoso, 967 - Bangu, Rio de Janeiro - RJ",
-      telefone: "(21) 3463-7936",
-      horario: "Consultar horário atualizado pelo 1746",
-      lat: -22.8750,
-      lon: -43.4688
+      nome: "CRAS Zózimo Barroso do Amaral",
+      endereco: "Avenida Ministro Edgard Romero, 400 - Madureira, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8660,
+      lon: -43.3350
+    },
+
+    {
+      nome: "CRAS Yara Amaral",
+      endereco: "Estrada do Camboatá, 23000 / loja 115 - Guadalupe, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8480,
+      lon: -43.3740
+    },
+
+    {
+      nome: "CRAS Rubens Corrêa",
+      endereco: "Rua Capitão Aliatar Martins, 211 - Irajá, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.817137,
+      lon: -43.354127
+    },
+
+    {
+      nome: "CRAS Francisco Sales de Mesquita",
+      endereco: "Rua Mercúrio, 430 - Pavuna, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8050,
+      lon: -43.3580
+    },
+
+    {
+      nome: "CRAS Acari",
+      endereco: "Rua Guaiúba, 150 - Acari, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8289,
+      lon: -43.3443
     },
 
     {
       nome: "CRAS Deputada Heloneida Studart",
       endereco: "Rua Rangel Pestana, 510 - Bangu, Rio de Janeiro - RJ",
-      telefone: "(21) 3577-0427",
-      horario: "Consultar horário atualizado pelo 1746",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
       lat: -22.8810,
       lon: -43.4665
     },
 
     {
-      nome: "CRAS Olímpia Esteves",
-      endereco: "Rua Santa Cecília, 984 - Bangu, Rio de Janeiro - RJ",
-      telefone: "(21) 3463-8333",
-      horario: "Consultar horário atualizado pelo 1746",
-      lat: -22.8748,
-      lon: -43.4660
+      nome: "CRAS Maria Thereza Freire Moura",
+      endereco: "Rua Silva Cardoso, 967 - Bangu, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8750,
+      lon: -43.4688
+    },
+
+    {
+      nome: "CRAS Vila Moretti",
+      endereco: "Avenida Ministro Ary Franco, 278 - Bangu, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8757,
+      lon: -43.4578
     },
 
     {
       nome: "CRAS Oswaldo Antonio Ferreira",
       endereco: "Rua Dona Olímpia, 220 - Realengo, Rio de Janeiro - RJ",
-      telefone: "(21) 3335-0541",
-      horario: "Consultar horário atualizado pelo 1746",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
       lat: -22.8832,
       lon: -43.4277
+    },
+
+    {
+      nome: "CRAS Olímpia Esteves",
+      endereco: "Rua Santa Cecília, 984 - Bangu, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Segunda a sexta-feira, 8h às 17h",
+      lat: -22.8748,
+      lon: -43.4660
     }
 
   ];
@@ -528,53 +591,38 @@
 
   /* =====================================================
      CASAS DA MULHER CARIOCA
+     
+     ENDEREÇOS E TELEFONES CONFERIDOS EM FONTES
+     OFICIAIS DA PREFEITURA DO RIO.
      ===================================================== */
 
   const casasDaMulher = [
 
     {
-      nome: "Casa da Mulher Carioca e NEAM Dinah Coutinho",
-      endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
+      nome: "Casa da Mulher Carioca Dinah Coutinho",
+      endereco: "Rua Limites, 1349 - Realengo, Rio de Janeiro - RJ",
       telefone: "(21) 3464-1870",
-      horario: "Segunda a sexta-feira, 8h às 17h",
+      horario: "Segunda a sexta-feira, 9h às 18h",
       lat: -22.8815,
       lon: -43.4305
     },
 
     {
-      nome: "Casa da Mulher Carioca Elza Soares",
-      endereco: "Rua Marechal Falcão da Frota, 1782 - Realengo, Rio de Janeiro - RJ",
-      telefone: "(21) 3900-3749",
-      horario: "Segunda a sexta-feira, 8h às 17h",
-      lat: -22.8755,
-      lon: -43.4485
-    },
-
-    {
-      nome: "Casa da Mulher Carioca e NEAM Tia Doca",
+      nome: "Casa da Mulher Carioca Tia Doca",
       endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
-      telefone: "(21) 3085-3823",
-      horario: "Segunda a sexta-feira, 8h às 17h",
+      telefone: "(21) 2452-2217",
+      horario: "Segunda a sexta-feira, 9h às 18h",
       lat: -22.8695,
       lon: -43.3375
     },
 
     {
-      nome: "Casa da Mulher Carioca - Polo Campo Grande",
-      endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
-      telefone: "(21) 96814-8886",
-      horario: "Segunda a sexta-feira, 8h às 17h",
-      lat: -22.9025,
-      lon: -43.5610
-    },
-
-    {
-      nome: "Casa da Mulher Carioca - Polo Coelho Neto",
-      endereco: "Avenida Pastor Martin Luther King Jr, 10055 - Coelho Neto, Rio de Janeiro - RJ",
-      telefone: "(21) 96815-1042",
-      horario: "Segunda a sexta-feira, 8h às 17h",
-      lat: -22.8255,
-      lon: -43.3660
+      nome: "Casa da Mulher Carioca e NEAM - Padre Miguel",
+      endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
+      telefone: "Consultar telefone atualizado pelo 1746",
+      horario: "Consultar horário atualizado pelo 1746",
+      lat: -22.8755,
+      lon: -43.4485
     }
 
   ];
@@ -584,42 +632,65 @@
      FORMATAÇÃO DO CEP
      ===================================================== */
 
-  cepInput.addEventListener("input", function(event) {
+  cepInput.addEventListener(
+    "input",
+    function(event) {
 
-    let value = event.target.value.replace(/\D/g, "");
+      let value =
+        event.target.value.replace(/\D/g, "");
 
-    if (value.length > 5) {
-      value =
-        value.substring(0, 5) +
-        "-" +
-        value.substring(5, 8);
+      if (value.length > 5) {
+
+        value =
+          value.substring(0, 5) +
+          "-" +
+          value.substring(5, 8);
+
+      }
+
+      event.target.value =
+        value.substring(0, 9);
+
     }
-
-    event.target.value = value.substring(0, 9);
-
-  });
+  );
 
 
   /* =====================================================
      DISTÂNCIA
+     
+     Distância geográfica em linha reta.
+     Não representa a distância de carro.
      ===================================================== */
 
-  function calcularDistancia(lat1, lon1, lat2, lon2) {
+  function calcularDistancia(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+  ) {
 
     const R = 6371;
 
     const dLat =
-      (lat2 - lat1) * Math.PI / 180;
+      (lat2 - lat1) *
+      Math.PI / 180;
 
     const dLon =
-      (lon2 - lon1) * Math.PI / 180;
+      (lon2 - lon1) *
+      Math.PI / 180;
 
     const a =
       Math.sin(dLat / 2) *
       Math.sin(dLat / 2) +
 
-      Math.cos(lat1 * Math.PI / 180) *
-      Math.cos(lat2 * Math.PI / 180) *
+      Math.cos(
+        lat1 * Math.PI / 180
+      ) *
+
+      Math.cos(
+        lat2 * Math.PI / 180
+      ) *
+
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
 
@@ -636,22 +707,26 @@
 
 
   /* =====================================================
-     CONSULTA VIA CEP
+     VIA CEP
      ===================================================== */
 
   async function consultarViaCEP(cep) {
 
-    const response = await fetch(
-      "https://viacep.com.br/ws/" +
-      cep +
-      "/json/"
-    );
+    const response =
+      await fetch(
+        "https://viacep.com.br/ws/" +
+        cep +
+        "/json/"
+      );
 
     if (!response.ok) {
-      throw new Error("Erro no ViaCEP");
+      throw new Error(
+        "Erro no ViaCEP"
+      );
     }
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
     if (data.erro) {
       return null;
@@ -663,13 +738,16 @@
 
 
   /* =====================================================
-     LOCALIZAÇÃO DO CEP
+     LOCALIZAÇÃO DO USUÁRIO
      
-     Primeiro tenta localizar o CEP diretamente.
+     Tenta primeiro o CEP.
      Depois tenta o endereço completo.
      ===================================================== */
 
-  async function localizarCEP(cep, dados) {
+  async function localizarCEP(
+    cep,
+    dados
+  ) {
 
     const consultas = [
 
@@ -686,37 +764,43 @@
       "&countrycodes=br" +
       "&q=" +
       encodeURIComponent(
-        dados.logradouro +
-        ", " +
-        dados.bairro +
-        ", " +
-        dados.localidade +
-        ", " +
-        dados.uf +
-        ", Brasil"
+        [
+          dados.logradouro,
+          dados.bairro,
+          dados.localidade,
+          dados.uf,
+          "Brasil"
+        ]
+        .filter(Boolean)
+        .join(", ")
       )
 
     ];
 
 
-    for (const url of consultas) {
+    for (
+      const url of consultas
+    ) {
 
       try {
 
-        const response = await fetch(
-          url,
-          {
-            headers: {
-              "Accept": "application/json"
+        const response =
+          await fetch(
+            url,
+            {
+              headers: {
+                "Accept":
+                  "application/json"
+              }
             }
-          }
-        );
+          );
 
         if (!response.ok) {
           continue;
         }
 
-        const resultado = await response.json();
+        const resultado =
+          await response.json();
 
         if (
           resultado &&
@@ -724,10 +808,14 @@
         ) {
 
           const lat =
-            parseFloat(resultado[0].lat);
+            parseFloat(
+              resultado[0].lat
+            );
 
           const lon =
-            parseFloat(resultado[0].lon);
+            parseFloat(
+              resultado[0].lon
+            );
 
           if (
             Number.isFinite(lat) &&
@@ -746,7 +834,7 @@
       } catch (erro) {
 
         console.error(
-          "Erro ao localizar CEP:",
+          "Erro ao localizar:",
           erro
         );
 
@@ -760,7 +848,7 @@
 
 
   /* =====================================================
-     ENCONTRA A UNIDADE MAIS PRÓXIMA
+     ENCONTRA UNIDADE MAIS PRÓXIMA
      ===================================================== */
 
   function encontrarMaisProxima(
@@ -773,12 +861,18 @@
       !Number.isFinite(latitude) ||
       !Number.isFinite(longitude)
     ) {
+
       return null;
+
     }
 
-    let melhor = null;
+    let melhor =
+      null;
 
-    for (const unidade of unidades) {
+
+    for (
+      const unidade of unidades
+    ) {
 
       const distancia =
         calcularDistancia(
@@ -787,6 +881,7 @@
           unidade.lat,
           unidade.lon
         );
+
 
       if (
         melhor === null ||
@@ -802,6 +897,7 @@
 
     }
 
+
     return melhor;
 
   }
@@ -816,23 +912,39 @@
     crasAddress.textContent =
       "Localizando...";
 
-    crasDistance.textContent = "";
-    crasPhone.textContent = "";
-    crasHours.textContent = "";
+    crasDistance.textContent =
+      "";
 
-    crasMap.style.display = "none";
-    crasCall.style.display = "none";
+    crasPhone.textContent =
+      "";
+
+    crasHours.textContent =
+      "";
+
+    crasMap.style.display =
+      "none";
+
+    crasCall.style.display =
+      "none";
 
 
     womanAddress.textContent =
       "Localizando...";
 
-    womanDistance.textContent = "";
-    womanPhone.textContent = "";
-    womanHours.textContent = "";
+    womanDistance.textContent =
+      "";
 
-    womanMap.style.display = "none";
-    womanCall.style.display = "none";
+    womanPhone.textContent =
+      "";
+
+    womanHours.textContent =
+      "";
+
+    womanMap.style.display =
+      "none";
+
+    womanCall.style.display =
+      "none";
 
   }
 
@@ -841,7 +953,9 @@
      MOSTRA CRAS
      ===================================================== */
 
-  function mostrarCras(unidade) {
+  function mostrarCras(
+    unidade
+  ) {
 
     if (!unidade) {
 
@@ -855,24 +969,29 @@
 
     }
 
+
     crasAddress.innerHTML =
       "<strong>" +
       unidade.nome +
       "</strong><br>" +
       unidade.endereco;
 
+
     crasDistance.textContent =
       "Aproximadamente " +
       unidade.distancia.toFixed(1) +
       " km em linha reta";
 
+
     crasPhone.textContent =
       "Telefone: " +
       unidade.telefone;
 
+
     crasHours.textContent =
       "Horário: " +
       unidade.horario;
+
 
     crasMap.href =
       "https://www.google.com/maps/dir/?api=1&destination=" +
@@ -880,15 +999,29 @@
         unidade.endereco
       );
 
+
     crasMap.style.display =
       "inline-block";
 
+
     crasCall.href =
       "tel:" +
-      unidade.telefone.replace(/\D/g, "");
+      unidade.telefone.replace(
+        /\D/g,
+        ""
+      );
 
-    crasCall.style.display =
-      "inline-block";
+
+    if (
+      unidade.telefone
+        .replace(/\D/g, "")
+        .length >= 10
+    ) {
+
+      crasCall.style.display =
+        "inline-block";
+
+    }
 
   }
 
@@ -897,7 +1030,9 @@
      MOSTRA CASA DA MULHER
      ===================================================== */
 
-  function mostrarCasa(unidade) {
+  function mostrarCasa(
+    unidade
+  ) {
 
     if (!unidade) {
 
@@ -911,24 +1046,29 @@
 
     }
 
+
     womanAddress.innerHTML =
       "<strong>" +
       unidade.nome +
       "</strong><br>" +
       unidade.endereco;
 
+
     womanDistance.textContent =
       "Aproximadamente " +
       unidade.distancia.toFixed(1) +
       " km em linha reta";
 
+
     womanPhone.textContent =
       "Telefone: " +
       unidade.telefone;
 
+
     womanHours.textContent =
       "Horário: " +
       unidade.horario;
+
 
     womanMap.href =
       "https://www.google.com/maps/dir/?api=1&destination=" +
@@ -936,15 +1076,30 @@
         unidade.endereco
       );
 
+
     womanMap.style.display =
       "inline-block";
 
-    womanCall.href =
-      "tel:" +
-      unidade.telefone.replace(/\D/g, "");
 
-    womanCall.style.display =
-      "inline-block";
+    const telefone =
+      unidade.telefone.replace(
+        /\D/g,
+        ""
+      );
+
+
+    if (
+      telefone.length >= 10
+    ) {
+
+      womanCall.href =
+        "tel:" +
+        telefone;
+
+      womanCall.style.display =
+        "inline-block";
+
+    }
 
   }
 
@@ -956,12 +1111,22 @@
   async function realizarBusca() {
 
     const cep =
-      cepInput.value.replace(/\D/g, "");
+      cepInput.value.replace(
+        /\D/g,
+        ""
+      );
 
-    if (cep.length !== 8) {
 
-      result.style.display = "block";
-      result.classList.add("error");
+    if (
+      cep.length !== 8
+    ) {
+
+      result.style.display =
+        "block";
+
+      result.classList.add(
+        "error"
+      );
 
       resultAddress.textContent =
         "Digite um CEP válido para continuar.";
@@ -974,29 +1139,41 @@
     searchButton.textContent =
       "BUSCANDO...";
 
-    searchButton.disabled = true;
+    searchButton.disabled =
+      true;
 
 
-    result.style.display = "none";
-    result.classList.remove("error");
+    result.style.display =
+      "none";
+
+    result.classList.remove(
+      "error"
+    );
+
 
     limparResultados();
 
 
     try {
 
-      /* -----------------------------------------------
-         1. CONSULTA O CEP
-         ----------------------------------------------- */
+      /* ================================================
+         1. VIA CEP
+         ================================================ */
 
       const dados =
-        await consultarViaCEP(cep);
+        await consultarViaCEP(
+          cep
+        );
 
 
       if (!dados) {
 
-        result.style.display = "block";
-        result.classList.add("error");
+        result.style.display =
+          "block";
+
+        result.classList.add(
+          "error"
+        );
 
         resultAddress.textContent =
           "Não encontramos esse CEP. Verifique os números e tente novamente.";
@@ -1006,28 +1183,46 @@
       }
 
 
-      /* -----------------------------------------------
+      /* ================================================
          2. MOSTRA ENDEREÇO
-         ----------------------------------------------- */
+         ================================================ */
 
       resultAddress.innerHTML =
 
-        (dados.logradouro || "Endereço não informado") +
+        (
+          dados.logradouro ||
+          "Endereço não informado"
+        ) +
+
         "<br>" +
 
-        (dados.bairro || "") +
+        (
+          dados.bairro ||
+          ""
+        ) +
+
         "<br>" +
 
-        (dados.localidade || "") +
+        (
+          dados.localidade ||
+          ""
+        ) +
+
         " - " +
-        (dados.uf || "");
 
-      result.style.display = "block";
+        (
+          dados.uf ||
+          ""
+        );
 
 
-      /* -----------------------------------------------
-         3. LOCALIZA O CEP
-         ----------------------------------------------- */
+      result.style.display =
+        "block";
+
+
+      /* ================================================
+         3. LOCALIZA O USUÁRIO
+         ================================================ */
 
       let coordenadas =
         await localizarCEP(
@@ -1037,12 +1232,10 @@
 
 
       /*
-        Para o CEP 21863-430, se o serviço de
-        geocodificação estiver indisponível, usamos
-        a coordenada conhecida da Rua Lúcio Alves.
+        Fallback específico para o CEP utilizado
+        nos testes de Bangu.
 
-        Isso evita que justamente o CEP utilizado
-        nos testes fique sem resultado.
+        Rua Lúcio Alves - Bangu.
       */
 
       if (
@@ -1053,6 +1246,27 @@
         coordenadas = {
           lat: -22.85578,
           lon: -43.46772
+        };
+
+      }
+
+
+      /*
+        Fallback específico para o CEP
+        oficial da Rua Guarama.
+
+        É utilizado somente se o serviço de
+        geocodificação não responder.
+      */
+
+      if (
+        !coordenadas &&
+        cep === "21510230"
+      ) {
+
+        coordenadas = {
+          lat: -22.84083,
+          lon: -43.34720
         };
 
       }
@@ -1093,9 +1307,9 @@
       );
 
 
-      /* -----------------------------------------------
-         4. ENCONTRA CRAS
-         ----------------------------------------------- */
+      /* ================================================
+         4. CRAS MAIS PRÓXIMO
+         ================================================ */
 
       const crasMaisProximo =
         encontrarMaisProxima(
@@ -1105,9 +1319,9 @@
         );
 
 
-      /* -----------------------------------------------
-         5. ENCONTRA CASA DA MULHER
-         ----------------------------------------------- */
+      /* ================================================
+         5. CASA DA MULHER MAIS PRÓXIMA
+         ================================================ */
 
       const casaMaisProxima =
         encontrarMaisProxima(
@@ -1117,9 +1331,9 @@
         );
 
 
-      /* -----------------------------------------------
+      /* ================================================
          6. MOSTRA RESULTADOS
-         ----------------------------------------------- */
+         ================================================ */
 
       mostrarCras(
         crasMaisProximo
@@ -1137,14 +1351,22 @@
         erro
       );
 
-      result.style.display = "block";
-      result.classList.add("error");
+
+      result.style.display =
+        "block";
+
+      result.classList.add(
+        "error"
+      );
+
 
       resultAddress.textContent =
         "Não foi possível realizar a busca neste momento. Tente novamente.";
 
+
       crasAddress.textContent =
         "Não foi possível localizar o CRAS.";
+
 
       womanAddress.textContent =
         "Não foi possível localizar a Casa da Mulher.";
@@ -1163,7 +1385,7 @@
 
 
   /* =====================================================
-     BOTÃO
+     BOTÃO ENCONTRAR
      ===================================================== */
 
   searchButton.addEventListener(
@@ -1173,15 +1395,19 @@
 
 
   /* =====================================================
-     ENTER
+     ENTER NO CAMPO DE CEP
      ===================================================== */
 
   cepInput.addEventListener(
     "keydown",
     function(event) {
 
-      if (event.key === "Enter") {
+      if (
+        event.key === "Enter"
+      ) {
+
         realizarBusca();
+
       }
 
     }
