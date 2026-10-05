@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conheça seus direitos</title>
+    <style>
+      :root {
+        --bg: #f4e4dc;
+        --card: #f8f2ee;
+        --panel: #f3ede8;
+        --primary: #d37586;
+        --primary-dark: #b5526e;
+        --accent: #f2d96a;
+        --text: #402d35;
+        --muted: #7b5d65;
+        --line: rgba(96, 63, 71, 0.18);
+        --button: #d98ca1;
+        --button-dark: #b9617d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at top, #f9f0eb 0%, #f1e4df 35%, #e8d8d2 100%);
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+      }
+
+      .card {
+        width: 420px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(120, 83, 91, 0.15);
+        border-radius: 22px;
+        box-shadow: 0 18px 30px rgba(86, 50, 58, 0.12);
+        padding: 18px 18px 22px;
+        backdrop-filter: blur(2px);
+      }
+
+      .inner {
+        background: var(--card);
+        border: 1px solid rgba(116, 73, 82, 0.08);
+        border-radius: 18px;
+        padding: 18px 18px 14px;
+      }
+
+      .title {
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.05rem;
+        letter-spacing: 0.04em;
+        color: #6a4650;
+        margin: 0 0 16px;
+        line-height: 1.3;
+      }
+
+      .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .search-label {
+        display: block;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .input-wrap {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .input {
+        width: 100%;
+        max-width: 220px;
+        height: 38px;
+        border: 1px solid rgba(116, 73, 82, 0.18);
+        border-radius: 8px;
+        background: #fff;
+        padding: 0 12px;
+        font-size: 0.98rem;
+        color: var(--text);
+        outline: none;
+      }
+
+      .input::placeholder {
+        color: #b19aa4;
+      }
+
+      .button {
+        height: 38px;
+        min-width: 104px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(180deg, var(--button) 0%, var(--button-dark) 100%);
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+      }
+
+      .divider {
+        border-top: 1px solid var(--line);
+        margin: 18px 0 12px;
+      }
+
+      .service {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 10px;
+        padding: 8px 4px 6px;
+      }
+
+      .icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(221, 170, 186, 0.22);
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+        margin-top: 2px;
+      }
+
+      .service-card {
+        border: 1px solid transparent;
+        padding: 0;
+      }
+
+      .service-name {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--text);
+        margin: 0 0 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .address {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0 0 4px;
+      }
+
+      .distance {
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin: 0 0 8px;
+      }
+
+      .cta {
+        display: inline-block;
+        height: 28px;
+        padding: 0 12px;
+        border: none;
+        background: rgba(201, 118, 146, 0.1);
+        color: var(--primary-dark);
+        border-radius: 6px;
+        font-weight: 800;
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          width: min(92vw, 420px);
+        }
+
+        .search {
+          flex-wrap: wrap;
+        }
+
+        .button {
+          width: 100%;
+          min-width: unset;
+          margin-top: 8px;
+        }
+
+        .input-wrap {
+          width: 100%;
+        }
+
+        .input {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="inner">
+        <h1 class="title">
+          CONHEÇA SEUS DIREITOS
+        </h1>
+
+        <div class="search-label">Digite seu CEP</div>
+
+        <div class="search">
+          <div class="input-wrap">
+            <input class="input" type="text" placeholder="00000-000" maxlength="9" />
+          </div>
+          <button class="button">ENCONTRAR</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="service">
+          <div class="icon">📍</div>
+          <div class="service-card">
+            <p class="service-name">CRAS mais próximo</p>
+            <p class="address">endereço</p>
+            <p class="distance">distância</p>
+            <button class="cta">COMO CHEGAR</button>
+          </div>
+        </div>
+
+        <div class="divider" style="margin-top: 14px; margin-bottom: 10px;"></div>
+
+        <div class="service">
+          <div class="icon">👩</div>
+          <div class="service-card">
+            <p class="service-name">Casa da Mulher mais próxima</p>
+            <p class="address">endereço</p>
+            <p class="distance">distância</p>
+            <button class="cta">COMO CHEGAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const cepInput = document.querySelector('.input');
+
+      cepInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 5) {
+          value = value.slice(0, 5) + '-' + value.slice(5, 8);
+        }
+        e.target.value = value.slice(0, 9);
+      });
+    </script>
+  </body>
+</html>
