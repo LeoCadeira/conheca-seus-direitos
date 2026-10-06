@@ -1,1801 +1,2145 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Conheça seus direitos</title>
+  <title>Conheça seus direitos</title>
 
-<style>
+  <style>
+    :root {
+      --card: #f8f2ee;
+      --primary: #d37586;
+      --primary-dark: #b5526e;
+      --text: #402d35;
+      --muted: #7b5d65;
+      --line: rgba(96, 63, 71, 0.18);
+      --button: #d98ca1;
+      --button-dark: #b9617d;
+      --white: #ffffff;
+    }
+
     * {
-        box-sizing: border-box;
+      box-sizing: border-box;
     }
 
     body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f5f7fa;
-        color: #222;
-    }
-
-    header {
-        background: #ffffff;
-        padding: 25px 20px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-    }
-
-    header h1 {
-        margin: 0;
-        color: #2457a6;
-        font-size: 30px;
-    }
-
-    header p {
-        margin: 8px 0 0;
-        color: #666;
-        font-size: 15px;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 850px;
-        margin: 30px auto;
-        padding: 0 15px;
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(
+          circle at top,
+          #f9f0eb 0%,
+          #f1e4df 35%,
+          #e8d8d2 100%
+        );
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      padding: 20px;
     }
 
     .card {
-        background: #ffffff;
-        border-radius: 14px;
-        padding: 25px;
-        margin-bottom: 20px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      width: 420px;
+      max-width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(120, 83, 91, 0.15);
+      border-radius: 22px;
+      box-shadow: 0 18px 30px rgba(86, 50, 58, 0.12);
+      padding: 18px;
+      backdrop-filter: blur(2px);
     }
 
-    .card h2 {
-        margin-top: 0;
-        color: #2457a6;
-        font-size: 22px;
+    .inner {
+      background: var(--card);
+      border: 1px solid rgba(116, 73, 82, 0.08);
+      border-radius: 18px;
+      padding: 18px;
     }
 
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 8px;
+    .title {
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: #6a4650;
+      margin: 0 0 16px;
+      line-height: 1.3;
     }
 
-    input {
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #bbb;
-        border-radius: 8px;
-        font-size: 18px;
-        margin-bottom: 12px;
+    .search-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-align: center;
+      font-weight: 700;
     }
 
-    button {
-        width: 100%;
-        padding: 14px;
-        border: none;
-        border-radius: 8px;
-        background: #2457a6;
-        color: white;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    button:hover {
-        background: #194683;
+    .input-wrap {
+      width: 100%;
     }
 
-    .resultado {
-        display: none;
+    .input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid rgba(116, 73, 82, 0.18);
+      border-radius: 8px;
+      background: var(--white);
+      padding: 0 12px;
+      font-size: 0.98rem;
+      color: var(--text);
+      outline: none;
     }
 
-    .endereco-box {
-        background: #f1f5fb;
-        border-radius: 10px;
-        padding: 15px;
-        margin-top: 15px;
+    .input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(211, 117, 134, 0.12);
     }
 
-    .servico {
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        padding: 18px;
-        margin-top: 15px;
-        background: #fff;
+    .input::placeholder {
+      color: #b19aa4;
     }
 
-    .servico h3 {
-        margin-top: 0;
-        color: #2457a6;
+    .button {
+      height: 38px;
+      min-width: 104px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(
+        180deg,
+        var(--button) 0%,
+        var(--button-dark) 100%
+      );
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: 0.15s;
     }
 
-    .info {
-        line-height: 1.6;
-        margin-bottom: 12px;
+    .button:hover {
+      transform: translateY(-1px);
     }
 
-    .bairros {
-        font-size: 14px;
-        color: #555;
-        line-height: 1.5;
-        background: #f7f7f7;
+    .button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .divider {
+      border-top: 1px solid var(--line);
+      margin: 18px 0 12px;
+    }
+
+    .result {
+      background: #fff;
+      border: 1px solid rgba(116, 73, 82, 0.12);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 14px 4px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .result-title {
+      color: var(--text);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      padding: 8px 4px 6px;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(221, 170, 186, 0.22);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+
+    .service-card {
+      padding: 0;
+    }
+
+    .service-name {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 6px;
+    }
+
+    .address {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0 0 4px;
+    }
+
+    .distance {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    .phone {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    .coverage {
+      font-size: 0.74rem;
+      color: #76545f;
+      margin: 0 0 9px;
+      line-height: 1.45;
+    }
+
+    .notice {
+      font-size: 0.72rem;
+      color: #8a6570;
+      background: #faf2f3;
+      border-radius: 7px;
+      padding: 7px 8px;
+      margin-top: 7px;
+      line-height: 1.4;
+    }
+
+    .cta {
+      display: inline-block;
+      height: 28px;
+      padding: 0 12px;
+      border: none;
+      background: rgba(201, 118, 146, 0.1);
+      color: var(--primary-dark);
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .cta:hover {
+      background: rgba(201, 118, 146, 0.18);
+    }
+
+    .call {
+      background: rgba(112, 170, 130, 0.12);
+      color: #39704a;
+    }
+
+    .error {
+      color: #9a4357;
+      background: #fff4f5;
+      border: 1px solid #ecc8cf;
+    }
+
+    .loading {
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 8px;
+    }
+
+    .source-note {
+      margin-top: 15px;
+      padding: 8px 4px 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.65rem;
+      line-height: 1.45;
+      color: #8b6e77;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      body {
         padding: 12px;
-        border-radius: 8px;
-        margin-top: 12px;
-    }
+      }
 
-    .acoes {
-        display: flex;
-        gap: 10px;
+      .card {
+        width: 100%;
+      }
+
+      .search {
         flex-wrap: wrap;
-        margin-top: 15px;
+      }
+
+      .button {
+        width: 100%;
+        min-width: unset;
+        margin-top: 8px;
+      }
     }
-
-    .acoes a {
-        text-decoration: none;
-        flex: 1;
-        min-width: 130px;
-    }
-
-    .btn-secundario {
-        display: block;
-        text-align: center;
-        padding: 11px;
-        border-radius: 8px;
-        background: #eeeeee;
-        color: #222;
-        font-weight: bold;
-    }
-
-    .btn-ligar {
-        display: block;
-        text-align: center;
-        padding: 11px;
-        border-radius: 8px;
-        background: #2e8b57;
-        color: white;
-        font-weight: bold;
-    }
-
-    .alerta {
-        background: #fff5d6;
-        border: 1px solid #e5c766;
-        color: #634f00;
-        padding: 14px;
-        border-radius: 9px;
-        margin-top: 15px;
-        line-height: 1.5;
-    }
-
-    .sucesso {
-        background: #eaf7ee;
-        border: 1px solid #9bd0a9;
-        color: #245c32;
-        padding: 14px;
-        border-radius: 9px;
-        margin-top: 15px;
-    }
-
-    .erro {
-        background: #fdecec;
-        border: 1px solid #e3aaaa;
-        color: #8a2222;
-        padding: 14px;
-        border-radius: 9px;
-        margin-top: 15px;
-    }
-
-    .carregando {
-        text-align: center;
-        padding: 20px;
-        color: #555;
-    }
-
-    .fonte {
-        margin-top: 15px;
-        font-size: 12px;
-        color: #777;
-    }
-
-    .fonte a {
-        color: #2457a6;
-    }
-
-    footer {
-        text-align: center;
-        color: #777;
-        font-size: 13px;
-        padding: 30px 15px;
-    }
-
-    @media (max-width: 600px) {
-        header h1 {
-            font-size: 25px;
-        }
-
-        .card {
-            padding: 18px;
-        }
-
-        .acoes {
-            flex-direction: column;
-        }
-
-        .acoes a {
-            width: 100%;
-        }
-    }
-</style>
+  </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Conheça seus direitos</h1>
-    <p>Encontre serviços públicos de assistência e proteção perto de você.</p>
-</header>
+<div class="card">
+  <div class="inner">
 
-<div class="container">
+    <h1 class="title">
+      CONHEÇA SEUS DIREITOS
+    </h1>
 
-    <div class="card">
+    <div class="search-label">
+      Digite seu CEP
+    </div>
 
-        <h2>Encontre serviços pelo seu CEP</h2>
+    <div class="search">
 
-        <label for="cep">Digite seu CEP</label>
-
+      <div class="input-wrap">
         <input
-            type="text"
-            id="cep"
-            maxlength="9"
-            placeholder="00000-000"
-            inputmode="numeric"
+          class="input"
+          type="text"
+          placeholder="00000-000"
+          maxlength="9"
+          inputmode="numeric"
+          autocomplete="postal-code"
+        />
+      </div>
+
+      <button class="button">
+        ENCONTRAR
+      </button>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div
+      id="result"
+      class="result"
+      style="display:none;"
+    >
+      <div class="result-title">
+        📍 Sua localização
+      </div>
+
+      <div id="result-address"></div>
+    </div>
+
+    <!-- CRAS -->
+
+    <div class="service">
+
+      <div class="icon">
+        📍
+      </div>
+
+      <div class="service-card">
+
+        <p class="service-name">
+          CRAS responsável pelo endereço
+        </p>
+
+        <p
+          class="address"
+          id="cras-address"
         >
+          Digite seu CEP para encontrar.
+        </p>
 
-        <button onclick="buscarCEP()">
-            ENCONTRAR SERVIÇOS
-        </button>
+        <p
+          class="distance"
+          id="cras-distance"
+        ></p>
 
-        <div id="mensagem"></div>
+        <p
+          class="phone"
+          id="cras-phone"
+        ></p>
+
+        <p
+          class="coverage"
+          id="cras-coverage"
+        ></p>
+
+        <a
+          id="cras-map"
+          class="cta"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display:none;"
+        >
+          COMO CHEGAR
+        </a>
+
+        <a
+          id="cras-call"
+          class="cta call"
+          href="tel:1746"
+          style="display:none;"
+        >
+          LIGAR 1746
+        </a>
+
+        <div
+          id="cras-notice"
+          class="notice"
+          style="display:none;"
+        ></div>
+
+      </div>
 
     </div>
 
-    <div id="resultado" class="resultado">
+    <div
+      class="divider"
+      style="margin-top:14px;margin-bottom:10px;"
+    ></div>
 
-        <div class="card">
+    <!-- CASA DA MULHER -->
 
-            <h2>Seu endereço</h2>
+    <div class="service">
 
-            <div id="enderecoEncontrado" class="endereco-box"></div>
+      <div class="icon">
+        👩
+      </div>
 
-        </div>
+      <div class="service-card">
 
-        <div class="card">
+        <p class="service-name">
+          Casa da Mulher mais próxima
+        </p>
 
-            <h2>CRAS responsável pelo endereço</h2>
+        <p
+          class="address"
+          id="woman-address"
+        >
+          Digite seu CEP para encontrar.
+        </p>
 
-            <div id="resultadoCras"></div>
+        <p
+          class="distance"
+          id="woman-distance"
+        ></p>
 
-        </div>
+        <p
+          class="phone"
+          id="woman-phone"
+        ></p>
 
-        <div class="card">
+        <p
+          class="coverage"
+          id="woman-coverage"
+        ></p>
 
-            <h2>Casa da Mulher mais próxima</h2>
+        <a
+          id="woman-map"
+          class="cta"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display:none;"
+        >
+          COMO CHEGAR
+        </a>
 
-            <div id="resultadoCasa"></div>
+        <a
+          id="woman-call"
+          class="cta call"
+          href="#"
+          style="display:none;"
+        >
+          LIGAR
+        </a>
 
-        </div>
+      </div>
 
     </div>
 
+    <div class="source-note">
+      Informações de CRAS baseadas na relação e nas áreas de abrangência
+      divulgadas pela Secretaria Municipal de Assistência Social da Prefeitura
+      do Rio de Janeiro. Em caso de dúvida sobre o atendimento, ligue 1746.
+    </div>
+
+  </div>
 </div>
-
-<footer>
-    <p>
-        Este site é uma ferramenta informativa e não substitui a orientação
-        oficial dos órgãos públicos.
-    </p>
-
-    <p>
-        Em caso de dúvida sobre o CRAS responsável pelo seu endereço,
-        consulte a Prefeitura pelo telefone 1746.
-    </p>
-</footer>
 
 
 <script>
 
-/* ============================================================
-   CONFIGURAÇÃO
-   ============================================================ */
+  /*
+  =========================================================
+  CONHEÇA SEUS DIREITOS
+  =========================================================
 
-const URL_PREFEITURA_CRAS =
-    "https://assistenciasocial.prefeitura.rio/cras/";
+  CRAS:
+
+  O sistema usa a área oficial de abrangência publicada
+  pela Prefeitura do Rio de Janeiro.
+
+  NÃO escolhe o CRAS simplesmente pela distância.
+
+  Quando a Prefeitura informa que determinado bairro é
+  dividido entre mais de um CRAS, o sistema não inventa
+  uma correspondência. Ele informa que o território é
+  compartilhado e orienta a confirmação pelo 1746.
+
+  Fonte:
+  Secretaria Municipal de Assistência Social
+  Prefeitura da Cidade do Rio de Janeiro.
+  */
 
 
-/* ============================================================
-   BASE OFICIAL DOS CRAS
-   ============================================================
+  const cepInput =
+    document.querySelector(".input");
 
-   Fonte:
-   Secretaria Municipal de Assistência Social
-   Prefeitura da Cidade do Rio de Janeiro
+  const searchButton =
+    document.querySelector(".button");
 
-   A lista abaixo reproduz nome, endereço e abrangência
-   publicados pela Prefeitura.
+  const result =
+    document.querySelector("#result");
 
-   IMPORTANTE:
-   alguns bairros aparecem em mais de uma unidade porque
-   a própria Prefeitura informa "parte" do bairro.
-   Nesses casos NÃO fazemos uma escolha artificial por distância.
-   ============================================================ */
+  const resultAddress =
+    document.querySelector("#result-address");
 
-const cras = [
+  const crasAddress =
+    document.querySelector("#cras-address");
 
-    /* =========================
+  const crasDistance =
+    document.querySelector("#cras-distance");
+
+  const crasPhone =
+    document.querySelector("#cras-phone");
+
+  const crasCoverage =
+    document.querySelector("#cras-coverage");
+
+  const crasMap =
+    document.querySelector("#cras-map");
+
+  const crasCall =
+    document.querySelector("#cras-call");
+
+  const crasNotice =
+    document.querySelector("#cras-notice");
+
+  const womanAddress =
+    document.querySelector("#woman-address");
+
+  const womanDistance =
+    document.querySelector("#woman-distance");
+
+  const womanPhone =
+    document.querySelector("#woman-phone");
+
+  const womanMap =
+    document.querySelector("#woman-map");
+
+  const womanCall =
+    document.querySelector("#woman-call");
+
+
+  /*
+  =========================================================
+  CRAS
+  =========================================================
+
+  DADOS CONFERIDOS NA PÁGINA OFICIAL DA SMAS.
+
+  A Prefeitura publica algumas abrangências como
+  "parte" de um bairro. Essas situações são mantidas
+  explicitamente para não transformar uma divisão territorial
+  em uma informação falsa.
+
+  =========================================================
+  */
+
+  const cras = [
+
+    /* =====================================================
        1ª CAS - CENTRO
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Adalberto Ismael de Souza",
-        endereco: "Rua Ana Neri, 636 – Benfica",
-        abrangencia: [
-            "Benfica",
-            "Leopoldina",
-            "Mangueira",
-            "São Cristóvão"
-        ]
+      nome: "CRAS ADALBERTO ISMAEL DE SOUZA",
+      endereco: "Rua Ana Neri, 636 - Benfica, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Benfica",
+        "Leopoldina",
+        "Mangueira",
+        "São Cristóvão (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Germinal Domingues",
-        endereco: "Rua Itapiru, 1.443 / 3º andar – Rio Comprido",
-        abrangencia: [
-            "Catumbi",
-            "Cidade Nova",
-            "Estácio",
-            "Rio Comprido"
-        ]
+      nome: "CRAS GERMINAL DOMINGUES",
+      endereco: "Rua Itapiru, 1.443 / 3º andar - Rio Comprido, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Catumbi",
+        "Cidade Nova",
+        "Estácio",
+        "Rio Comprido"
+      ]
     },
 
     {
-        nome: "CRAS Deputado Luis Eduardo Magalhães",
-        endereco: "Rua Paraíso do Tuiuti, s/nº – Morro do Tuiuti – São Cristóvão",
-        abrangencia: [
-            "Benfica",
-            "São Cristóvão",
-            "Vasco da Gama"
-        ]
+      nome: "CRAS DEPUTADO LUIS EDUARDO MAGALHÃES",
+      endereco: "Rua Paraíso do Tuiuti, s/nº - Morro do Tuiuti - São Cristóvão, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Benfica",
+        "São Cristóvão (Rua São Luis Gonzaga - lado par)",
+        "São Cristóvão (Rua Bela)",
+        "Vasco da Gama"
+      ]
     },
 
     {
-        nome: "CRAS XV de Maio",
-        endereco: "Rua General Sampaio, 74 – Caju",
-        abrangencia: [
-            "Caju"
-        ]
+      nome: "CRAS XV DE MAIO",
+      endereco: "Rua General Sampaio, 74 - Caju, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Caju"
+      ]
     },
 
     {
-        nome: "CRAS Dodô da Portela",
-        endereco: "Rua Rivadávia Corrêa, 188 / 2º andar – Gamboa",
-        abrangencia: [
-            "Centro",
-            "Gamboa",
-            "Paquetá",
-            "Santo Cristo",
-            "Saúde"
-        ]
+      nome: "CRAS DODÔ DA PORTELA",
+      endereco: "Rua Rivadávia Corrêa, 188 / 2º andar - Gamboa, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Centro (parte)",
+        "Gamboa",
+        "Ilha de Paquetá",
+        "Santo Cristo",
+        "Saúde"
+      ]
     },
 
     {
-        nome: "CRAS Professora Ismênia de Lima Martins",
-        endereco: "Rua da Alfândega, 114 – Centro",
-        abrangencia: [
-            "Centro",
-            "Lapa",
-            "Santa Teresa"
-        ]
+      nome: "CRAS PROFESSORA ISMÊNIA DE LIMA MARTINS",
+      endereco: "Rua da Alfândega, 114 - Centro, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Centro (Av. Presidente Vargas, lado ímpar)",
+        "Lapa",
+        "Santa Teresa"
+      ]
     },
 
 
-    /* =========================
-       2ª CAS - VILA ISABEL /
-       GRANDE TIJUCA / ZONA SUL
-       ========================= */
+    /* =====================================================
+       2ª CAS - VILA ISABEL / GRANDE TIJUCA / ZONA SUL
+       ===================================================== */
 
     {
-        nome: "CRAS Presidente Itamar Franco",
-        endereco: "Rua Caçapava, 305 – Grajaú",
-        abrangencia: [
-            "Andaraí",
-            "Grajaú"
-        ]
-    },
-
-    {
-        nome: "CRAS Rosani Cunha",
-        endereco: "Rua Visconde de Santa Isabel, 412 – Vila Isabel",
-        abrangencia: [
-            "Vila Isabel",
-            "Maracanã",
-            "Engenho Novo"
-        ]
+      nome: "CRAS PRESIDENTE ITAMAR FRANCO",
+      endereco: "Rua Caçapava, 305 - Grajaú, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Andaraí",
+        "Grajaú"
+      ]
     },
 
     {
-        nome: "CRAS Rinaldo de Lamare",
-        endereco: "Av. Niemeyer, 776 / 7º e 9º andares – São Conrado",
-        abrangencia: [
-            "Gávea",
-            "Rocinha",
-            "São Conrado",
-            "Vidigal"
-        ]
+      nome: "CRAS ROSANI CUNHA",
+      endereco: "Rua Visconde de Santa Isabel, 412 - Vila Isabel, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Vila Isabel",
+        "Maracanã",
+        "Engenho Novo (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Padre Veloso",
-        endereco: "Rua São Clemente, 312 – Botafogo",
-        abrangencia: [
-            "Botafogo",
-            "Catete",
-            "Cosme Velho",
-            "Flamengo",
-            "Glória",
-            "Humaitá",
-            "Lagoa",
-            "Laranjeiras"
-        ]
+      nome: "CRAS RINALDO DE LAMARE",
+      endereco: "Av. Niemeyer, 776 / 7º e 9º andares - São Conrado, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Gávea",
+        "Rocinha",
+        "São Conrado",
+        "Vidigal"
+      ]
     },
 
     {
-        nome: "CRAS Tijuca",
-        endereco: "Rua Guapiara, 43 – Tijuca",
-        abrangencia: [
-            "Alto da Boa Vista",
-            "Praça da Bandeira",
-            "Tijuca"
-        ]
+      nome: "CRAS PADRE VELOSO",
+      endereco: "Rua São Clemente, 312 - Botafogo, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Botafogo",
+        "Catete",
+        "Cosme Velho",
+        "Flamengo",
+        "Glória",
+        "Humaitá",
+        "Lagoa (parte)",
+        "Laranjeiras"
+      ]
     },
 
     {
-        nome: "CRAS Sebastião Teodoro Filho",
-        endereco: "Rua Saint Roman, 172 – Copacabana",
-        abrangencia: [
-            "Copacabana",
-            "Ipanema",
-            "Leblon",
-            "Leme"
-        ]
+      nome: "CRAS TIJUCA",
+      endereco: "Rua Guapiara, 43 - Tijuca, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Alto da Boa Vista",
+        "Praça da Bandeira",
+        "Tijuca"
+      ]
+    },
+
+    {
+      nome: "CRAS SEBASTIÃO TEODORO FILHO",
+      endereco: "Rua Saint Roman, 172 - Copacabana, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Copacabana",
+        "Ipanema",
+        "Leblon",
+        "Leme"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        3ª CAS - ENGENHO NOVO
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Maria da Luz dos Santos",
-        endereco: "Rua Ana Quintão, 380 – Piedade",
-        abrangencia: [
-            "Abolição",
-            "Engenho da Rainha",
-            "Engenho de Dentro",
-            "Inhaúma",
-            "Piedade",
-            "Pilares",
-            "Tomás Coelho"
-        ]
+      nome: "CRAS MARIA DA LUZ DOS SANTOS",
+      endereco: "Rua Ana Quintão, 380 - Piedade, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Abolição (parte)",
+        "Engenho da Rainha",
+        "Engenho de Dentro",
+        "Inhaúma",
+        "Piedade (parte)",
+        "Pilares",
+        "Tomás Coelho"
+      ]
     },
 
     {
-        nome: "CRAS Sobral Pinto",
-        endereco: "Rua Pernambuco, 484 – Engenho de Dentro",
-        abrangencia: [
-            "Abolição",
-            "Água Santa",
-            "Cachambi",
-            "Del Castilho",
-            "Encantado",
-            "Engenho de Dentro",
-            "Maria da Graça",
-            "Méier",
-            "Piedade",
-            "Pilares",
-            "Todos os Santos"
-        ]
+      nome: "CRAS SOBRAL PINTO",
+      endereco: "Rua Pernambuco, 484 - Engenho de Dentro, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Abolição (parte)",
+        "Água Santa",
+        "Cachambi (parte)",
+        "Del Castilho (parte)",
+        "Encantado",
+        "Engenho de Dentro (exceto lado par da Av. Dom Hélder Câmara e Comunidade Fernão Cardim)",
+        "Maria da Graça",
+        "Méier (exceto comunidade Boca do Mato)",
+        "Piedade (parte)",
+        "Pilares (parte)",
+        "Todos os Santos"
+      ]
     },
 
     {
-        nome: "CRAS Caio Fernando Abreu",
-        endereco: "Rua Lino Teixeira, 112 – Rocha",
-        abrangencia: [
-            "Cachambi",
-            "Del Castilho",
-            "Higienópolis",
-            "Jacaré",
-            "Jacarezinho",
-            "Maria da Graça"
-        ]
+      nome: "CRAS CAIO FERNANDO ABREU",
+      endereco: "Rua Lino Teixeira, 112 - Rocha, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Cachambi (parte)",
+        "Del Castilho (parte)",
+        "Higienópolis",
+        "Jacaré",
+        "Jacarezinho",
+        "Maria da Graça (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Mary Richmond",
-        endereco: "Rua Conselheiro Ferraz, 54 – Lins de Vasconcelos",
-        abrangencia: [
-            "Engenho Novo",
-            "Lins de Vasconcelos",
-            "Riachuelo",
-            "Rocha",
-            "São Francisco Xavier",
-            "Sampaio"
-        ]
+      nome: "CRAS MARY RICHMOND",
+      endereco: "Rua Conselheiro Ferraz, 54 - Lins de Vasconcelos, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Engenho Novo",
+        "Lins de Vasconcelos",
+        "Riachuelo",
+        "Rocha",
+        "São Francisco Xavier (parte)",
+        "Sampaio"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        4ª CAS - BONSUCESSO
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Nelson Mandela",
-        endereco: "Rua da Regeneração, 654 – Bonsucesso",
-        abrangencia: [
-            "Complexo da Maré",
-            "Bonsucesso",
-            "Ramos"
-        ]
+      nome: "CRAS NELSON MANDELA",
+      endereco: "Rua da Regeneração, 654 - Bonsucesso, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Complexo da Maré",
+        "Bonsucesso",
+        "Ramos (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Nelza Felipe Pereira",
-        endereco: "Rua Rodolfo Chamberlland, s/nº – Jardim América",
-        abrangencia: [
-            "Jardim América",
-            "Parada de Lucas",
-            "Vigário Geral"
-        ]
+      nome: "CRAS NELZA FELIPE PEREIRA",
+      endereco: "Rua Rodolfo Chamberlland, s/nº - Jardim América, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Jardim América",
+        "Parada de Lucas",
+        "Vigário Geral"
+      ]
     },
 
     {
-        nome: "CRAS Professor Darcy Ribeiro",
-        endereco: "Estrada Governador Chagas Freitas, 1.900 – Parque Royal – Portuguesa",
-        abrangencia: [
-            "Bancários",
-            "Cacuia",
-            "Cidade Universitária",
-            "Cocotá",
-            "Freguesia",
-            "Galeão",
-            "Jardim Carioca",
-            "Jardim Guanabara",
-            "Moneró",
-            "Portuguesa",
-            "Pitangueiras",
-            "Praia da Bandeira",
-            "Ribeira",
-            "Tauá",
-            "Zumbi"
-        ]
+      nome: "CRAS PROFESSOR DARCY RIBEIRO",
+      endereco: "Estrada Governador Chagas Freitas, 1.900 - Parque Royal - Portuguesa, Ilha do Governador, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bancários",
+        "Cacuia",
+        "Cidade Universitária",
+        "Cocotá",
+        "Freguesia (Ilha do Governador)",
+        "Galeão",
+        "Jardim Carioca",
+        "Jardim Guanabara",
+        "Moneró",
+        "Portuguesa",
+        "Pitangueiras",
+        "Praia da Bandeira",
+        "Ribeira",
+        "Tauá",
+        "Zumbi"
+      ]
     },
 
     {
-        nome: "CRAS Carlos Drummond de Andrade",
-        endereco: "Rua Taperoá, 308 – Morro de Caracol – Penha",
-        abrangencia: [
-            "Olaria",
-            "Penha",
-            "Ramos"
-        ]
+      nome: "CRAS CARLOS DRUMMOND DE ANDRADE",
+      endereco: "Rua Taperoá, 308 - Morro de Caracol - Penha, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Olaria",
+        "Penha",
+        "Ramos (parte)"
+      ]
     },
 
     {
-        nome: "CRAS João Fassarela",
-        endereco: "Rua Flora Lobo, s/nº – Parque Ary Barroso – Penha",
-        abrangencia: [
-            "Brás de Pina",
-            "Cordovil",
-            "Penha Circular"
-        ]
+      nome: "CRAS JOÃO FASSARELA",
+      endereco: "Rua Flora Lobo, s/nº - Parque Ary Barroso - Penha, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Brás de Pina",
+        "Cordovil (Cidade Alta)",
+        "Penha Circular"
+      ]
     },
 
     {
-        nome: "CRAS Ramos",
-        endereco: "Estrada do Itararé, 222 – Ramos – Complexo do Alemão",
-        abrangencia: [
-            "Complexo do Alemão",
-            "Bonsucesso",
-            "Manguinhos",
-            "Ramos"
-        ]
+      nome: "CRAS RAMOS",
+      endereco: "Estrada do Itararé, 222 - Ramos, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Complexo do Alemão",
+        "Bonsucesso (parte)",
+        "Manguinhos",
+        "Ramos (parte)"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        5ª CAS - MADUREIRA
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Yara Amaral",
-        endereco: "Estrada do Camboatá, 23000 / loja 115 – Guadalupe",
-        abrangencia: [
-            "Guadalupe",
-            "Marechal Hermes",
-            "Parque Anchieta",
-            "Ricardo de Albuquerque"
-        ]
+      nome: "CRAS YARA AMARAL",
+      endereco: "Estrada do Camboatá, 23000 / loja 115 - Guadalupe, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Guadalupe",
+        "Marechal Hermes",
+        "Parque Anchieta",
+        "Ricardo de Albuquerque"
+      ]
     },
 
     {
-        nome: "CRAS José Carlos Campos",
-        endereco: "Rua Guarama, s/nº – Rocha Miranda",
-        abrangencia: [
-            "Bento Ribeiro",
-            "Coelho Neto",
-            "Honório Gurgel",
-            "Oswaldo Cruz",
-            "Rocha Miranda",
-            "Turiaçu"
-        ]
+      nome: "CRAS JOSÉ CARLOS CAMPOS",
+      endereco: "Rua Guarama, s/nº - Rocha Miranda, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bento Ribeiro",
+        "Coelho Neto",
+        "Honório Gurgel",
+        "Oswaldo Cruz",
+        "Rocha Miranda",
+        "Turiaçu"
+      ]
     },
 
     {
-        nome: "CRAS Zózimo Barroso do Amaral",
-        endereco: "Av. Ministro Edgard Romero, 400 – Madureira",
-        abrangencia: [
-            "Campinho",
-            "Cascadura",
-            "Cavalcanti",
-            "Engenheiro Leal",
-            "Madureira",
-            "Quintino Bocaiúva",
-            "Vaz Lobo"
-        ]
+      nome: "CRAS ZÓZIMO BARROSO DO AMARAL",
+      endereco: "Av. Ministro Edgard Romero, 400 - Madureira, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Campinho",
+        "Cascadura",
+        "Cavalcanti",
+        "Engenheiro Leal",
+        "Madureira",
+        "Quintino Bocaiúva",
+        "Vaz Lobo"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        6ª CAS - IRAJÁ
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Rubens Corrêa",
-        endereco: "Rua Capitão Aliatar Martins, 211 – Irajá",
-        abrangencia: [
-            "Colégio",
-            "Irajá",
-            "Vicente de Carvalho",
-            "Vila da Penha",
-            "Vila Kosmos",
-            "Vista Alegre"
-        ]
+      nome: "CRAS RUBENS CORRÊA",
+      endereco: "Rua Capitão Aliatar Martins, 211 - Irajá, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Colégio",
+        "Irajá",
+        "Vicente de Carvalho",
+        "Vila da Penha",
+        "Vila Kosmos",
+        "Vista Alegre"
+      ]
     },
 
     {
-        nome: "CRAS Francisco Sales de Mesquita",
-        endereco: "Rua Mercúrio, 430 – Pavuna",
-        abrangencia: [
-            "Anchieta",
-            "Costa Barros",
-            "Pavuna"
-        ]
+      nome: "CRAS FRANCISCO SALES DE MESQUITA",
+      endereco: "Rua Mercúrio, 430 - Pavuna, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Anchieta (parte)",
+        "Costa Barros",
+        "Pavuna"
+      ]
     },
 
     {
-        nome: "CRAS Acari",
-        endereco: "Rua Guaiúba, 150 – Acari",
-        abrangencia: [
-            "Acari",
-            "Barros Filho",
-            "Parque Colúmbia"
-        ]
+      nome: "CRAS ACARI",
+      endereco: "Rua Guaiúba, 150 - Acari, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Acari",
+        "Barros Filho",
+        "Parque Colúmbia"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        7ª CAS - JACAREPAGUÁ
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Marcio Brotto",
-        endereco: "Rua General José Eulálio, 142 – Anil",
-        abrangencia: [
-            "Anil",
-            "Barra da Tijuca",
-            "Gardênia Azul",
-            "Itanhangá",
-            "Joá"
-        ]
+      nome: "CRAS MARCIO BROTTO",
+      endereco: "Rua General José Eulálio, 142 - Anil, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Anil",
+        "Barra da Tijuca (parte - da Barrinha às proximidades do Shopping Città America)",
+        "Gardênia Azul",
+        "Itanhangá",
+        "Joá"
+      ]
     },
 
     {
-        nome: "CRAS Elis Regina",
-        endereco: "Av. Edgard Werneck, 1.565 – Cidade de Deus",
-        abrangencia: [
-            "Barra da Tijuca",
-            "Cidade de Deus"
-        ]
+      nome: "CRAS ELIS REGINA",
+      endereco: "Av. Edgard Werneck, 1.565 - Cidade de Deus, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Barra da Tijuca (parte - Av. Ayrton Senna até o Terminal Alvorada)",
+        "Cidade de Deus"
+      ]
     },
 
     {
-        nome: "CRAS Gonzaguinha",
-        endereco: "Praça Barão da Taquara, 9 – Praça Seca",
-        abrangencia: [
-            "Freguesia",
-            "Pechincha",
-            "Praça Seca",
-            "Tanque",
-            "Vila Valqueire"
-        ]
+      nome: "CRAS GONZAGUINHA",
+      endereco: "Praça Barão da Taquara, 9 - Praça Seca, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Freguesia",
+        "Pechincha",
+        "Praça Seca",
+        "Tanque",
+        "Vila Valqueire"
+      ]
     },
 
     {
-        nome: "CRAS Zumbi dos Palmares",
-        endereco: "Estrada dos Bandeirantes, 11.227 – Vargem Pequena",
-        abrangencia: [
-            "Camorim",
-            "Curicica",
-            "Grumari",
-            "Recreio",
-            "Rio Centro",
-            "Vargem Grande",
-            "Vargem Pequena"
-        ]
+      nome: "CRAS ZUMBI DOS PALMARES",
+      endereco: "Estrada dos Bandeirantes, 11.227 - Vargem Pequena, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Camorim",
+        "Curicica",
+        "Grumari",
+        "Recreio",
+        "Rio Centro",
+        "Vargem Grande",
+        "Vargem Pequena"
+      ]
     },
 
     {
-        nome: "CRAS Machado de Assis",
-        endereco: "Rua Núcleo Rodrigues Caldas, 804 – Colônia",
-        abrangencia: [
-            "Colônia",
-            "Curicica",
-            "Jordão",
-            "Taquara"
-        ]
+      nome: "CRAS MACHADO DE ASSIS",
+      endereco: "Rua Núcleo Rodrigues Caldas, 804 - Colônia, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Colônia",
+        "Curicica (parte)",
+        "Jordão",
+        "Taquara"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        8ª CAS - BANGU
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Deputada Heloneida Studart",
-        endereco: "Rua Rangel Pestana, 510 – Bangu",
-        abrangencia: [
-            "Bangu",
-            "Senador Camará",
-            "Santíssimo"
-        ]
+      nome: "CRAS DEPUTADA HELONEIDA STUDART",
+      endereco: "Rua Rangel Pestana, 510 - Bangu, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bangu",
+        "Senador Camará",
+        "Santíssimo (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Maria Thereza Freire Moura",
-        endereco: "Rua Silva Cardoso, 967 – Bangu",
-        abrangencia: [
-            "Bangu",
-            "Padre Miguel",
-            "Realengo"
-        ]
+      nome: "CRAS MARIA THEREZA FREIRE MOURA",
+      endereco: "Rua Silva Cardoso, 967 - Bangu, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bangu (parte)",
+        "Padre Miguel",
+        "Realengo"
+      ]
     },
 
     {
-        nome: "CRAS Vila Moretti",
-        endereco: "Av. Ministro Ary Franco, 278 – Bangu",
-        abrangencia: [
-            "Bangu",
-            "Padre Miguel",
-            "Senador Camará"
-        ]
+      nome: "CRAS VILA MORETTI",
+      endereco: "Av. Ministro Ary Franco, 278 - Bangu, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bangu (parte)",
+        "Padre Miguel (parte)",
+        "Senador Camará (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Oswaldo Antonio Ferreira",
-        endereco: "Rua Dona Olímpia, 220 – Realengo",
-        abrangencia: [
-            "Deodoro",
-            "Magalhães Bastos",
-            "Realengo",
-            "Sulacap",
-            "Vila Militar"
-        ]
+      nome: "CRAS OSWALDO ANTONIO FERREIRA",
+      endereco: "Rua Dona Olímpia, 220 - Realengo, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Deodoro",
+        "Magalhães Bastos",
+        "Realengo (parte)",
+        "Sulacap",
+        "Vila Militar"
+      ]
     },
 
     {
-        nome: "CRAS Olímpia Esteves",
-        endereco: "Rua Santa Cecília, 984 – Bangu",
-        abrangencia: [
-            "Bangu",
-            "Batan",
-            "Realengo",
-            "Vila Kennedy"
-        ]
+      nome: "CRAS OLÍMPIA ESTEVES",
+      endereco: "Rua Santa Cecília, 984 - Bangu, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Bangu",
+        "Batan",
+        "Realengo",
+        "Vila Kennedy"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        9ª CAS - CAMPO GRANDE
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Aluno Marcelo Cardoso Tomé",
-        endereco: "Rua Breno Pessoa, 15 – Campo Grande",
-        abrangencia: [
-            "Campo Grande",
-            "Santíssimo",
-            "Senador Vasconcelos"
-        ]
+      nome: "CRAS ALUNO MARCELO CARDOSO TOMÉ",
+      endereco: "Rua Breno Pessoa, 15 - Campo Grande, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Campo Grande",
+        "Santíssimo (parte)",
+        "Senador Vasconcelos (parte)"
+      ]
     },
 
     {
-        nome: "CRAS Luisa Mahim",
-        endereco: "Rua Campo Grande, 3058 – Inhoaíba",
-        abrangencia: [
-            "Cosmos",
-            "Inhoaíba"
-        ]
+      nome: "CRAS LUISA MAHIM",
+      endereco: "Rua Campo Grande, 3058 - Inhoaíba, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Cosmos",
+        "Inhoaíba"
+      ]
     },
 
     {
-        nome: "CRAS Cecilia Meireles",
-        endereco: "Rua Viúva Dantas, 695 – Campo Grande",
-        abrangencia: [
-            "Campo Grande",
-            "Santíssimo",
-            "Senador Vasconcelos"
-        ]
+      nome: "CRAS CECILIA MEIRELES",
+      endereco: "Rua Viúva Dantas, 695 - Campo Grande, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Campo Grande",
+        "Santíssimo",
+        "Senador Vasconcelos (parte)"
+      ]
     },
 
 
-    /* =========================
+    /* =====================================================
        10ª CAS - SANTA CRUZ
-       ========================= */
+       ===================================================== */
 
     {
-        nome: "CRAS Betty Friedman",
-        endereco: "Rua Prainha, 57 – Sepetiba",
-        abrangencia: [
-            "Alagado",
-            "Balneário Globo",
-            "Beco da Guarda",
-            "Beco do Constâncio",
-            "Mata Sete",
-            "Nova Sepetiba",
-            "Piai",
-            "Ponta do Ipiranga",
-            "Praia da Brisa",
-            "Praia de Sepetiba",
-            "Praia do Cardo",
-            "Praia do Recôncavo",
-            "Tijolinho",
-            "Vila Fernanda",
-            "Sepetiba"
-        ]
+      nome: "CRAS BETTY FRIEDMAN",
+      endereco: "Rua Prainha, 57 - Sepetiba, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Alagado",
+        "Balneário Globo",
+        "Beco da Guarda",
+        "Beco do Constâncio",
+        "Mata Sete",
+        "Nova Sepetiba",
+        "Piai",
+        "Ponta do Ipiranga",
+        "Praia da Brisa",
+        "Praia de Sepetiba",
+        "Praia do Cardo",
+        "Praia do Recôncavo",
+        "Tijolinho",
+        "Vila Fernanda",
+        "Sepetiba"
+      ]
     },
 
     {
-        nome: "CRAS Professora Helenice Nunes Jacintho",
-        endereco: "Travessa JK, 5 – Paciência",
-        abrangencia: [
-            "Paciência"
-        ]
+      nome: "CRAS PROFESSORA HELENICE NUNES JACINTHO",
+      endereco: "Travessa JK, 5 - Paciência, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Paciência"
+      ]
     },
 
     {
-        nome: "CRAS Maria Clara Machado",
-        endereco: "Rua Gabriel Bernardes, s/nº – Santa Cruz",
-        abrangencia: [
-            "Santa Cruz"
-        ]
+      nome: "CRAS MARIA CLARA MACHADO",
+      endereco: "Rua Gabriel Bernardes, s/nº - Santa Cruz, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Santa Cruz"
+      ]
     },
 
     {
-        nome: "CRAS Iacyra Frazão Sousa",
-        endereco: "Rua Eremias Delizoicoiv, s/nº – Urucânia – Paciência",
-        abrangencia: [
-            "Coqueiral",
-            "Mangaratiba",
-            "Urucânia"
-        ]
+      nome: "CRAS IACYRA FRAZÃO SOUSA",
+      endereco: "Rua Eremias Delizoicoiv, s/nº - Urucânia - Paciência, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Coqueiral",
+        "Mangaratiba",
+        "Urucânia"
+      ]
     },
 
     {
-        nome: "CRAS Maria Vieira Bazani",
-        endereco: "Estrada do Mato Alto, 5620 – Guaratiba",
-        abrangencia: [
-            "Barra de Guaratiba",
-            "Guaratiba",
-            "Ilha de Guaratiba",
-            "Jardim Maravilha",
-            "Pedra de Guaratiba"
-        ]
+      nome: "CRAS MARIA VIEIRA BAZANI",
+      endereco: "Estrada do Mato Alto, 5620 - Guaratiba, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Barra de Guaratiba",
+        "Guaratiba",
+        "Ilha de Guaratiba",
+        "Jardim Maravilha",
+        "Pedra de Guaratiba"
+      ]
     },
 
     {
-        nome: "CRAS Jorge Gonçalves",
-        endereco: "Rua Primeira, 61 – Santa Cruz",
-        abrangencia: [
-            "Antares",
-            "Areia Branca",
-            "Cesarão",
-            "Cruz das Almas",
-            "Jaqueira",
-            "Largo do Arão",
-            "Matadouro",
-            "Novo Camarão",
-            "Nova Palestina",
-            "Pedrinhas",
-            "São Benedito",
-            "Santa Cruz",
-            "Santa Veridiana",
-            "Vitor Dumas",
-            "Rolas"
-        ]
+      nome: "CRAS JORGE GONÇALVES",
+      endereco: "Rua Primeira, 61 - Santa Cruz, Rio de Janeiro - RJ",
+      abrangencia: [
+        "Antares",
+        "Areia Branca",
+        "Cesarão I, II e III",
+        "Cruz das Almas",
+        "Jaqueira",
+        "Largo do Arão",
+        "Matadouro",
+        "Novo Camarão",
+        "Nova Palestina",
+        "Pedrinhas",
+        "São Benedito",
+        "Santa Cruz (centro)",
+        "Santa Veridiana",
+        "Vitor Dumas",
+        "Rolas I e II"
+      ]
     }
 
-];
+  ];
 
 
-/* ============================================================
-   CASAS DA MULHER CARIOCA
-   ============================================================ */
+  /*
+  =========================================================
+  CASAS DA MULHER CARIOCA
 
-const casasDaMulher = [
+  NÃO ALTEREI ESTA PARTE.
+  =========================================================
+  */
+
+  const casasDaMulher = [
 
     {
-        nome: "Casa da Mulher Carioca Tia Doca",
-        endereco: "Rua Júlio Fragoso, 47 – Madureira / Osvaldo Cruz"
+      nome: "Casa da Mulher Carioca e NEAM Tia Doca",
+      endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
+      telefone: "(21) 2452-2217"
     },
 
     {
-        nome: "Casa da Mulher Carioca Dinah Coutinho",
-        endereco: "Rua Limites, 1260 – Realengo"
+      nome: "Casa da Mulher Carioca e NEAM Dinah Coutinho",
+      endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
+      telefone: ""
     },
 
     {
-        nome: "Casa da Mulher Carioca Elza Soares",
-        endereco: "Avenida Marechal Falcão da Frota, s/nº – Padre Miguel"
+      nome: "Casa da Mulher Carioca e NEAM Elza Soares",
+      endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
+      telefone: ""
     },
 
     {
-        nome: "Casa da Mulher Carioca – Polo Campo Grande",
-        endereco: "Rua Mário Barbosa, 137 – Campo Grande"
+      nome: "Casa da Mulher Carioca - Polo Campo Grande",
+      endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
+      telefone: ""
     },
 
     {
-        nome: "Casa da Mulher Carioca – Polo Coelho Neto",
-        endereco: "Avenida Pastor Martin Luther King Jr., 10055 – Coelho Neto"
+      nome: "Casa da Mulher Carioca - Polo Coelho Neto",
+      endereco: "Avenida Pastor Martin Luther King Jr., 10055 - Coelho Neto, Rio de Janeiro - RJ",
+      telefone: ""
     }
 
-];
+  ];
 
 
-/* ============================================================
-   NORMALIZAÇÃO DE TEXTO
-   ============================================================ */
+  /*
+  =========================================================
+  NORMALIZAÇÃO
+  =========================================================
+  */
 
-function normalizarTexto(texto) {
+  function normalizarTexto(texto) {
 
-    if (!texto) {
-        return "";
-    }
+    return String(texto || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
 
-    return texto
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[()]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-
-}
+  }
 
 
-/* ============================================================
-   FORMATAÇÃO DO CEP
-   ============================================================ */
+  /*
+  =========================================================
+  FORMATAÇÃO DO CEP
+  =========================================================
+  */
 
-document.getElementById("cep").addEventListener("input", function() {
+  cepInput.addEventListener(
+    "input",
+    function(e) {
 
-    let valor = this.value.replace(/\D/g, "");
+      let value =
+        e.target.value.replace(/\D/g, "");
 
-    if (valor.length > 8) {
-        valor = valor.substring(0, 8);
-    }
+      if (value.length > 5) {
 
-    if (valor.length > 5) {
-        valor =
-            valor.substring(0, 5) +
-            "-" +
-            valor.substring(5);
-    }
+        value =
+          value.slice(0, 5) +
+          "-" +
+          value.slice(5, 8);
 
-    this.value = valor;
+      }
 
-});
-
-
-/* ============================================================
-   BUSCA DO CEP
-   ============================================================ */
-
-async function buscarCEP() {
-
-    const campoCep = document.getElementById("cep");
-
-    const mensagem = document.getElementById("mensagem");
-
-    const resultado = document.getElementById("resultado");
-
-    const cep = campoCep.value.replace(/\D/g, "");
-
-    mensagem.innerHTML = "";
-
-    resultado.style.display = "none";
-
-
-    if (cep.length !== 8) {
-
-        mensagem.innerHTML =
-            '<div class="erro">Digite um CEP válido com 8 números.</div>';
-
-        return;
-    }
-
-
-    mensagem.innerHTML =
-        '<div class="carregando">Consultando o endereço...</div>';
-
-
-    try {
-
-        const resposta = await fetch(
-            "https://viacep.com.br/ws/" +
-            cep +
-            "/json/"
-        );
-
-        if (!resposta.ok) {
-            throw new Error("Erro ao consultar o CEP.");
-        }
-
-        const dados = await resposta.json();
-
-
-        if (dados.erro) {
-
-            mensagem.innerHTML =
-                '<div class="erro">CEP não encontrado.</div>';
-
-            return;
-        }
-
-
-        const bairro = dados.bairro || "";
-
-        const cidade = dados.localidade || "";
-
-        const uf = dados.uf || "";
-
-        const logradouro = dados.logradouro || "";
-
-        const complemento = dados.complemento || "";
-
-
-        mostrarEndereco(
-            logradouro,
-            bairro,
-            cidade,
-            uf,
-            complemento,
-            cep
-        );
-
-
-        resultado.style.display = "block";
-
-        mensagem.innerHTML =
-            '<div class="sucesso">Endereço encontrado.</div>';
-
-
-        encontrarCras(bairro, logradouro);
-
-        encontrarCasaMaisProxima(
-            logradouro,
-            bairro,
-            cidade,
-            uf
-        );
+      e.target.value =
+        value.slice(0, 9);
 
     }
+  );
 
-    catch (erro) {
 
-        console.error(erro);
+  /*
+  =========================================================
+  DISTÂNCIA
+  =========================================================
+  */
 
-        mensagem.innerHTML =
-            '<div class="erro">Não foi possível consultar o CEP agora. Tente novamente.</div>';
-
-    }
-
-}
-
-
-/* ============================================================
-   MOSTRAR ENDEREÇO
-   ============================================================ */
-
-function mostrarEndereco(
-    logradouro,
-    bairro,
-    cidade,
-    uf,
-    complemento,
-    cep
-) {
-
-    let html = "";
-
-    html += "<strong>";
-
-    if (logradouro) {
-        html += logradouro;
-    } else {
-        html += "Endereço não informado";
-    }
-
-    html += "</strong><br>";
-
-    if (bairro) {
-        html += bairro + "<br>";
-    }
-
-    html += cidade + " - " + uf + "<br>";
-
-    html += "CEP: " + formatarCEP(cep);
-
-    if (complemento) {
-        html += "<br>" + complemento;
-    }
-
-    document.getElementById(
-        "enderecoEncontrado"
-    ).innerHTML = html;
-
-}
-
-
-/* ============================================================
-   ENCONTRAR CRAS PELO BAIRRO
-   ============================================================ */
-
-function encontrarCras(bairro, logradouro) {
-
-    const resultado = document.getElementById(
-        "resultadoCras"
-    );
-
-
-    const bairroNormalizado =
-        normalizarTexto(bairro);
-
-
-    /*
-       Procuramos o bairro dentro da abrangência oficial.
-
-       NÃO usamos distância para decidir o CRAS.
-    */
-
-    const candidatos = cras.filter(function(unidade) {
-
-        return unidade.abrangencia.some(function(item) {
-
-            const abrangenciaNormalizada =
-                normalizarTexto(item);
-
-            return (
-                abrangenciaNormalizada ===
-                bairroNormalizado
-            );
-
-        });
-
-    });
-
-
-    if (candidatos.length === 0) {
-
-        resultado.innerHTML = `
-
-            <div class="alerta">
-
-                <strong>Não encontramos uma correspondência automática.</strong>
-
-                <p>
-                    A Prefeitura pode possuir uma divisão territorial
-                    específica para este endereço que não é identificável
-                    somente pelo nome do bairro retornado pelo CEP.
-                </p>
-
-                <p>
-                    Para confirmar o CRAS responsável pelo endereço,
-                    entre em contato com a Prefeitura pelo número
-                    <strong>1746</strong>.
-                </p>
-
-                <div class="acoes">
-
-                    <a
-                        href="tel:1746"
-                        class="btn-ligar"
-                    >
-                        LIGAR 1746
-                    </a>
-
-                    <a
-                        href="${URL_PREFEITURA_CRAS}"
-                        target="_blank"
-                        class="btn-secundario"
-                    >
-                        VER CRAS DA PREFEITURA
-                    </a>
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    /*
-       UMA unidade:
-       podemos apresentar diretamente.
-    */
-
-    if (candidatos.length === 1) {
-
-        resultado.innerHTML =
-            criarCardCras(candidatos[0], false);
-
-        return;
-    }
-
-
-    /*
-       MAIS DE UMA unidade:
-       isso significa que a Prefeitura divide aquele bairro
-       entre territórios.
-
-       Não vamos escolher arbitrariamente pelo CRAS mais próximo.
-    */
-
-    let html = "";
-
-    html += `
-
-        <div class="alerta">
-
-            <strong>
-                A Prefeitura divide este bairro entre mais de uma área de abrangência.
-            </strong>
-
-            <p>
-                Para não indicar uma unidade errada, o sistema
-                não escolheu um CRAS apenas pela distância.
-                Estas são as unidades oficialmente relacionadas
-                ao bairro informado:
-            </p>
-
-        </div>
-
-    `;
-
-
-    candidatos.forEach(function(unidade) {
-
-        html += criarCardCras(unidade, true);
-
-    });
-
-
-    html += `
-
-        <div class="alerta">
-
-            <strong>Confirmação oficial</strong>
-
-            <p>
-                Como este território é dividido, confirme com a Prefeitura
-                qual unidade corresponde exatamente ao seu endereço.
-            </p>
-
-            <div class="acoes">
-
-                <a
-                    href="tel:1746"
-                    class="btn-ligar"
-                >
-                    LIGAR 1746
-                </a>
-
-                <a
-                    href="${URL_PREFEITURA_CRAS}"
-                    target="_blank"
-                    class="btn-secundario"
-                >
-                    VER DADOS DA PREFEITURA
-                </a>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    resultado.innerHTML = html;
-
-}
-
-
-/* ============================================================
-   CARD DO CRAS
-   ============================================================ */
-
-function criarCardCras(unidade, possivel) {
-
-    let html = "";
-
-    html += '<div class="servico">';
-
-    html += "<h3>" +
-        escapeHTML(unidade.nome) +
-        "</h3>";
-
-
-    html += '<div class="info">';
-
-    html +=
-        "<strong>Endereço:</strong><br>" +
-        escapeHTML(unidade.endereco);
-
-    html += "<br><br>";
-
-    html +=
-        "<strong>Atendimento:</strong><br>" +
-        "Segunda a sexta-feira, das 8h às 17h.";
-
-    html += "<br><br>";
-
-    html +=
-        "<strong>Telefone da Prefeitura:</strong><br>" +
-        "1746";
-
-    html += "</div>";
-
-
-    html += '<div class="bairros">';
-
-    html += "<strong>Área de abrangência publicada pela Prefeitura:</strong><br>";
-
-    html +=
-        unidade.abrangencia
-        .map(function(item) {
-            return escapeHTML(item);
-        })
-        .join(", ");
-
-    html += "</div>";
-
-
-    html += '<div class="acoes">';
-
-    html += `
-
-        <a
-            href="tel:1746"
-            class="btn-ligar"
-        >
-            LIGAR 1746
-        </a>
-
-    `;
-
-
-    const enderecoMaps =
-        encodeURIComponent(
-            unidade.endereco +
-            ", Rio de Janeiro - RJ"
-        );
-
-
-    html += `
-
-        <a
-            href="https://www.google.com/maps/search/?api=1&query=${enderecoMaps}"
-            target="_blank"
-            class="btn-secundario"
-        >
-            COMO CHEGAR
-        </a>
-
-    `;
-
-    html += "</div>";
-
-
-    if (possivel) {
-
-        html += `
-
-            <div class="fonte">
-                Unidade indicada como possibilidade porque
-                a Prefeitura informa divisão territorial no bairro.
-            </div>
-
-        `;
-
-    }
-
-
-    html += "</div>";
-
-
-    return html;
-
-}
-
-
-/* ============================================================
-   CASA DA MULHER MAIS PRÓXIMA
-   ============================================================ */
-
-async function encontrarCasaMaisProxima(
-    logradouro,
-    bairro,
-    cidade,
-    uf
-) {
-
-    const resultado =
-        document.getElementById("resultadoCasa");
-
-
-    resultado.innerHTML =
-        '<div class="carregando">Localizando a Casa da Mulher mais próxima...</div>';
-
-
-    try {
-
-        const enderecoUsuario =
-            `${logradouro}, ${bairro}, ${cidade}, ${uf}, Brasil`;
-
-
-        const coordenadasUsuario =
-            await geocodificar(enderecoUsuario);
-
-
-        if (!coordenadasUsuario) {
-
-            resultado.innerHTML = `
-
-                <div class="alerta">
-
-                    Não foi possível calcular a distância
-                    até as Casas da Mulher.
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-        let melhorCasa = null;
-
-        let menorDistancia = Infinity;
-
-
-        for (const casa of casasDaMulher) {
-
-            const coordenadasCasa =
-                await geocodificar(
-                    casa.endereco +
-                    ", Rio de Janeiro, RJ, Brasil"
-                );
-
-
-            if (!coordenadasCasa) {
-                continue;
-            }
-
-
-            const distancia =
-                calcularDistancia(
-                    coordenadasUsuario.lat,
-                    coordenadasUsuario.lon,
-                    coordenadasCasa.lat,
-                    coordenadasCasa.lon
-                );
-
-
-            if (distancia < menorDistancia) {
-
-                menorDistancia = distancia;
-
-                melhorCasa = {
-                    ...casa,
-                    distancia: distancia
-                };
-
-            }
-
-
-            /*
-               Pequeno intervalo entre consultas para evitar
-               sobrecarregar o serviço de geocodificação.
-            */
-
-            await esperar(1000);
-
-        }
-
-
-        if (!melhorCasa) {
-
-            resultado.innerHTML = `
-
-                <div class="alerta">
-
-                    Não foi possível localizar automaticamente
-                    uma Casa da Mulher.
-
-                </div>
-
-            `;
-
-            return;
-        }
-
-
-        mostrarCasaDaMulher(melhorCasa);
-
-    }
-
-    catch (erro) {
-
-        console.error(erro);
-
-        resultado.innerHTML = `
-
-            <div class="alerta">
-
-                Não foi possível calcular automaticamente
-                a Casa da Mulher mais próxima.
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* ============================================================
-   MOSTRAR CASA DA MULHER
-   ============================================================ */
-
-function mostrarCasaDaMulher(casa) {
-
-    const distancia =
-        casa.distancia < 1
-            ? (casa.distancia * 1000).toFixed(0) + " m"
-            : casa.distancia.toFixed(1) + " km";
-
-
-    const enderecoMaps =
-        encodeURIComponent(
-            casa.endereco +
-            ", Rio de Janeiro - RJ"
-        );
-
-
-    document.getElementById(
-        "resultadoCasa"
-    ).innerHTML = `
-
-        <div class="servico">
-
-            <h3>
-                ${escapeHTML(casa.nome)}
-            </h3>
-
-            <div class="info">
-
-                <strong>Endereço:</strong><br>
-
-                ${escapeHTML(casa.endereco)}
-
-                <br><br>
-
-                <strong>Distância aproximada:</strong><br>
-
-                ${distancia}
-
-            </div>
-
-            <div class="acoes">
-
-                <a
-                    href="https://www.google.com/maps/search/?api=1&query=${enderecoMaps}"
-                    target="_blank"
-                    class="btn-secundario"
-                >
-                    COMO CHEGAR
-                </a>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ============================================================
-   GEOCODIFICAÇÃO
-   ============================================================ */
-
-async function geocodificar(endereco) {
-
-    const url =
-        "https://nominatim.openstreetmap.org/search?" +
-        "format=json" +
-        "&limit=1" +
-        "&countrycodes=br" +
-        "&q=" +
-        encodeURIComponent(endereco);
-
-
-    const resposta =
-        await fetch(url, {
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-
-    if (!resposta.ok) {
-        return null;
-    }
-
-
-    const dados =
-        await resposta.json();
-
-
-    if (!dados || dados.length === 0) {
-        return null;
-    }
-
-
-    return {
-        lat: parseFloat(dados[0].lat),
-        lon: parseFloat(dados[0].lon)
-    };
-
-}
-
-
-/* ============================================================
-   DISTÂNCIA - HAVERSINE
-   ============================================================ */
-
-function calcularDistancia(
+  function calcularDistancia(
     lat1,
     lon1,
     lat2,
     lon2
-) {
+  ) {
 
     const R = 6371;
 
     const dLat =
-        grausParaRadianos(lat2 - lat1);
+      (lat2 - lat1) *
+      Math.PI / 180;
 
     const dLon =
-        grausParaRadianos(lon2 - lon1);
-
+      (lon2 - lon1) *
+      Math.PI / 180;
 
     const a =
-        Math.sin(dLat / 2) *
-        Math.sin(dLat / 2) +
+      Math.sin(dLat / 2) *
+      Math.sin(dLat / 2) +
 
-        Math.cos(
-            grausParaRadianos(lat1)
-        ) *
+      Math.cos(
+        lat1 * Math.PI / 180
+      ) *
 
-        Math.cos(
-            grausParaRadianos(lat2)
-        ) *
+      Math.cos(
+        lat2 * Math.PI / 180
+      ) *
 
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
 
     const c =
-        2 *
-        Math.atan2(
-            Math.sqrt(a),
-            Math.sqrt(1 - a)
-        );
-
+      2 *
+      Math.atan2(
+        Math.sqrt(a),
+        Math.sqrt(1 - a)
+      );
 
     return R * c;
 
-}
+  }
 
 
-function grausParaRadianos(graus) {
+  /*
+  =========================================================
+  GEOCODIFICAÇÃO
+  =========================================================
+  */
 
-    return graus * Math.PI / 180;
+  async function localizarEndereco(endereco) {
 
-}
+    const url =
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=jsonv2" +
+      "&limit=1" +
+      "&countrycodes=br" +
+      "&q=" +
+      encodeURIComponent(endereco);
 
+    try {
 
-/* ============================================================
-   AUXILIARES
-   ============================================================ */
+      const response =
+        await fetch(url, {
+          headers: {
+            "Accept": "application/json"
+          }
+        });
 
-function esperar(ms) {
+      if (!response.ok) {
+        return null;
+      }
 
-    return new Promise(function(resolve) {
+      const data =
+        await response.json();
 
-        setTimeout(resolve, ms);
+      if (
+        !data ||
+        !data.length
+      ) {
+        return null;
+      }
 
-    });
+      const lat =
+        parseFloat(data[0].lat);
 
-}
+      const lon =
+        parseFloat(data[0].lon);
 
+      if (
+        Number.isNaN(lat) ||
+        Number.isNaN(lon)
+      ) {
+        return null;
+      }
 
-function formatarCEP(cep) {
+      return {
+        lat,
+        lon
+      };
 
-    const numeros =
-        String(cep).replace(/\D/g, "");
+    } catch (erro) {
 
-    if (numeros.length !== 8) {
-        return cep;
+      console.error(
+        "Erro ao localizar endereço:",
+        erro
+      );
+
+      return null;
+
     }
 
-    return (
-        numeros.substring(0, 5) +
-        "-" +
-        numeros.substring(5)
+  }
+
+
+  /*
+  =========================================================
+  ENCONTRA CRAS PELO BAIRRO
+  =========================================================
+
+  A diferença fundamental:
+
+  ANTES:
+  bairro -> candidatos -> distância
+
+  AGORA:
+  bairro -> abrangência oficial
+
+  A distância NÃO decide o CRAS.
+
+  =========================================================
+  */
+
+  function encontrarCrasPorBairro(bairro) {
+
+    const bairroNormalizado =
+      normalizarTexto(bairro);
+
+    if (!bairroNormalizado) {
+      return [];
+    }
+
+    return cras.filter(
+      unidade => {
+
+        return unidade.abrangencia.some(
+          item => {
+
+            const itemNormalizado =
+              normalizarTexto(
+                item
+                  .replace(/\(parte.*?\)/gi, "")
+                  .trim()
+              );
+
+            return (
+              itemNormalizado ===
+              bairroNormalizado
+            );
+
+          }
+        );
+
+      }
     );
 
-}
+  }
 
 
-function escapeHTML(texto) {
+  /*
+  =========================================================
+  DETECTA QUANDO O BAIRRO É DIVIDIDO
+  =========================================================
+  */
 
-    return String(texto)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+  function bairroPossuiAbrangenciaParcial(bairro) {
 
-}
+    const bairroNormalizado =
+      normalizarTexto(bairro);
+
+    return cras.some(
+      unidade => {
+
+        return unidade.abrangencia.some(
+          item => {
+
+            const itemNormalizado =
+              normalizarTexto(item);
+
+            return (
+              itemNormalizado.startsWith(
+                bairroNormalizado + " (parte"
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+  =========================================================
+  SELEÇÃO DO CRAS
+  =========================================================
+
+  Se houver apenas uma unidade:
+  -> seleciona.
+
+  Se houver mais de uma:
+  -> território compartilhado.
+
+  NÃO escolhemos pelo CRAS mais próximo.
+  =========================================================
+  */
+
+  function selecionarCras(
+    candidatos
+  ) {
+
+    if (!candidatos.length) {
+
+      return null;
+
+    }
+
+    if (candidatos.length === 1) {
+
+      return {
+        unidade: candidatos[0],
+        compartilhado: false,
+        candidatos
+      };
+
+    }
+
+    return {
+      unidade: null,
+      compartilhado: true,
+      candidatos
+    };
+
+  }
+
+
+  /*
+  =========================================================
+  ENCONTRA CASA MAIS PRÓXIMA
+
+  MANTIDO.
+  =========================================================
+  */
+
+  async function encontrarCasaMaisProxima(
+    coordenadasUsuario
+  ) {
+
+    if (!coordenadasUsuario) {
+      return null;
+    }
+
+    const resultados = [];
+
+    for (
+      const unidade of casasDaMulher
+    ) {
+
+      const coordenadas =
+        await localizarEndereco(
+          unidade.endereco
+        );
+
+      if (!coordenadas) {
+        continue;
+      }
+
+      const distancia =
+        calcularDistancia(
+          coordenadasUsuario.lat,
+          coordenadasUsuario.lon,
+          coordenadas.lat,
+          coordenadas.lon
+        );
+
+      resultados.push({
+        ...unidade,
+        lat: coordenadas.lat,
+        lon: coordenadas.lon,
+        distancia
+      });
+
+      await new Promise(
+        resolve =>
+          setTimeout(resolve, 300)
+      );
+
+    }
+
+    if (!resultados.length) {
+      return null;
+    }
+
+    resultados.sort(
+      (a, b) =>
+        a.distancia - b.distancia
+    );
+
+    return resultados[0];
+
+  }
+
+
+  /*
+  =========================================================
+  MOSTRA CRAS
+  =========================================================
+  */
+
+  function mostrarCras(
+    resultado,
+    bairro
+  ) {
+
+    crasMap.style.display =
+      "none";
+
+    crasCall.style.display =
+      "none";
+
+    crasNotice.style.display =
+      "none";
+
+    crasDistance.textContent =
+      "";
+
+    crasPhone.textContent =
+      "";
+
+    crasCoverage.textContent =
+      "";
+
+
+    /*
+    ---------------------------------------------------------
+    NENHUM CRAS ENCONTRADO
+    ---------------------------------------------------------
+    */
+
+    if (!resultado) {
+
+      crasAddress.textContent =
+        "Não encontramos uma correspondência direta para este bairro na base de abrangência dos CRAS.";
+
+      crasCoverage.textContent =
+        "Bairro informado: " + bairro;
+
+      crasNotice.textContent =
+        "A Prefeitura pode utilizar uma divisão territorial específica. Para confirmar o CRAS responsável pelo seu endereço, ligue 1746.";
+
+      crasNotice.style.display =
+        "block";
+
+      crasCall.style.display =
+        "inline-block";
+
+      return;
+
+    }
+
+
+    /*
+    ---------------------------------------------------------
+    MAIS DE UM CRAS
+    ---------------------------------------------------------
+    */
+
+    if (
+      resultado.compartilhado
+    ) {
+
+      crasAddress.innerHTML =
+        "<strong>Este bairro possui mais de uma área de abrangência.</strong>";
+
+      crasCoverage.textContent =
+        "Bairro informado: " + bairro;
+
+      crasNotice.innerHTML =
+        "A Prefeitura divide este território entre diferentes CRAS. " +
+        "Como o CEP fornece o bairro, mas não informa qual parte territorial corresponde ao endereço, não vamos escolher uma unidade arbitrariamente. Confirme pelo 1746.";
+
+      crasNotice.style.display =
+        "block";
+
+      crasCall.style.display =
+        "inline-block";
+
+      return;
+
+    }
+
+
+    /*
+    ---------------------------------------------------------
+    UMA UNIDADE
+    ---------------------------------------------------------
+    */
+
+    const unidade =
+      resultado.unidade;
+
+
+    crasAddress.innerHTML =
+      `<strong>${unidade.nome}</strong><br>${unidade.endereco}`;
+
+
+    crasCoverage.textContent =
+      "Abrangência oficial: " +
+      unidade.abrangencia.join(", ") +
+      ".";
+
+
+    crasPhone.textContent =
+      "Telefone: 1746";
+
+
+    crasMap.href =
+      "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(
+        unidade.endereco
+      );
+
+    crasMap.style.display =
+      "inline-block";
+
+
+    crasCall.href =
+      "tel:1746";
+
+    crasCall.textContent =
+      "LIGAR 1746";
+
+    crasCall.style.display =
+      "inline-block";
+
+  }
+
+
+  /*
+  =========================================================
+  MOSTRA CASA DA MULHER
+  =========================================================
+
+  MANTIDO.
+  =========================================================
+  */
+
+  function mostrarCasa(
+    unidade
+  ) {
+
+    womanMap.style.display =
+      "none";
+
+    womanCall.style.display =
+      "none";
+
+    womanDistance.textContent =
+      "";
+
+    womanPhone.textContent =
+      "";
+
+    womanCoverage.textContent =
+      "";
+
+    if (!unidade) {
+
+      womanAddress.textContent =
+        "Não foi possível localizar uma Casa da Mulher.";
+
+      return;
+
+    }
+
+
+    womanAddress.innerHTML =
+      `<strong>${unidade.nome}</strong><br>${unidade.endereco}`;
+
+
+    womanDistance.textContent =
+      `Aproximadamente ${unidade.distancia.toFixed(1)} km em linha reta`;
+
+
+    if (unidade.telefone) {
+
+      womanPhone.textContent =
+        `Telefone: ${unidade.telefone}`;
+
+      womanCall.href =
+        "tel:" +
+        unidade.telefone.replace(/\D/g, "");
+
+      womanCall.textContent =
+        "LIGAR";
+
+      womanCall.style.display =
+        "inline-block";
+
+    }
+
+
+    womanMap.href =
+      "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(
+        unidade.endereco
+      );
+
+    womanMap.style.display =
+      "inline-block";
+
+  }
+
+
+  /*
+  =========================================================
+  LIMPA RESULTADOS
+  =========================================================
+  */
+
+  function limparResultados() {
+
+    crasAddress.textContent =
+      "Localizando...";
+
+    crasDistance.textContent =
+      "";
+
+    crasPhone.textContent =
+      "";
+
+    crasCoverage.textContent =
+      "";
+
+    crasMap.style.display =
+      "none";
+
+    crasCall.style.display =
+      "none";
+
+    crasNotice.style.display =
+      "none";
+
+    womanAddress.textContent =
+      "Localizando...";
+
+    womanDistance.textContent =
+      "";
+
+    womanPhone.textContent =
+      "";
+
+    womanMap.style.display =
+      "none";
+
+    womanCall.style.display =
+      "none";
+
+  }
+
+
+  /*
+  =========================================================
+  BUSCA PRINCIPAL
+  =========================================================
+  */
+
+  searchButton.addEventListener(
+    "click",
+    async function() {
+
+      const cep =
+        cepInput.value
+          .replace(/\D/g, "");
+
+
+      /*
+      -------------------------------------------------------
+      VALIDAÇÃO
+      -------------------------------------------------------
+      */
+
+      if (cep.length !== 8) {
+
+        result.style.display =
+          "block";
+
+        result.classList.add(
+          "error"
+        );
+
+        resultAddress.textContent =
+          "Digite um CEP válido para continuar.";
+
+        return;
+
+      }
+
+
+      /*
+      -------------------------------------------------------
+      CARREGAMENTO
+      -------------------------------------------------------
+      */
+
+      searchButton.textContent =
+        "BUSCANDO...";
+
+      searchButton.disabled =
+        true;
+
+      result.style.display =
+        "none";
+
+      result.classList.remove(
+        "error"
+      );
+
+      limparResultados();
+
+
+      try {
+
+        /*
+        =====================================================
+        1. VIA CEP
+        =====================================================
+        */
+
+        const response =
+          await fetch(
+            `https://viacep.com.br/ws/${cep}/json/`
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Falha no ViaCEP"
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (data.erro) {
+
+          result.style.display =
+            "block";
+
+          result.classList.add(
+            "error"
+          );
+
+          resultAddress.textContent =
+            "Não encontramos esse CEP. Verifique os números e tente novamente.";
+
+          return;
+
+        }
+
+
+        /*
+        =====================================================
+        2. MOSTRA ENDEREÇO
+        =====================================================
+        */
+
+        resultAddress.innerHTML = `
+
+          ${data.logradouro || "Endereço não informado"}<br>
+
+          ${data.bairro || ""}<br>
+
+          ${data.localidade || ""} - ${data.uf || ""}
+
+        `;
+
+        result.style.display =
+          "block";
+
+
+        /*
+        =====================================================
+        3. BAIRRO
+        =====================================================
+        */
+
+        const bairro =
+          data.bairro || "";
+
+
+        /*
+        =====================================================
+        4. ENDEREÇO DO USUÁRIO
+        =====================================================
+        */
+
+        const enderecoUsuario = [
+
+          data.logradouro,
+
+          data.bairro,
+
+          data.localidade,
+
+          data.uf,
+
+          "Brasil"
+
+        ]
+          .filter(Boolean)
+          .join(", ");
+
+
+        /*
+        =====================================================
+        5. LOCALIZA O USUÁRIO
+        =====================================================
+        */
+
+        const coordenadasUsuario =
+          await localizarEndereco(
+            enderecoUsuario
+          );
+
+
+        /*
+        =====================================================
+        6. CRAS PELO BAIRRO
+
+        A escolha é territorial.
+
+        A coordenada NÃO decide o CRAS.
+        =====================================================
+        */
+
+        const candidatosCras =
+          encontrarCrasPorBairro(
+            bairro
+          );
+
+
+        const resultadoCras =
+          selecionarCras(
+            candidatosCras
+          );
+
+
+        /*
+        =====================================================
+        7. MOSTRA CRAS
+        =====================================================
+        */
+
+        mostrarCras(
+          resultadoCras,
+          bairro
+        );
+
+
+        /*
+        =====================================================
+        8. CASA DA MULHER
+
+        Continua sendo calculada pela distância.
+        =====================================================
+        */
+
+        if (coordenadasUsuario) {
+
+          const casaMaisProxima =
+            await encontrarCasaMaisProxima(
+              coordenadasUsuario
+            );
+
+          mostrarCasa(
+            casaMaisProxima
+          );
+
+        } else {
+
+          womanAddress.textContent =
+            "Encontramos o endereço, mas não foi possível calcular a Casa da Mulher mais próxima.";
+
+        }
+
+
+      } catch (erro) {
+
+        console.error(
+          "Erro na busca:",
+          erro
+        );
+
+        result.style.display =
+          "block";
+
+        result.classList.add(
+          "error"
+        );
+
+        resultAddress.textContent =
+          "Não foi possível realizar a busca neste momento. Tente novamente.";
+
+        crasAddress.textContent =
+          "Não foi possível consultar o CRAS.";
+
+        crasNotice.textContent =
+          "Ligue 1746 da Prefeitura para orientação.";
+
+        crasNotice.style.display =
+          "block";
+
+        crasCall.style.display =
+          "inline-block";
+
+        womanAddress.textContent =
+          "Não foi possível localizar a Casa da Mulher.";
+
+      } finally {
+
+        searchButton.textContent =
+          "ENCONTRAR";
+
+        searchButton.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+
+  /*
+  =========================================================
+  ENTER NO CAMPO DE CEP
+  =========================================================
+  */
+
+  cepInput.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        searchButton.click();
+
+      }
+
+    }
+  );
 
 </script>
 
