@@ -1334,115 +1334,185 @@
   =========================================================
   */
 
-  async function localizarEndereco(endereco) {
+  async function localizarEndereco(endereco, cep = "") {
 
-    // 1) Primeira tentativa: Nominatim / OpenStreetMap
-    const nominatimUrl =
-      "https://nominatim.openstreetmap.org/search" +
-      "?format=jsonv2" +
-      "&limit=1" +
-      "&countrycodes=br" +
-      "&q=" +
-      encodeURIComponent(endereco);
+    /*
+      Fazemos mais de uma tentativa porque alguns CEPs são
+      reconhecidos pelo ViaCEP, mas o mapa não reconhece o
+      endereço completo exatamente como foi retornado.
 
-    try {
+      Ordem:
+      1) endereço completo
+      2) endereço sem "Brasil"
+      3) logradouro + bairro + cidade + UF
+      4) logradouro + cidade + UF
+      5) bairro + cidade + UF
+      6) CEP
+    */
 
-      const response =
-        await fetch(nominatimUrl, {
-          headers: {
-            "Accept": "application/json"
-          }
-        });
+    const partes = endereco
+      .split(",")
+      .map(parte => parte.trim())
+      .filter(Boolean);
 
-      if (response.ok) {
+    const consultas = [];
 
-        const data = await response.json();
+    const adicionarConsulta = valor => {
+      if (valor && !consultas.includes(valor)) {
+        consultas.push(valor);
+      }
+    };
 
-        if (data && data.length) {
+    adicionarConsulta(endereco);
 
-          const lat = parseFloat(data[0].lat);
-          const lon = parseFloat(data[0].lon);
+    if (partes.length >= 2) {
+      adicionarConsulta(partes.slice(0, -1).join(", "));
+    }
 
-          if (
-            !Number.isNaN(lat) &&
-            !Number.isNaN(lon)
-          ) {
-            return { lat, lon };
+    if (partes.length >= 4) {
+      adicionarConsulta(partes.slice(0, 4).join(", "));
+      adicionarConsulta([
+        partes[0],
+        partes[2],
+        partes[3]
+      ].join(", "));
+      adicionarConsulta([
+        partes[1],
+        partes[2],
+        partes[3]
+      ].join(", "));
+    }
+
+    if (cep) {
+      adicionarConsulta(cep);
+      adicionarConsulta(cep.replace(/\D/g, ""));
+    }
+
+    // 1) Nominatim / OpenStreetMap
+    for (const consulta of consultas) {
+
+      const nominatimUrl =
+        "https://nominatim.openstreetmap.org/search" +
+        "?format=jsonv2" +
+        "&limit=1" +
+        "&countrycodes=br" +
+        "&q=" +
+        encodeURIComponent(consulta);
+
+      try {
+
+        const response =
+          await fetch(nominatimUrl, {
+            headers: {
+              "Accept": "application/json"
+            }
+          });
+
+        if (response.ok) {
+
+          const data = await response.json();
+
+          if (data && data.length) {
+
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+
+            if (
+              !Number.isNaN(lat) &&
+              !Number.isNaN(lon)
+            ) {
+              return { lat, lon };
+            }
+
           }
 
         }
 
+      } catch (erro) {
+
+        console.warn(
+          "Nominatim falhou para:",
+          consulta,
+          erro
+        );
+
       }
 
-    } catch (erro) {
-
-      console.warn(
-        "Nominatim falhou. Tentando segunda busca:",
-        erro
+      // Pequena pausa para evitar excesso de consultas.
+      await new Promise(
+        resolve => setTimeout(resolve, 250)
       );
-
     }
 
-    // 2) Segunda tentativa: Photon / OpenStreetMap
-    const photonUrl =
-      "https://photon.komoot.io/api/" +
-      "?limit=1&q=" +
-      encodeURIComponent(endereco);
+    // 2) Photon / OpenStreetMap
+    for (const consulta of consultas) {
 
-    try {
+      const photonUrl =
+        "https://photon.komoot.io/api/" +
+        "?limit=1&q=" +
+        encodeURIComponent(consulta);
 
-      const response =
-        await fetch(photonUrl, {
-          headers: {
-            "Accept": "application/json"
-          }
-        });
+      try {
 
-      if (response.ok) {
+        const response =
+          await fetch(photonUrl, {
+            headers: {
+              "Accept": "application/json"
+            }
+          });
 
-        const data = await response.json();
-        const feature =
-          data &&
-          data.features &&
-          data.features.length
-            ? data.features[0]
-            : null;
+        if (response.ok) {
 
-        if (
-          feature &&
-          feature.geometry &&
-          Array.isArray(feature.geometry.coordinates)
-        ) {
-
-          const lon = parseFloat(
-            feature.geometry.coordinates[0]
-          );
-          const lat = parseFloat(
-            feature.geometry.coordinates[1]
-          );
+          const data = await response.json();
+          const feature =
+            data &&
+            data.features &&
+            data.features.length
+              ? data.features[0]
+              : null;
 
           if (
-            !Number.isNaN(lat) &&
-            !Number.isNaN(lon)
+            feature &&
+            feature.geometry &&
+            Array.isArray(feature.geometry.coordinates)
           ) {
-            return { lat, lon };
+
+            const lon = parseFloat(
+              feature.geometry.coordinates[0]
+            );
+            const lat = parseFloat(
+              feature.geometry.coordinates[1]
+            );
+
+            if (
+              !Number.isNaN(lat) &&
+              !Number.isNaN(lon)
+            ) {
+              return { lat, lon };
+            }
+
           }
 
         }
 
+      } catch (erro) {
+
+        console.warn(
+          "Photon falhou para:",
+          consulta,
+          erro
+        );
+
       }
 
-    } catch (erro) {
-
-      console.warn(
-        "Photon também falhou:",
-        erro
+      await new Promise(
+        resolve => setTimeout(resolve, 250)
       );
-
     }
 
-    // 3) A última tentativa é feita pelas coordenadas
-    // cadastradas na própria unidade da Casa da Mulher.
+    // 3) Se todas as buscas externas falharem,
+    // a Casa da Mulher ainda pode usar suas coordenadas
+    // cadastradas diretamente em encontrarCasaMaisProxima().
     return null;
 
   }
@@ -2090,7 +2160,8 @@
 
         const coordenadasUsuario =
           await localizarEndereco(
-            enderecoUsuario
+            enderecoUsuario,
+            data.cep || cep
           );
 
 
