@@ -1533,7 +1533,7 @@
   =========================================================
   */
 
-  async function encontrarCasaMaisProxima(
+  function encontrarCasaMaisProxima(
     coordenadasUsuario
   ) {
 
@@ -1541,140 +1541,27 @@
       return null;
     }
 
-    const resultados = [];
+    const resultados = casasDaMulher
+      .filter(unidade =>
+        unidade.lat !== undefined &&
+        unidade.lon !== undefined
+      )
+      .map(unidade => {
 
-    for (
-      const unidade of casasDaMulher
-    ) {
-
-      let coordenadas = null;
-
-      /*
-       * Para a Elza Soares usamos o endereço
-       * físico mais preciso da unidade.
-       */
-      let enderecoBusca =
-        unidade.endereco;
-
-      if (
-        unidade.nome.includes(
-          "Elza Soares"
-        )
-      ) {
-
-        enderecoBusca =
-          "Rua Marechal Falcão da Frota, 1782 - Realengo, Rio de Janeiro - RJ";
-
-      }
-
-      /*
-       * Verifica se já temos as coordenadas
-       * salvas no navegador.
-       */
-      const chaveCache =
-        "casa_mulher_coords_" +
-        encodeURIComponent(
-          enderecoBusca
-        );
-
-      try {
-
-        const coordenadasSalvas =
-          localStorage.getItem(
-            chaveCache
+        const distancia =
+          calcularDistancia(
+            coordenadasUsuario.lat,
+            coordenadasUsuario.lon,
+            unidade.lat,
+            unidade.lon
           );
 
-        if (coordenadasSalvas) {
+        return {
+          ...unidade,
+          distancia
+        };
 
-          coordenadas =
-            JSON.parse(
-              coordenadasSalvas
-            );
-
-        }
-
-      } catch (erroCache) {
-
-        console.warn(
-          "Não foi possível ler o cache:",
-          erroCache
-        );
-
-      }
-
-      /*
-       * Se ainda não temos as coordenadas,
-       * fazemos uma consulta ao Nominatim.
-       */
-      if (!coordenadas) {
-
-        coordenadas =
-          await localizarEndereco(
-            enderecoBusca
-          );
-
-        /*
-         * Salva o resultado para não precisar
-         * consultar novamente nas próximas buscas.
-         */
-        if (coordenadas) {
-
-          try {
-
-            localStorage.setItem(
-              chaveCache,
-              JSON.stringify(
-                coordenadas
-              )
-            );
-
-          } catch (erroCache) {
-
-            console.warn(
-              "Não foi possível salvar o cache:",
-              erroCache
-            );
-
-          }
-
-        }
-
-        /*
-         * Aguarda antes de consultar a próxima
-         * unidade para evitar bloqueio do serviço.
-         */
-        await new Promise(
-          resolve =>
-            setTimeout(
-              resolve,
-              1200
-            )
-        );
-
-      }
-
-      if (!coordenadas) {
-        continue;
-      }
-
-      const distancia =
-        calcularDistancia(
-          coordenadasUsuario.lat,
-          coordenadasUsuario.lon,
-          coordenadas.lat,
-          coordenadas.lon
-        );
-
-      resultados.push({
-        ...unidade,
-        lat:
-          coordenadas.lat,
-        lon:
-          coordenadas.lon,
-        distancia
       });
-
-    }
 
     if (!resultados.length) {
       return null;
@@ -1682,8 +1569,7 @@
 
     resultados.sort(
       (a, b) =>
-        a.distancia -
-        b.distancia
+        a.distancia - b.distancia
     );
 
     return resultados[0];
