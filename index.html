@@ -2055,16 +2055,30 @@
         =====================================================
         */
 
-        if (coordenadasUsuario) {
+                if (coordenadasUsuario) {
 
-          const casaMaisProxima =
-            await encontrarCasaMaisProxima(
-              coordenadasUsuario
+          try {
+
+            const casaMaisProxima =
+              await encontrarCasaMaisProxima(
+                coordenadasUsuario
+              );
+
+            mostrarCasa(
+              casaMaisProxima
             );
 
-          mostrarCasa(
-            casaMaisProxima
-          );
+          } catch (erroCasa) {
+
+            console.error(
+              "Erro ao localizar a Casa da Mulher:",
+              erroCasa
+            );
+
+            womanAddress.textContent =
+              "Não foi possível calcular a Casa da Mulher mais próxima.";
+
+          }
 
         } else {
 
@@ -2072,7 +2086,6 @@
             "Encontramos o endereço, mas não foi possível calcular a Casa da Mulher mais próxima.";
 
         }
-
 
       } catch (erro) {
 
