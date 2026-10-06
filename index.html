@@ -1192,31 +1192,41 @@
     {
       nome: "Casa da Mulher Carioca e NEAM Tia Doca",
       endereco: "Rua Júlio Fragoso, 47 - Madureira, Rio de Janeiro - RJ",
-      telefone: "(21) 2452-2217"
+      telefone: "(21) 2452-2217",
+      lat: -22.8716004,
+      lon: -43.343158
     },
 
     {
       nome: "Casa da Mulher Carioca e NEAM Dinah Coutinho",
       endereco: "Rua Limites, 1260 - Realengo, Rio de Janeiro - RJ",
-      telefone: ""
+      telefone: "",
+      lat: -22.8875915,
+      lon: -43.4354653
     },
 
     {
       nome: "Casa da Mulher Carioca e NEAM Elza Soares",
       endereco: "Avenida Marechal Falcão da Frota, s/n - Padre Miguel, Rio de Janeiro - RJ",
-      telefone: ""
+      telefone: "",
+      lat: -22.870286,
+      lon: -43.4390447
     },
 
     {
       nome: "Casa da Mulher Carioca - Polo Campo Grande",
       endereco: "Rua Mário Barbosa, 137 - Campo Grande, Rio de Janeiro - RJ",
-      telefone: ""
+      telefone: "",
+      lat: -22.9078396,
+      lon: -43.5571192
     },
 
     {
       nome: "Casa da Mulher Carioca - Polo Coelho Neto",
       endereco: "Avenida Pastor Martin Luther King Jr., 10055 - Coelho Neto, Rio de Janeiro - RJ",
-      telefone: ""
+      telefone: "",
+      lat: -22.83231,
+      lon: -43.34391
     }
 
   ];
@@ -1326,7 +1336,8 @@
 
   async function localizarEndereco(endereco) {
 
-    const url =
+    // 1) Primeira tentativa: Nominatim / OpenStreetMap
+    const nominatimUrl =
       "https://nominatim.openstreetmap.org/search" +
       "?format=jsonv2" +
       "&limit=1" +
@@ -1337,54 +1348,102 @@
     try {
 
       const response =
-        await fetch(url, {
+        await fetch(nominatimUrl, {
           headers: {
             "Accept": "application/json"
           }
         });
 
-      if (!response.ok) {
-        return null;
+      if (response.ok) {
+
+        const data = await response.json();
+
+        if (data && data.length) {
+
+          const lat = parseFloat(data[0].lat);
+          const lon = parseFloat(data[0].lon);
+
+          if (
+            !Number.isNaN(lat) &&
+            !Number.isNaN(lon)
+          ) {
+            return { lat, lon };
+          }
+
+        }
+
       }
-
-      const data =
-        await response.json();
-
-      if (
-        !data ||
-        !data.length
-      ) {
-        return null;
-      }
-
-      const lat =
-        parseFloat(data[0].lat);
-
-      const lon =
-        parseFloat(data[0].lon);
-
-      if (
-        Number.isNaN(lat) ||
-        Number.isNaN(lon)
-      ) {
-        return null;
-      }
-
-      return {
-        lat,
-        lon
-      };
 
     } catch (erro) {
 
-      console.error(
-        "Erro ao localizar endereço:",
+      console.warn(
+        "Nominatim falhou. Tentando segunda busca:",
         erro
       );
 
-      return null;
+    }
+
+    // 2) Segunda tentativa: Photon / OpenStreetMap
+    const photonUrl =
+      "https://photon.komoot.io/api/" +
+      "?limit=1&q=" +
+      encodeURIComponent(endereco);
+
+    try {
+
+      const response =
+        await fetch(photonUrl, {
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+      if (response.ok) {
+
+        const data = await response.json();
+        const feature =
+          data &&
+          data.features &&
+          data.features.length
+            ? data.features[0]
+            : null;
+
+        if (
+          feature &&
+          feature.geometry &&
+          Array.isArray(feature.geometry.coordinates)
+        ) {
+
+          const lon = parseFloat(
+            feature.geometry.coordinates[0]
+          );
+          const lat = parseFloat(
+            feature.geometry.coordinates[1]
+          );
+
+          if (
+            !Number.isNaN(lat) &&
+            !Number.isNaN(lon)
+          ) {
+            return { lat, lon };
+          }
+
+        }
+
+      }
+
+    } catch (erro) {
+
+      console.warn(
+        "Photon também falhou:",
+        erro
+      );
 
     }
+
+    // 3) A última tentativa é feita pelas coordenadas
+    // cadastradas na própria unidade da Casa da Mulher.
+    return null;
 
   }
 
@@ -1544,10 +1603,24 @@
       const unidade of casasDaMulher
     ) {
 
-      const coordenadas =
+      let coordenadas =
         await localizarEndereco(
           unidade.endereco
         );
+
+      // Se as duas buscas externas falharem, usa as
+      // coordenadas cadastradas da unidade.
+      if (!coordenadas) {
+        if (
+          Number.isFinite(unidade.lat) &&
+          Number.isFinite(unidade.lon)
+        ) {
+          coordenadas = {
+            lat: unidade.lat,
+            lon: unidade.lon
+          };
+        }
+      }
 
       if (!coordenadas) {
         continue;
